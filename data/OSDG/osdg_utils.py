@@ -4,9 +4,10 @@ import sys
 import pandas as pd
 
 #TODO: Implement functions to load data from the OSDG dataset and return it as a pandas dataframe with the following columns:
-# - 'text' (the text of the sample)
+# - doi (the doi of the sample)
+# - text (the text of the sample)
 # - SDG (the corresponding SDG label)
-# - 'label' (the agreement value that we will use as the target variable)
+# - label (the agreement value that we will use as the target variable)
 
 
 
