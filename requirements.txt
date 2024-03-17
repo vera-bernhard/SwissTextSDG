@@ -2,3 +2,4 @@ pandas
 nltk
 matplotlib
 seaborn
+pypdf
