@@ -3,3 +3,4 @@ nltk
 matplotlib
 seaborn
 pypdf
+requests
