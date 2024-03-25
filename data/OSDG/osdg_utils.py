@@ -14,7 +14,7 @@ class OSDGDataLoader:
         if os.path.exists(osdg_dataset_path):
             self.osdg_data = pd.read_csv(osdg_dataset_path, header=0, delimiter = '\t', encoding='utf-8')
         else:
-            self.osdg_data = None
+            self.osdg_data = self.load_osdg_data()
         
         self.responses_dict_path = responses_dict_path
         if os.path.exists(responses_dict_path):
@@ -60,7 +60,7 @@ class OSDGDataLoader:
                 else:
                     citations_response = requests.get(citations_url)
                     self.responses_dict[citations_url] = citations_response
-                    self.save_responses_dict(self.responses_dict_path)
+                    self.save_responses_dict()
 
                 if citations_response.status_code == 200:
                     citations_data = citations_response.json()
@@ -128,9 +128,7 @@ def main():
 
     osdg_data_loader = OSDGDataLoader(osdg_dataset_path, responses_dict_path)
 
-    osdg_data = osdg_data_loader.load_osdg_data()
-
-    related_works = osdg_data_loader.enlarge_osdg_dataset(osdg_data)
+    related_works = osdg_data_loader.enlarge_osdg_dataset(osdg_data_loader.osdg_data)
 
     print(related_works.head())
 
