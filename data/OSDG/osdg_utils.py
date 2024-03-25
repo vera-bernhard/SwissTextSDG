@@ -2,7 +2,7 @@ import os
 import sys
 import re
 import requests
-
+import pickle
 
 import pandas as pd
 
@@ -14,7 +14,7 @@ def load_osdg_data():
     # - sdg (the corresponding SDG label)
     # - label (the agreement value that we will use as the target variable)
 
-    data = pd.read_csv('data/OSDG/osdg-community-data-v2024-01-01.csv', header=0, delimiter = '\t', index_col=0, encoding='utf-8')
+    data = pd.read_csv('data/OSDG/osdg-community-data-v2024-01-01.csv', header=0, delimiter = '\t', encoding='utf-8')
 
     # The columns of the dataframe should be: 'doi', 'text', 'sdg', 'label', the csv has columns doi, text_id, text, sdg, labels_negative, labels_positive, agreement
     # Remove the columns 'text_id', 'labels_negative', 'labels_positive'
@@ -22,6 +22,27 @@ def load_osdg_data():
     # Rename the column 'agreement' to 'label'
     data = data.rename(columns={'agreement': 'label'})
     return data
+
+def process_API_response(response):
+    # Implement a function to process the API response and return the related works as a pandas dataframe with the following columns:
+    # - doi (the doi of the related work)
+    # - text (the text of the related work)
+    # - sdg (the corresponding SDG label)
+    # - label (the agreement value that we will use as the target variable)
+
+    if response.status_code == 200:
+        data = response.json()
+        references_count = data['message']['reference-count']
+        if references_count > 0:
+            references = data['message']['reference']
+            related_works = pd.DataFrame(columns=['doi', 'text', 'sdg', 'label'])
+            for reference in references:
+                related_works = related_works.append({'doi': reference['DOI'], 'text': reference['title'], 'sdg': sdg, 'label': label}, ignore_index=True)
+            return related_works
+        else:
+            return None
+    else:
+        return None
 
 def get_related_works(osdg_sample):
     # Implement a function to retrieve the related works for a given OSDG sample (i.e. a row from the OSDG dataset) using the Crossref API
@@ -38,27 +59,32 @@ def get_related_works(osdg_sample):
     # Get the label of the OSDG sample
     label = osdg_sample['label']
 
-    # Get the related works for the given doi using the Crossref API
-    url = f'https://api.crossref.org/works/{doi}/relations'
-    response = requests.get(url)
-
-    # Check if the request was successful
-    if response.status_code == 200:
-        # Get the related works from the response
-        related_works = response.json()['message']['items']
-        # Create a dataframe with the related works
-        related_works_df = pd.DataFrame(columns=['doi', 'text', 'sdg', 'label'])
-        for related_work in related_works:
-            # Get the doi of the related work
-            related_doi = related_work['DOI']
-            # Get the text of the related work
-            related_text = related_work['title']
-            # Add the related work to the dataframe
-            related_works_df = related_works_df.append({'doi': related_doi, 'text': related_text, 'sdg': sdg, 'label': label}, ignore_index=True)
-        return related_works_df
+    # Load/create a dictionary to store the API responses (so that we call the API only once for each doi)
+    responses_dict_path = 'data/OSDG/responses_dict.pkl'
+    if os.path.exists(responses_dict_path):
+        with open(responses_dict_path, 'rb') as file:
+            responses_dict = pickle.load(file)
     else:
-        print(f'Error: {response.status_code}')
-        return None
+        responses_dict = {}
+
+    # Check if the doi is already in the dictionary
+    if doi in responses_dict:
+        response = responses_dict[doi]
+    else:
+        # Call the API
+        url = f"https://api.crossref.org/works/{doi}"
+        response = requests.get(url)
+        # Add the response to the dictionary
+        responses_dict[doi] = response
+        # Save the dictionary
+        with open(responses_dict_path, 'wb') as file:
+            pickle.dump(responses_dict, file)
+
+    # Process the API response
+        
+    related_works = process_API_response(response)
+
+    return related_works
 
 def enlarge_osdg_dataset(osdg_data):
     # Implement a function to enlarge the OSDG dataset by adding related works for each OSDG sample using the get_related_works function
@@ -70,8 +96,13 @@ def enlarge_osdg_dataset(osdg_data):
     for index, osdg_sample in osdg_data.iterrows():
         # Get the related works for the OSDG sample
         related_works = get_related_works(osdg_sample)
+
+        if related_works is None:
+            continue
+        
         # Add the related works to the dataframe
-        related_works_df = related_works_df.append(related_works, ignore_index=True)
+        related_works_df = pd.concat([related_works_df, related_works], ignore_index=True)
+
     return related_works_df
 
 
