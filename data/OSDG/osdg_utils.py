@@ -48,7 +48,7 @@ class OSDGDataLoader:
         # Implement a function to get the Semantic Scholar API url to retrieve the citations of a given doi
         # The function should return the url as a string
 
-        url = f'https://api.semanticscholar.org/graph/v1/paper/{doi}/citations'
+        url = f'https://api.semanticscholar.org/graph/v1/paper/{doi}/citations?fields=title,abstract'
         return url
     
     def process_semantic_scholar_citation_response(self, response):
@@ -68,8 +68,15 @@ class OSDGDataLoader:
                 paperId = citation['citingPaper']['paperId']
                 title = citation['citingPaper'].get('title', '')
                 abstract = citation['citingPaper'].get('abstract', '')
-                text = title + ' ' + abstract
+                if abstract is not None:
+                    # Remove the punctuation, newlines and special characters from the abstract
+                    abstract = re.sub(r'[^\w\s]', '', abstract)
+                    abstract = re.sub(r'\n', ' ', abstract)
+                    text = title + ' ' + abstract
+                else:
+                    text = title
                 related_works = pd.concat([related_works, pd.DataFrame({'paperId': [paperId], 'text': [text]})], ignore_index=True)
+                
             return related_works
         else:
             return None
@@ -127,6 +134,9 @@ class OSDGDataLoader:
         related_works_df = pd.DataFrame(columns=['paperId', 'text', 'sdg', 'label'])
         # Iterate over the OSDG samples
         for index, osdg_sample in tqdm(osdg_data.iterrows(), total=osdg_data.shape[0], desc='Enlarging OSDG dataset'):
+            if index % 100 == 0:
+                related_works_df.to_csv('data/OSDG/citing_works_OSDG.csv', sep='\t', index=False, encoding='utf-8')
+
             # Get the related works for the OSDG sample
             related_works = self.get_related_works(osdg_sample)
 
@@ -138,9 +148,6 @@ class OSDGDataLoader:
             related_works = self.build_related_work_sample(osdg_sample, related_works)
             related_works_df = pd.concat([related_works_df, related_works], ignore_index=True)
 
-            if index % 100 == 0:
-                related_works_df.to_csv('data/OSDG/citing_works_OSDG.csv', sep='\t', index=False, encoding='utf-8')
-
         return related_works_df
 
     def post_process_related_works(self, related_works):
@@ -151,7 +158,7 @@ class OSDGDataLoader:
 
         # Remove rows with empty text
         related_works = related_works[related_works['text'].str.strip() != '']
-        
+
         return related_works
 
 def main():
