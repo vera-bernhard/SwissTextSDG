@@ -79,6 +79,8 @@ class OSDGDataLoader:
                     # Remove the punctuation, newlines and special characters from the abstract
                     abstract = re.sub(r'[^\w\s]', '', abstract)
                     abstract = re.sub(r'\n', ' ', abstract)
+                    abstract = re.sub(r'\t', ' ', abstract)
+
                     text = title + ' ' + abstract
                 else:
                     text = title
@@ -137,12 +139,15 @@ class OSDGDataLoader:
         # Implement a function to enlarge the OSDG dataset by adding citing works for each OSDG sample using the get_related_works function
         # The function should return a pandas dataframe with the same columns as the OSDG dataset, but with the citing works as rows
 
+        # Check if we have already enlarged the dataset
+        enlarged_dataset_path = os.path.join('data', 'OSDG', 'citing_works_OSDG.csv')
+        if os.path.exists(enlarged_dataset_path):
+            return pd.read_csv(enlarged_dataset_path, header=0, delimiter = ',', encoding='utf-8')
+
         # Create an empty dataframe to store the citing works
         related_works_df = pd.DataFrame(columns=['paperId', 'text', 'sdg', 'label'])
         # Iterate over the OSDG samples
         for index, osdg_sample in tqdm(osdg_data.iterrows(), total=osdg_data.shape[0], desc='Enlarging OSDG dataset'):
-            if index % 1000 == 0:
-                related_works_df.to_csv('data/OSDG/citing_works_OSDG.csv', index=False, encoding='utf-8')
 
             # Get the related works for the OSDG sample
             related_works = self.get_related_works(osdg_sample)
@@ -165,6 +170,14 @@ class OSDGDataLoader:
 
         # Remove rows with empty text
         related_works = related_works[related_works['text'].str.strip() != '']
+
+        # Remove any rows with NaN values
+
+        related_works = related_works.dropna()
+
+        # Remove any rows where the sdg column is not a float
+
+        related_works = related_works[related_works['sdg'].apply(lambda x: isinstance(x, float))]
 
         return related_works
 
