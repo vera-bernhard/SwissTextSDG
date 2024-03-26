@@ -3,6 +3,7 @@ import sys
 import re
 import requests
 import pickle
+from tqdm import tqdm
 
 import pandas as pd
 
@@ -42,53 +43,55 @@ class OSDGDataLoader:
         # Rename the column 'agreement' to 'label'
         data = data.rename(columns={'agreement': 'label'})
         return data
+    
+    def get_semantic_scholar_citations_url(self, doi):
+        # Implement a function to get the Semantic Scholar API url to retrieve the citations of a given doi
+        # The function should return the url as a string
 
-    def process_API_response(self, response, doi):
-        # Implement a function to process a works endpoint API response and return the citations of the work as a pandas dataframe with the following columns:
-        # - doi (the doi of the related work)
+        url = f'https://api.semanticscholar.org/graph/v1/paper/{doi}/citations'
+        return url
+    
+    def process_semantic_scholar_citation_response(self, response):
+        # Implement a function to process the response from the Semantic Scholar API and return a pandas dataframe with the following columns:
+
+        # - paperId (the Semantic Scholar paperId of the citing work)
+        # - text (text of the citing work, title and/or abstract)
 
         if response.status_code == 200:
             data = response.json()
-            citations_count = data['message']['is-referenced-by-count']
-
-            if citations_count > 0:
-            # Get the citations of the work 
-                citations_url = f"https://api.crossref.org/works/{doi}/citations"
-                # Check if we have already called this API endpoint
-                if citations_url in self.responses_dict:
-                    citations_response = self.responses_dict[citations_url]
-                else:
-                    citations_response = requests.get(citations_url)
-                    self.responses_dict[citations_url] = citations_response
-                    self.save_responses_dict()
-
-                if citations_response.status_code == 200:
-                    citations_data = citations_response.json()
-                    dois = [citation['doi'] for citation in citations_data['message']['items']]
-                    related_works = pd.DataFrame({'doi': dois})
-                    return  related_works
-                else:
-                    return None
+            if len(data['data']) == 0:
+                return None
+            related_works = pd.DataFrame(columns=['paperId', 'text'])
+            for citation in data['data']:
+                # data['data'] is a list of dictionaries with keys 'citingPaper'
+                # each 'citingPaper' dictionary has keys 'paperId' (required), 'title' (optional), 'abstract' (optional)
+                paperId = citation['citingPaper']['paperId']
+                title = citation['citingPaper'].get('title', '')
+                abstract = citation['citingPaper'].get('abstract', '')
+                text = title + ' ' + abstract
+                related_works = pd.concat([related_works, pd.DataFrame({'paperId': [paperId], 'text': [text]})], ignore_index=True)
+            return related_works
         else:
-            None
+            return None
 
     def get_related_works(self, osdg_sample):
-        # Implement a function to retrieve the related works for a given OSDG sample (i.e. a row from the OSDG dataset) using the Crossref API
-        # The function should return a pandas dataframe with the same columns as the OSDG dataset, but with the related works as rows:
-        # - doi (the doi of the related work)
-        # - text (the text of the related work)
+        # Implement a function to retrieve the works that cite a given OSDG sample (i.e. a row from the OSDG dataset) using the Semantic Scholar Academic Graph API
+        # The function should return a pandas dataframe with the following columns:
+
+        # - doi (the doi of the citing work)
+        # - text (text of the citing work, title and/or abstract)
 
         # Get the doi of the OSDG sample
         doi = osdg_sample['doi']
 
-        url = f"https://api.crossref.org/works/{doi}"
+        url = self.get_semantic_scholar_citations_url(doi)
 
-        # Check if the doi is already in the dictionary
+        # Check if we have queried this url before
+
         if url in self.responses_dict:
             response = self.responses_dict[url]
         else:
             # Call the API
-            url = f"https://api.crossref.org/works/{doi}"
             response = requests.get(url)
             # Add the response to the dictionary
             self.responses_dict[url] = response
@@ -97,30 +100,59 @@ class OSDGDataLoader:
 
         # Process the API response
             
-        related_works = self.process_API_response(response, doi)
+        related_works = self.process_semantic_scholar_citation_response(response)
 
         return related_works
 
-    def enlarge_osdg_dataset(self, osdg_data):
-        # Implement a function to enlarge the OSDG dataset by adding related works for each OSDG sample using the get_related_works function
-        # The function should return a pandas dataframe with the same columns as the OSDG dataset, but with the related works as rows
+    def build_related_work_sample(self, osdg_sample, related_work):
+        # Implement a function to build a related work sample using the OSDG sample and the related work
+        # The function should return a pandas dataframe with the same columns as the OSDG dataset but with the related work as the only row
+        # We will assign the same SDG label and agreement value to the related work as its corresponding OSDG sample
 
-        # Create an empty dataframe to store the related works dois
-        related_works_df = pd.DataFrame(columns=['doi'])
+        related_work_sample = pd.DataFrame({'paperId': related_work['paperId'], 
+                                                          'text': related_work['text'], 
+                                                          'sdg': osdg_sample['sdg'], 
+                                                          'label': osdg_sample['label']})
+        
+        return related_work_sample
+
+
+
+
+    def enlarge_osdg_dataset(self, osdg_data):
+        # Implement a function to enlarge the OSDG dataset by adding citing works for each OSDG sample using the get_related_works function
+        # The function should return a pandas dataframe with the same columns as the OSDG dataset, but with the citing works as rows
+
+        # Create an empty dataframe to store the citing works
+        related_works_df = pd.DataFrame(columns=['paperId', 'text', 'sdg', 'label'])
         # Iterate over the OSDG samples
-        for index, osdg_sample in osdg_data.iterrows():
+        for index, osdg_sample in tqdm(osdg_data.iterrows(), total=osdg_data.shape[0], desc='Enlarging OSDG dataset'):
             # Get the related works for the OSDG sample
             related_works = self.get_related_works(osdg_sample)
 
+            # Check if related works is an empty dataframe
             if related_works is None:
                 continue
             
             # Add the related works to the dataframe
+            related_works = self.build_related_work_sample(osdg_sample, related_works)
             related_works_df = pd.concat([related_works_df, related_works], ignore_index=True)
+
+            if index % 100 == 0:
+                related_works_df.to_csv('data/OSDG/citing_works_OSDG.csv', sep='\t', index=False, encoding='utf-8')
 
         return related_works_df
 
+    def post_process_related_works(self, related_works):
+        # Implement a function to post-process the related works dataframe
+        # The function should remove duplicates and return the post-processed dataframe
 
+        related_works = related_works.drop_duplicates(subset=['paperId'], keep='first')
+
+        # Remove rows with empty text
+        related_works = related_works[related_works['text'].str.strip() != '']
+        
+        return related_works
 
 def main():
     osdg_dataset_path = 'data/OSDG/osdg_dataset.csv'
@@ -130,7 +162,10 @@ def main():
 
     related_works = osdg_data_loader.enlarge_osdg_dataset(osdg_data_loader.osdg_data)
 
-    print(related_works.head())
+    related_works = osdg_data_loader.post_process_related_works(related_works)
+
+    # Save the enlarged dataset
+    related_works.to_csv('data/OSDG/citing_works_OSDG.csv', sep='\t', index=False, encoding='utf-8')
 
 if __name__ == '__main__':
     main()
