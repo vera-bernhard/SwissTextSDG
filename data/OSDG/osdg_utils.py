@@ -59,8 +59,15 @@ class OSDGDataLoader:
 
         if response.status_code == 200:
             data = response.json()
+            # Check if the response has no data
+            try:
+                data['data']
+            except KeyError:    
+                return None
+            
             if len(data['data']) == 0:
                 return None
+
             related_works = pd.DataFrame(columns=['paperId', 'text'])
             for citation in data['data']:
                 # data['data'] is a list of dictionaries with keys 'citingPaper'
@@ -134,8 +141,8 @@ class OSDGDataLoader:
         related_works_df = pd.DataFrame(columns=['paperId', 'text', 'sdg', 'label'])
         # Iterate over the OSDG samples
         for index, osdg_sample in tqdm(osdg_data.iterrows(), total=osdg_data.shape[0], desc='Enlarging OSDG dataset'):
-            if index % 100 == 0:
-                related_works_df.to_csv('data/OSDG/citing_works_OSDG.csv', sep='\t', index=False, encoding='utf-8')
+            if index % 1000 == 0:
+                related_works_df.to_csv('data/OSDG/citing_works_OSDG.csv', index=False, encoding='utf-8')
 
             # Get the related works for the OSDG sample
             related_works = self.get_related_works(osdg_sample)
@@ -172,7 +179,7 @@ def main():
     related_works = osdg_data_loader.post_process_related_works(related_works)
 
     # Save the enlarged dataset
-    related_works.to_csv('data/OSDG/citing_works_OSDG.csv', sep='\t', index=False, encoding='utf-8')
+    related_works.to_csv('data/OSDG/citing_works_OSDG.csv', index=False, encoding='utf-8')
 
 if __name__ == '__main__':
     main()
