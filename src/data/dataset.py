@@ -43,13 +43,13 @@ class SwissTextDataset(ABC):
                         train_frac: float = DEFAULT_TRAIN_FRAC,):
         
         if name == 'OSDG':
-            return OSDGDataset(model_name, use_val, seed, do_lower_case, max_seq_length, train_frac)
+            return OSDGDataset(model_name, use_val, SplitMethod.RANDOM, seed, do_lower_case, max_seq_length, train_frac)
         elif name == 'enlarged_OSDG':
-            return OSDGDataset(model_name, use_val, seed, do_lower_case, max_seq_length, train_frac)
+            return OSDGDataset(model_name, use_val, SplitMethod.RANDOM, seed, do_lower_case, max_seq_length, train_frac)
         else:
             raise ValueError(f"Dataset {name} not supported")
 
-    def __init__(self, name: str, model_name: str, use_val: bool,
+    def __init__(self, name: str, model_name: str, split_method: SplitMethod, use_val: bool,
                 seed: int = DEFAULT_SEED, do_lower_case=True, max_seq_length: int = DEFAULT_SEQ_LENGTH,
                 train_frac: float = DEFAULT_TRAIN_FRAC):
         self.name = self._check_dataset_name(name)
@@ -61,6 +61,7 @@ class SwissTextDataset(ABC):
         self.max_seq_length = max_seq_length
         self.train_frac = train_frac
         self.tokenizer = None
+        self.split_method = split_method
 
         # Set the seed on all libraries
         init_seed(self.seed)

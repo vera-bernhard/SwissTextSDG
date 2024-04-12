@@ -27,6 +27,7 @@ class PyTorchModel:
         self.args = args
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.dataset = SwissTextDataset.create_instance(name=self.args.experiment_name, model_name=self.args.model_name,
+                                                        split_method= self.args.split_method,
                                                         use_val=self.args.use_val, seed=self.args.seed,
                                                         do_lower_case=self.args.do_lower_case,
                                                         max_seq_length=self.args.max_seq_length,
