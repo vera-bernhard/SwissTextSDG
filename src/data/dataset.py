@@ -11,6 +11,7 @@ from abc import ABC, abstractmethod
 from src.helpers.logging_helper import setup_logging
 from src.helpers.seed_helper import init_seed
 from src.helpers.path_helper import *
+from src.data.dataset_utils import SplitMethod
 from src.data.preprocessor import OSDGPreprocessor
 from src.data.tokenizer import SwissTextTokenizer
 from src.models.config import Config, DEFAULT_SEED, DEFAULT_SEQ_LENGTH, DEFAULT_TRAIN_FRAC, DEFAULT_NONMATCH_RATIO
@@ -35,6 +36,7 @@ class SwissTextDataset(ABC):
     def create_instance(name: str,
                         model_name: str,
                         use_val: bool,
+                        split_method: SplitMethod = SplitMethod.RANDOM,
                         seed: int = DEFAULT_SEED,
                         do_lower_case=True,
                         max_seq_length: int = DEFAULT_SEQ_LENGTH,
@@ -120,6 +122,105 @@ class SwissTextDataset(ABC):
             val_dl = DataLoader(val_ds, shuffle=False, batch_size=batch_size)
 
         return train_dl, test_dl, val_dl
+    
+    def get_split_method_name(self):
+        return str(self.split_method).split('.')[1].lower()
+
+    def get_train_test_val(self):
+        try:
+            return self.train_df, self.test_df, self.validation_df
+        except AttributeError:
+            method_name = self.get_split_method_name()
+            train_file_path = dataset_processed_file_path(self.name, f'train__{method_name}__all_matches.csv',
+                                                          seed=self.seed)
+            test_file_path = dataset_processed_file_path(self.name, f'test__{method_name}__all_matches.csv',
+                                                         seed=self.seed)
+            validation_file_path = dataset_processed_file_path(self.name, f'val__{method_name}__all_matches.csv',
+                                                               seed=self.seed)
+
+            check_val = file_exists_or_create(validation_file_path) if self.use_val else True
+
+            if file_exists_or_create(train_file_path) and file_exists_or_create(train_file_path) and check_val:
+                self.train_df = pd.read_csv(train_file_path)
+                self.test_df = pd.read_csv(test_file_path)
+                self.validation_df = pd.read_csv(validation_file_path) if self.use_val else pd.DataFrame()
+            else:
+                # Split the dataset into train, test, and validation
+
+                self.train_df, self.test_df, self.validation_df = \
+                    self.get_train_test_val__implementation(self.train_frac)
+
+                self.train_df.to_csv(train_file_path, index=False)
+                self.test_df.to_csv(test_file_path, index=False)
+                if not self.validation_df.empty:
+                    self.validation_df.to_csv(validation_file_path, index=False)
+
+        return self.train_df, self.test_df, self.validation_df
+    
+
+    def _random_split(self):
+        def split_fn(df: pd.DataFrame, train_frac: float):
+            train_df = df.sample(frac=train_frac, random_state=self.seed)
+            test_df = df.drop(train_df.index)
+            val_df = pd.DataFrame()
+            if self.use_val:
+                # split the validation set as half of the test set, i.e.
+                # both test and valid sets will be of the same size
+                #
+                val_df = test_df.sample(frac=0.5, random_state=self.seed)
+                test_df = test_df.drop(val_df.index)
+            # TODO: Check if we need to return the dfs or just the indices (see model.train/model.test)
+            return train_df, test_df, val_df
+
+        return split_fn
+
+    
+    def pre_split(self):
+        raise NotImplementedError("Needs to be implemented on subclass.")
+
+
+    def get_train_test_val__implementation(self, train_frac: float):
+        if self.split_method == SplitMethod.RANDOM:
+            split_fn = self._random_split()
+        elif self.split_method == SplitMethod.PRE_SPLIT:
+            split_fn = self.pre_split()
+        else:
+            raise NotImplementedError(
+                f"Split method '{self.split_method}' not implemented. \
+                Make sure to include the seed when implementing a new one.")
+        
+        try:
+            if self.use_val:
+                return self.train_given, self.test_given, self.val_given
+            else:
+                return self.train_given, self.test_given, pd.DataFrame()
+        except AttributeError:
+            method_name = self.get_split_method_name()
+            train_file_path = dataset_processed_file_path(self.name, f'train__{method_name}__samples.csv',
+                                                          seed=self.seed)
+            test_file_path = dataset_processed_file_path(self.name, f'test__{method_name}__samples.csv',
+                                                         seed=self.seed)
+            validation_file_path = dataset_processed_file_path(self.name, f'val__{method_name}__samples.csv',
+                                                         seed=self.seed)
+
+            check_val = file_exists_or_create(validation_file_path) if self.use_val else True
+
+            if file_exists_or_create(train_file_path) and file_exists_or_create(train_file_path) and check_val:
+                self.train_given = pd.read_csv(train_file_path)
+                self.test_given = pd.read_csv(test_file_path)
+                self.validation_given = pd.read_csv(validation_file_path) if self.use_val else None
+            else:
+
+                self.train_given, self.test_given, self.validation_given = split_fn(self.get_raw_df(), train_frac)
+                self.train_given.to_csv(train_file_path, index=False)
+                self.test_given.to_csv(test_file_path, index=False)
+                if not self.validation_given.empty:
+                    self.validation_given.to_csv(validation_file_path, index=False)
+
+        return self.train_given, self.test_given, self.validation_given
+
+
+
 
 
 class OSDGDataset(SwissTextDataset):

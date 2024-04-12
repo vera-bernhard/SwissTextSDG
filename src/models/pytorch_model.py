@@ -43,7 +43,6 @@ class PyTorchModel:
         self.device, _ = initialize_gpu_seed(self.model_seed)
         self.network.to(self.device)
 
-
         self._setup_data_loaders()
         self._setup_optimizer()
         self._reset_prediction_buffer()
