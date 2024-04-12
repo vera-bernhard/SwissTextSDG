@@ -3,12 +3,16 @@ import os
 
 import PyPDF2
 import requests
-from bs4 import BeautifulSoup
+import layoutparser as lp
+import numpy as np
 
+from pdf2image import convert_from_path
+from bs4 import BeautifulSoup
 from helper import read_in_data
 from settings import *
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+
 
 def get_pdf_from_zora_url(url: str, id: str) -> str:
     '''Get the html from a url.'''
@@ -25,11 +29,11 @@ def get_pdf_from_zora_url(url: str, id: str) -> str:
             no_pdf = soup.find('div', class_='download_meta').text
             if no_pdf == 'Full text not available from this repository.':
                 # write the url to a file
-                with open('data/pdf/missing_pdfs.txt', 'a') as file:
+                with open('pdf/missing_pdfs.txt', 'a') as file:
                     file.write(f'{url}\n')
             else:
                 # write the url to a file
-                with open('data/pdf/closed_pdfs.txt', 'a') as file:
+                with open('pdf/closed_pdfs.txt', 'a') as file:
                     file.write(f'{url}\n')
 
         elif access in downloadable:
@@ -46,13 +50,24 @@ def get_pdf_from_zora_url(url: str, id: str) -> str:
         print(e)
         return None
 
-def get_pdf(pdf_url: str, id: str, ext='zora'):
-    response = requests.get(pdf_url)
-    with open(f'data/pdf/{id}_{ext}.pdf', 'wb') as file:
-        file.write(response.content)
+def get_pdf(pdf_url: str, id: str, ext='zora', session=None):
+    if session:
+        response = session.get(pdf_url)
+    else:
+        response = requests.get(pdf_url)
+    # check if response 200
+    if response.status_code != 200:
+        print(f'Error: {response.status_code}')
+        return None
+    else:
+        with open(f'pdf/{id}_{ext}.pdf', 'wb') as file:
+            file.write(response.content)
 
 def get_closed_pdf_from_zora_url(file: str) -> str:
     """ Little bot to open zora, login, prompt sso code, and download the pdfs."""
+    # Create a session object
+    session = requests.Session()
+    
     # Login to zora
     driver = webdriver.Chrome()
     driver.get('https://www.zora.uzh.ch/cgi/users/home')
@@ -94,7 +109,13 @@ def get_closed_pdf_from_zora_url(file: str) -> str:
             if pdf_link:
                 id = url.split('/')[-1]
                 # download the pdf
-                get_pdf(pdf_link, id, 'closed')
+                
+                if not session.cookies:
+                    # Add selenium to the session
+                    cookies = {c['name']: c['value'] for c in driver.get_cookies()}
+                    session.cookies.update(cookies)
+                
+                get_pdf(pdf_link, id, 'closed', session=session)
             else:
                 print(f'No pdf found for {url}')
 
@@ -120,27 +141,24 @@ def text_mine_pdfs(pdf_folder: str) -> None:
                 pdf_text_dict[id] = text
             except Exception as e:
                 # write the pdfs and error to a file
-                with open('data/pdf/faulty_pdf_text_extract.txt', 'a') as file:
+                with open('pdf/faulty_pdf_text_extract.txt', 'a') as file:
                     file.write(f'{pdf}: {e}\n')
 
     # write all text to a json file
-    with open('data/pdf/pdf_text_raw.json', 'w', encoding='utf-8') as file:
+    with open('pdf/pdf_text_raw.json', 'w', encoding='utf-8') as file:
         json.dump(pdf_text_dict, file, ensure_ascii=False, indent=4)
 
 
 if __name__ == '__main__':
     # read in the data
-    data = read_in_data('data/task1_train.jsonl')
+    data = read_in_data('task1_train.jsonl')
     # get the pdfs
     for i, row in data.iterrows():
         id = row['ID'].lstrip('oai:www.zora.uzh.ch:')
         get_pdf_from_zora_url(row['URL'], id)
 
-    # get the closed pdfs
-    closed_pdf = 'data/pdf/closed_pdfs.txt'
+    # # get the closed pdfs
+    closed_pdf = 'pdf/closed_pdfs.txt'
     get_closed_pdf_from_zora_url(closed_pdf)
     
-    # text_mine_pdfs('data/pdf')
-    # url = 'https://www.zora.uzh.ch/id/eprint/149430/'
-    # id = url.lstrip('oai:www.zora.uzh.ch:')
-
+    # text_mine_pdfs('pdf')
