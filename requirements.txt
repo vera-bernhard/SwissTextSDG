@@ -3,3 +3,8 @@ nltk
 matplotlib
 seaborn
 pypdf
+requests
+torch
+transformers
+matplotlib
+swifter
