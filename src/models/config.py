@@ -37,8 +37,8 @@ class Config():
     }
 
     DATASETS = {
-        'OSDG': 'data/OSDG/osdg-community-data-v2024-01-01.csv',
-        'enlarged_OSDG': 'data/OSD/citing_works_OSDG.csv',
+        'OSDG': 'OSDG/osdg-community-data-v2024-01-01.csv',
+        'enlarged_OSDG': 'OSDG/citing_works_OSDG.csv',
     }
 
 def write_config_to_file(args):
