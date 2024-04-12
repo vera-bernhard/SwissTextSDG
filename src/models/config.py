@@ -65,6 +65,7 @@ def read_arguments_train(args):
 
     parser.add_argument('--experiment_name', type=str, default='default_experiment', help='Name of the experiment')
     parser.add_argument('--model', type=str, default='mbert', help='Model to use')
+    parser.add_argument('--model_name_or_path', default='distilbert-base-uncased', type=str)
     parser.add_argument('--dataset', type=str, default='OSDG', help='Dataset to use')
     parser.add_argument('--seed', type=int, default=DEFAULT_SEED, help='Seed for random number generators')
     parser.add_argument('--model_seed', type=int, default=DEFAULT_MODEL_SEED, help='Seed for model initialization')

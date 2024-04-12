@@ -11,6 +11,7 @@ from abc import ABC, abstractmethod
 from src.helpers.logging_helper import setup_logging
 from src.helpers.seed_helper import init_seed
 from src.helpers.path_helper import *
+from src.data.preprocessor import OSDGPreprocessor
 from src.data.tokenizer import SwissTextTokenizer
 from src.models.config import Config, DEFAULT_SEED, DEFAULT_SEQ_LENGTH, DEFAULT_TRAIN_FRAC, DEFAULT_NONMATCH_RATIO
 sys.path.append(os.getcwd())
@@ -37,32 +38,30 @@ class SwissTextDataset(ABC):
                         seed: int = DEFAULT_SEED,
                         do_lower_case=True,
                         max_seq_length: int = DEFAULT_SEQ_LENGTH,
-                        train_frac: float = DEFAULT_TRAIN_FRAC,
-                        nonmatch_ratio: int = DEFAULT_NONMATCH_RATIO):
+                        train_frac: float = DEFAULT_TRAIN_FRAC,):
         
         if name == 'OSDG':
-            return OSDGDataset(model_name, use_val, seed, do_lower_case, max_seq_length, train_frac, nonmatch_ratio)
+            return OSDGDataset(model_name, use_val, seed, do_lower_case, max_seq_length, train_frac)
         elif name == 'enlarged_OSDG':
-            return OSDGDataset(model_name, use_val, seed, do_lower_case, max_seq_length, train_frac, nonmatch_ratio)
+            return OSDGDataset(model_name, use_val, seed, do_lower_case, max_seq_length, train_frac)
         else:
             raise ValueError(f"Dataset {name} not supported")
 
     def __init__(self, name: str, model_name: str, use_val: bool,
                 seed: int = DEFAULT_SEED, do_lower_case=True, max_seq_length: int = DEFAULT_SEQ_LENGTH,
-                train_frac: float = DEFAULT_TRAIN_FRAC, nonmatch_ratio: int = DEFAULT_NONMATCH_RATIO):
-        self.name = name
-        self.model_name = model_name
+                train_frac: float = DEFAULT_TRAIN_FRAC):
+        self.name = self._check_dataset_name(name)
+        self.raw_file_path = dataset_raw_file_path(Config.DATASETS[self.name])
+        self.model_name = self._check_model_name(model_name)
         self.use_val = use_val
         self.seed = seed
         self.do_lower_case = do_lower_case
         self.max_seq_length = max_seq_length
         self.train_frac = train_frac
-        self.nonmatch_ratio = nonmatch_ratio
         self.tokenizer = None
 
         # Set the seed on all libraries
         init_seed(self.seed)
-        self.preprocessor = None
 
     def _check_dataset_name(self, name):
         configured_dataset_names = Config.DATASETS.keys()
@@ -77,6 +76,10 @@ class SwissTextDataset(ABC):
         if model_name not in configured_model_names:
             raise ValueError(f':model_name {model_name} should be one of [{configured_model_names}]')
         return model_name
+    
+    def _get_label_list(self):
+        data_df = self.preprocessor.get_raw_df()
+        return data_df['label'].unique().tolist()
     
     def get_raw_df(self):
         return self.preprocessor.get_raw_df()
@@ -122,13 +125,14 @@ class SwissTextDataset(ABC):
 class OSDGDataset(SwissTextDataset):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.preprocessor = None
+        self.preprocessor = OSDGPreprocessor(raw_file_path= self.raw_file_path, dataset_name=self.name, seed=self.seed, tf_idf=False)
         self.tokenizer = SwissTextTokenizer(model_name=self.model_name, do_lower_case=self.do_lower_case,
                                             max_seq_length=self.max_seq_length)
+        self.label_list = self._get_label_list()
 
 
 class PytorchDataset(Dataset):
-    def __init__(self, model_name: str, idx_df: pd.DataFrame, data_df: pd.DataFrame, tokenizer: SwissTextTokenizer,
+    def __init__(self, model_name: str, data_df: pd.DataFrame, tokenizer: SwissTextTokenizer,
                  max_seq_length: int):
         self.model_name = model_name
         self.data_df = data_df
