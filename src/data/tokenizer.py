@@ -69,7 +69,7 @@ class SwissTextTokenizer(ABC):
         '''
         def concat_fn(row):
             def string_conversion(cell):
-                col_name, val = cell
+                val = cell
                 return '' if pd.isna(val) else str(val)
 
             return " ".join(map(string_conversion, row['text'])).strip()

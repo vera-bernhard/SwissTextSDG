@@ -64,10 +64,14 @@ class OSDGPreprocessor(Preprocessor):
         df = copy.deepcopy(df)
         df = df.loc[pd.notnull(df['label'])]
         df = df.loc[df['label'] >= 0.5]
+        # Drop rows with empty text
+        df = df.loc[pd.notnull(df['text'])]
         return df
 
     def _get_entity_data__implementation(self, raw_df: pd.DataFrame):
         df = copy.deepcopy(raw_df)
+        # Drop the paperId, sgd and label columns (not needed for tokenization)
+        df = df.drop(columns=['paperId', 'sdg', 'label'])
         df = self.preprocess_text_samples(df)
         return df
 

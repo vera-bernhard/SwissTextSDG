@@ -111,9 +111,9 @@ class SwissTextDataset(ABC):
     def get_data_loaders(self, batch_size: int = 8):
         train_df, test_df, validation_df = self.get_train_test_val()
 
-        train_ds = PytorchDataset(model_name=self.name, idx_df=train_df, data_df=self.get_tokenized_data(),
+        train_ds = PytorchDataset(model_name=self.name, data_df=self.get_tokenized_data(),
                                   tokenizer=self.tokenizer, max_seq_length=self.max_seq_length)
-        test_ds = PytorchDataset(model_name=self.name, idx_df=test_df, data_df=self.get_tokenized_data(),
+        test_ds = PytorchDataset(model_name=self.name, data_df=self.get_tokenized_data(),
                                  tokenizer=self.tokenizer, max_seq_length=self.max_seq_length)
 
         train_dl = DataLoader(train_ds, shuffle=True, batch_size=batch_size)
@@ -122,7 +122,7 @@ class SwissTextDataset(ABC):
         if validation_df.empty:
             val_dl = None
         else:
-            val_ds = PytorchDataset(model_name=self.name, idx_df=validation_df, data_df=self.get_tokenized_data(),
+            val_ds = PytorchDataset(model_name=self.name, data_df=self.get_tokenized_data(),
                                  tokenizer=self.tokenizer, max_seq_length=self.max_seq_length)
             val_dl = DataLoader(val_ds, shuffle=False, batch_size=batch_size)
 
@@ -249,7 +249,7 @@ class PytorchDataset(Dataset):
         self.max_seq_length = max_seq_length
 
     def __len__(self):
-        return len(self.idx_df)
+        return len(self.data_df)
 
     def __getitem__(self, idx):
         seq = self.tokenized_data.iloc[idx]['tokenized']

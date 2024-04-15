@@ -309,10 +309,10 @@ class PyTorchModel:
     def _reset_prediction_buffer(self, is_test=True):
         num_test_samples = len(self.test_data_loader.dataset) if is_test else len(self.val_data_loader.dataset)
         self.prediction_buffer = {
-            'ids': np.zeros(num_test_samples, dtype=np.int),
-            'labels': np.zeros(num_test_samples, dtype=np.int),
-            'predictions': np.zeros(num_test_samples, dtype=np.int),
-            'prediction_proba': np.zeros(num_test_samples, dtype=np.float)
+            'ids': np.zeros(num_test_samples, dtype=int),
+            'labels': np.zeros(num_test_samples, dtype=int),
+            'predictions': np.zeros(num_test_samples, dtype=int),
+            'prediction_proba': np.zeros(num_test_samples, dtype=float)
         }
 
     def _setup_optimizer(self):
