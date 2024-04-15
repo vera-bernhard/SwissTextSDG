@@ -208,3 +208,12 @@ pip-selfcheck.json
 
 settings.py
 .vscode/launch.json
+
+# Don't upload anything inside the models folder
+
+models/*
+
+# Don't upload anything inside data/processed, data/results
+
+data/processed/*
+data/results/*

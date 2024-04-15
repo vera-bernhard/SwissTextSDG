@@ -60,18 +60,20 @@ def read_config_from_file(experiment_name: str):
     logging.info(f'\tSuccessfully loaded configuration for {experiment_name}')
     return args
 
-def read_arguments_train(args):
+def read_arguments_train():
     parser = argparse.ArgumentParser(description='Train a model on a dataset')
 
     parser.add_argument('--experiment_name', type=str, default='default_experiment', help='Name of the experiment')
-    parser.add_argument('--model', type=str, default='mbert', help='Model to use')
-    parser.add_argument('--model_name_or_path', default='distilbert-base-uncased', type=str)
+    parser.add_argument('--model_name', type=str, default='mbert', help='Model to use')
     parser.add_argument('--dataset', type=str, default='OSDG', help='Dataset to use')
     parser.add_argument('--seed', type=int, default=DEFAULT_SEED, help='Seed for random number generators')
     parser.add_argument('--model_seed', type=int, default=DEFAULT_MODEL_SEED, help='Seed for model initialization')
     parser.add_argument('--seq_length', type=int, default=DEFAULT_SEQ_LENGTH, help='Maximum sequence length')
     parser.add_argument('--train_frac', type=float, default=0.8, help='Fraction of data to use for training')
     parser.add_argument('--batch_size', type=int, default=32, help='Batch size')
+    parser.add_argument('--use_val', action='store_true', default=True, help='Use validation set')
+    parser.add_argument('--max_seq_length', type=int, default=256, help='Maximum sequence length')
+    parser.add_argument('--do_lower_case', action='store_true', default=True, help='Use lower case')
 
     parser.add_argument('--num_epochs', default=5, type=int)
     parser.add_argument('--learning_rate', default=2e-5, type=float)

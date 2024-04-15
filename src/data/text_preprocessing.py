@@ -21,8 +21,9 @@ def get_top_tf_idf_words(feature_names, response, top_n=2):
 class TextProcessor:
     @classmethod
     def normalize_text(self, text: str):
-
-        stop_words = set(stopwords.words(language) for language in stopwords.fileids())
+        stop_words = set()
+        for language in stopwords.fileids():
+            stop_words.update(stopwords.words(language))
         punct_words = set(string.punctuation)
 
         normalized = [w for w in word_tokenize(text.lower())

@@ -14,7 +14,7 @@ from src.helpers.path_helper import *
 from src.data.dataset_utils import SplitMethod
 from src.data.preprocessor import OSDGPreprocessor
 from src.data.tokenizer import SwissTextTokenizer
-from src.models.config import Config, DEFAULT_SEED, DEFAULT_SEQ_LENGTH, DEFAULT_TRAIN_FRAC, DEFAULT_NONMATCH_RATIO
+from src.models.config import Config, DEFAULT_SEED, DEFAULT_SEQ_LENGTH
 sys.path.append(os.getcwd())
 
 
@@ -33,35 +33,39 @@ class SwissTextDataset(ABC):
         return Config.DATASETS.keys()
     
     @staticmethod
-    def create_instance(name: str,
+    def create_instance(dataset: str,
                         model_name: str,
                         use_val: bool,
-                        split_method: SplitMethod = SplitMethod.RANDOM,
                         seed: int = DEFAULT_SEED,
-                        do_lower_case=True,
                         max_seq_length: int = DEFAULT_SEQ_LENGTH,
-                        train_frac: float = DEFAULT_TRAIN_FRAC,):
+                        do_lower_case: bool = True,
+                        train_frac: float = 0.8
+                        ):
         
-        if name == 'OSDG':
-            return OSDGDataset(model_name, use_val, SplitMethod.RANDOM, seed, do_lower_case, max_seq_length, train_frac)
-        elif name == 'enlarged_OSDG':
-            return OSDGDataset(model_name, use_val, SplitMethod.RANDOM, seed, do_lower_case, max_seq_length, train_frac)
+        if dataset == 'OSDG':
+            return OSDGDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
+                               use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
+                               do_lower_case = do_lower_case, train_frac = train_frac)
+        elif dataset == 'enlarged_OSDG':
+            return OSDGDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
+                               use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
+                               do_lower_case = do_lower_case, train_frac = train_frac)
         else:
-            raise ValueError(f"Dataset {name} not supported")
+            raise ValueError(f"Dataset {dataset} not supported")
 
     def __init__(self, name: str, model_name: str, split_method: SplitMethod, use_val: bool,
-                seed: int = DEFAULT_SEED, do_lower_case=True, max_seq_length: int = DEFAULT_SEQ_LENGTH,
-                train_frac: float = DEFAULT_TRAIN_FRAC):
+                seed: int = DEFAULT_SEED, max_seq_length: int = DEFAULT_SEQ_LENGTH, do_lower_case: bool = True, train_frac: float = 0.8,
+                ):
         self.name = self._check_dataset_name(name)
         self.raw_file_path = dataset_raw_file_path(Config.DATASETS[self.name])
         self.model_name = self._check_model_name(model_name)
         self.use_val = use_val
         self.seed = seed
-        self.do_lower_case = do_lower_case
         self.max_seq_length = max_seq_length
-        self.train_frac = train_frac
         self.tokenizer = None
         self.split_method = split_method
+        self.do_lower_case = do_lower_case
+        self.train_frac = train_frac
 
         # Set the seed on all libraries
         init_seed(self.seed)
@@ -82,7 +86,7 @@ class SwissTextDataset(ABC):
     
     def _get_label_list(self):
         data_df = self.preprocessor.get_raw_df()
-        return data_df['label'].unique().tolist()
+        return data_df['sdg'].astype(int).unique().tolist()
     
     def get_raw_df(self):
         return self.preprocessor.get_raw_df()
@@ -98,7 +102,7 @@ class SwissTextDataset(ABC):
                 self.tokenized_data = pd.read_json(tokenized_file_path)
 
             else:
-                self.tokenized_data, _ = self.tokenizer.tokenize_df(self.get_entity_data())
+                self.tokenized_data, _ = self.tokenizer.tokenize_df(self.preprocessor.get_entity_data())
                 self.tokenized_data.to_json(tokenized_file_path)
 
         return self.tokenized_data
@@ -132,11 +136,11 @@ class SwissTextDataset(ABC):
             return self.train_df, self.test_df, self.validation_df
         except AttributeError:
             method_name = self.get_split_method_name()
-            train_file_path = dataset_processed_file_path(self.name, f'train__{method_name}__all_matches.csv',
+            train_file_path = dataset_processed_file_path(self.name, f'train__{method_name}__samples.csv',
                                                           seed=self.seed)
-            test_file_path = dataset_processed_file_path(self.name, f'test__{method_name}__all_matches.csv',
+            test_file_path = dataset_processed_file_path(self.name, f'test__{method_name}__samples.csv',
                                                          seed=self.seed)
-            validation_file_path = dataset_processed_file_path(self.name, f'val__{method_name}__all_matches.csv',
+            validation_file_path = dataset_processed_file_path(self.name, f'val__{method_name}__samples.csv',
                                                                seed=self.seed)
 
             check_val = file_exists_or_create(validation_file_path) if self.use_val else True
@@ -150,7 +154,7 @@ class SwissTextDataset(ABC):
 
                 self.train_df, self.test_df, self.validation_df = \
                     self.get_train_test_val__implementation(self.train_frac)
-
+                
                 self.train_df.to_csv(train_file_path, index=False)
                 self.test_df.to_csv(test_file_path, index=False)
                 if not self.validation_df.empty:
@@ -228,9 +232,12 @@ class OSDGDataset(SwissTextDataset):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.preprocessor = OSDGPreprocessor(raw_file_path= self.raw_file_path, dataset_name=self.name, seed=self.seed, tf_idf=False)
-        self.tokenizer = SwissTextTokenizer(model_name=self.model_name, do_lower_case=self.do_lower_case,
-                                            max_seq_length=self.max_seq_length)
+        self.tokenizer = SwissTextTokenizer(model_name=self.model_name,
+                                            max_seq_length=self.max_seq_length,
+                                            do_lower_case= self.do_lower_case)
         self.label_list = self._get_label_list()
+        self.label_list.append(0) # Add the 0 label for the 'non-relevant' class
+        self.no_labels = len(self.label_list)
 
 
 class PytorchDataset(Dataset):

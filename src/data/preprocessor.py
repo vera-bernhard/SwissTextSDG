@@ -50,6 +50,7 @@ class Preprocessor(ABC):
 
     @abstractmethod
     def _get_entity_data__implementation(self, df):
+        """This function should implement the preprocessing of the raw df before tokenization."""
         raise NotImplementedError("Needs to be implemented on subclass.")
 
 
@@ -59,6 +60,10 @@ class OSDGPreprocessor(Preprocessor):
         self.tf_idf = tf_idf
 
     def _preprocess_raw_df(self, df: pd.DataFrame):
+        # Drop rows with label < 0.5
+        df = copy.deepcopy(df)
+        df = df.loc[pd.notnull(df['label'])]
+        df = df.loc[df['label'] >= 0.5]
         return df
 
     def _get_entity_data__implementation(self, raw_df: pd.DataFrame):

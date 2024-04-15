@@ -26,13 +26,12 @@ class PyTorchModel:
     def __init__(self, args):
         self.args = args
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        self.dataset = SwissTextDataset.create_instance(name=self.args.experiment_name, model_name=self.args.model_name,
-                                                        split_method= self.args.split_method,
+        self.dataset = SwissTextDataset.create_instance(dataset=self.args.dataset, model_name=self.args.model_name,
                                                         use_val=self.args.use_val, seed=self.args.seed,
-                                                        do_lower_case=self.args.do_lower_case,
                                                         max_seq_length=self.args.max_seq_length,
-                                                        train_frac=self.args.train_frac)
-        
+                                                        do_lower_case=self.args.do_lower_case,
+                                                        train_frac = self.args.train_frac,)
+    
 
         self.seed = self.args.seed
         self.model_seed = self.args.model_seed
@@ -89,18 +88,18 @@ class PyTorchModel:
     def load(self, model_path):
         self.network.load_state_dict(torch.load(model_path, map_location=self.device))
 
-    def _get_pretrained_network(self, model_name, model_name_or_path):
+    def _get_pretrained_network(self, model_name, pretrained_model):
         config_class = Config.MODELS[model_name].model_config
         model_class = Config.MODELS[model_name].model_class
 
-        config = config_class.from_pretrained(model_name_or_path)
-        network = model_class.from_pretrained(model_name_or_path, config=config)
+        config = config_class.from_pretrained(pretrained_model)
+        network = model_class.from_pretrained(pretrained_model, config=config)
 
         # (Log)SoftmaxLayer to get softmax probabilities as output of our network, rather than logits
         if self.args.use_softmax_layer:
             new_clf = nn.Sequential(
                 network.classifier,
-                nn.LogSoftmax(dim=self.no_of_classes),
+                nn.LogSoftmax(dim=self.dataset.no_labels),
             )
             network.classifier = new_clf
 
