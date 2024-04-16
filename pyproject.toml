@@ -25,6 +25,7 @@ scipy = "^1.13.0"
 qdrant-client = "^1.8.2"
 sentence-transformers = "^2.6.1"
 scikit-learn = "^1.4.1.post1"
+kaggle = "^1.6.12"
 
 
 [tool.poetry.group.dev.dependencies]
