@@ -7,7 +7,7 @@ There seems to be two ways to work on a script from a GitHub repository from Col
 1. **Access a specific .ipynb notebook (no access to the repo). This way makes most sense if you want to simply run an existing notebook without saving changes.**
    * Go to Colab and select `Open Colab` and then `GitHub`.
    * On the repo page, go to `Code` -> `local` -> `HTTPS`, and copy the link.
-   * Paste the link in the field at the top of the window and click anywhere on the page to active the connection.
+   * Back on Colab, paste the link into the field at the top of the window and click anywhere on the page to active the connection.
    * You will see a list of availalble notebooks.
      
 2. **Clone the repo to Google Drive and push changes back to GitHub. This method allows you to work on the repo in the same manner as you would locally and gives full access to the data.**
