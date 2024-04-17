@@ -7,6 +7,7 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset, DataLoader
 from abc import ABC, abstractmethod
+from sklearn.model_selection import train_test_split
 
 from src.helpers.logging_helper import setup_logging
 from src.helpers.seed_helper import init_seed
@@ -165,16 +166,14 @@ class SwissTextDataset(ABC):
 
     def _random_split(self):
         def split_fn(df: pd.DataFrame, train_frac: float):
-            train_df = df.sample(frac=train_frac, random_state=self.seed)
-            test_df = df.drop(train_df.index)
+            # Stratified split of the dataset into train and test (and validation if needed) preserving the proportion of labels
+            train_df, test_df = train_test_split(df, test_size=1 - train_frac, stratify=df['sdg'], random_state=self.seed)
             val_df = pd.DataFrame()
             if self.use_val:
                 # split the validation set as half of the test set, i.e.
                 # both test and valid sets will be of the same size
-                #
-                val_df = test_df.sample(frac=0.5, random_state=self.seed)
-                test_df = test_df.drop(val_df.index)
-            # TODO: Check if we need to return the dfs or just the indices (see model.train/model.test)
+                val_df, test_df = train_test_split(test_df, test_size=0.5, stratify=test_df['sdg'], random_state=self.seed)
+
             return train_df, test_df, val_df
 
         return split_fn
