@@ -140,7 +140,7 @@ class PyTorchModel:
                                           desc=f'[TRAINING] Running epoch {epoch}/{self.args.num_epochs} ...',
                                           total=len(self.train_data_loader)):
                 self.network.train()
-                outputs, inputs, _ = self.predict(batch_tuple)
+                outputs, inputs = self.predict(batch_tuple)
 
                 loss = outputs[0]
                 output = outputs[1]
@@ -206,11 +206,11 @@ class PyTorchModel:
             predictions = torch.argmax(output, axis=1)
 
             if self.args.use_softmax_layer:
-                prediction_proba = torch.exp(output)[:, 1, predictions]
+                prediction_proba, _ = torch.max(torch.exp(output)[:, predictions], dim=1)
             else:
-                prediction_proba = torch.nn.functional.softmax(output, dim=2)[:, 1, predictions]
+                prediction_proba, _ = torch.max(torch.nn.functional.softmax(output, dim=2)[:, predictions], dim=1)
 
-            self.log_predictions( predictions, prediction_proba, step=step)
+            self.log_predictions(inputs['labels'], predictions, prediction_proba, step=step)
 
             sample_count += len(predictions)
             sample_correct += (predictions == inputs['labels'].squeeze()).detach().cpu().numpy().sum()
@@ -242,11 +242,11 @@ class PyTorchModel:
             predictions = torch.argmax(output, axis=1)
 
             if self.args.use_softmax_layer:
-                prediction_proba = torch.exp(output)[:, 1, predictions]
+                prediction_proba, _ = torch.max(torch.exp(output)[:, predictions], dim=1)
             else:
-                prediction_proba = torch.nn.functional.softmax(output, dim=2)[:, 1, predictions]
+                prediction_proba, _ = torch.max(torch.nn.functional.softmax(output, dim=2)[:, predictions], dim=1)
 
-            self.log_predictions(raw_inputs, predictions, prediction_proba, step=step, is_test=False)
+            self.log_predictions(inputs['labels'], predictions, prediction_proba, step=step, is_test=False)
 
             sample_count += len(predictions)
             sample_correct += (predictions == inputs['labels'].squeeze()).detach().cpu().numpy().sum()
@@ -277,7 +277,7 @@ class PyTorchModel:
         return all_predictions
 
 
-    def log_predictions(self, raw_inputs, predictions, prediction_proba, step=0, is_test=True):
+    def log_predictions(self, labels, predictions, prediction_proba, step=0, is_test=True):
         def tensor_to_list(tensor_data):
             return tensor_data.detach().cpu().numpy().reshape(-1).tolist()
 
@@ -288,9 +288,7 @@ class PyTorchModel:
         end_idx = np.min([((step + 1) * batch_size), num_samples])
 
         # Save the IDs, labels and predictions in the buffer
-        self.prediction_buffer['lids'][start_idx:end_idx] = tensor_to_list(raw_inputs['lids'])
-        self.prediction_buffer['rids'][start_idx:end_idx] = tensor_to_list(raw_inputs['rids'])
-        self.prediction_buffer['labels'][start_idx:end_idx] = tensor_to_list(raw_inputs['labels'])
+        self.prediction_buffer['labels'][start_idx:end_idx] = tensor_to_list(labels)
         self.prediction_buffer['predictions'][start_idx:end_idx] = tensor_to_list(predictions)
         self.prediction_buffer['prediction_proba'][start_idx:end_idx] = tensor_to_list(prediction_proba)
 
