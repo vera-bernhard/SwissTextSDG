@@ -93,13 +93,15 @@ class PyTorchModel:
         model_class = Config.MODELS[model_name].model_class
 
         config = config_class.from_pretrained(pretrained_model)
+        # Change the number of labels
+        config.num_labels = self.dataset.num_labels
         network = model_class.from_pretrained(pretrained_model, config=config)
 
         # (Log)SoftmaxLayer to get softmax probabilities as output of our network, rather than logits
         if self.args.use_softmax_layer:
             new_clf = nn.Sequential(
                 network.classifier,
-                nn.LogSoftmax(dim=self.dataset.no_labels),
+                nn.LogSoftmax(dim=1),
             )
             network.classifier = new_clf
 
@@ -116,7 +118,7 @@ class PyTorchModel:
         }
 
         if self.args.model_name != 'distilbert':
-            inputs['token_type_ids'] = batch[2] if self.args.model_name in ['bert', 'xlnet'] else None
+            inputs['token_type_ids'] = batch[2] if self.args.model_name in ['bert', 'mbert'] else None
 
         outputs = self.network(**inputs)
 
@@ -194,7 +196,7 @@ class PyTorchModel:
         for step, batch_tuple in tqdm(enumerate(self.test_data_loader), desc=f'[TESTING] Running epoch {epoch} ...',
                                       total=len(self.test_data_loader)):
             self.network.eval()
-            outputs, inputs, raw_inputs = self.predict(batch_tuple)
+            outputs, inputs = self.predict(batch_tuple)
 
             loss = outputs[0]
             output = outputs[1]
@@ -208,7 +210,7 @@ class PyTorchModel:
             else:
                 prediction_proba = torch.nn.functional.softmax(output, dim=2)[:, 1, predictions]
 
-            self.log_predictions(raw_inputs, predictions, prediction_proba, step=step)
+            self.log_predictions( predictions, prediction_proba, step=step)
 
             sample_count += len(predictions)
             sample_correct += (predictions == inputs['labels'].squeeze()).detach().cpu().numpy().sum()

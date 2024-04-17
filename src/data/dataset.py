@@ -112,9 +112,9 @@ class SwissTextDataset(ABC):
     def get_data_loaders(self, batch_size: int = 8):
         train_df, test_df, validation_df = self.get_train_test_val()
 
-        train_ds = PytorchDataset(model_name=self.name, data_df=self.get_tokenized_data(),
+        train_ds = PytorchDataset(model_name=self.name, data_df=train_df, tokenized_data=self.get_tokenized_data(),
                                   tokenizer=self.tokenizer, max_seq_length=self.max_seq_length)
-        test_ds = PytorchDataset(model_name=self.name, data_df=self.get_tokenized_data(),
+        test_ds = PytorchDataset(model_name=self.name, data_df=test_df, tokenized_data=self.get_tokenized_data(),
                                  tokenizer=self.tokenizer, max_seq_length=self.max_seq_length)
 
         train_dl = DataLoader(train_ds, shuffle=True, batch_size=batch_size)
@@ -123,7 +123,7 @@ class SwissTextDataset(ABC):
         if validation_df.empty:
             val_dl = None
         else:
-            val_ds = PytorchDataset(model_name=self.name, data_df=self.get_tokenized_data(),
+            val_ds = PytorchDataset(model_name=self.name, data_df=validation_df, tokenized_data=self.get_tokenized_data(),
                                  tokenizer=self.tokenizer, max_seq_length=self.max_seq_length)
             val_dl = DataLoader(val_ds, shuffle=False, batch_size=batch_size)
 
@@ -167,6 +167,8 @@ class SwissTextDataset(ABC):
     def _random_split(self):
         def split_fn(df: pd.DataFrame, train_frac: float):
             # Stratified split of the dataset into train and test (and validation if needed) preserving the proportion of labels
+            # First add an id column
+            df['id'] = range(len(df))
             train_df, test_df = train_test_split(df, test_size=1 - train_frac, stratify=df['sdg'], random_state=self.seed)
             val_df = pd.DataFrame()
             if self.use_val:
@@ -236,14 +238,16 @@ class OSDGDataset(SwissTextDataset):
                                             do_lower_case= self.do_lower_case)
         self.label_list = self._get_label_list()
         self.label_list.append(0) # Add the 0 label for the 'non-relevant' class
-        self.no_labels = len(self.label_list)
+        self.num_labels = len(self.label_list)
 
 
 class PytorchDataset(Dataset):
-    def __init__(self, model_name: str, data_df: pd.DataFrame, tokenizer: SwissTextTokenizer,
+    def __init__(self, model_name: str, data_df: pd.DataFrame, tokenized_data:pd.DataFrame, tokenizer: SwissTextTokenizer,
                  max_seq_length: int):
         self.model_name = model_name
         self.data_df = data_df
+        # Merge the tokenized data with the data_df
+        self.tokenized_data = pd.merge(data_df, tokenized_data, how='left', on='id')
         self.tokenizer = tokenizer
         self.max_seq_length = max_seq_length
 
@@ -251,5 +255,7 @@ class PytorchDataset(Dataset):
         return len(self.data_df)
 
     def __getitem__(self, idx):
-        seq = self.tokenized_data.iloc[idx]['tokenized']
+        token_seq = self.tokenized_data.iloc[idx]['tokenized']
+        label = self.data_df.iloc[idx]['sdg']
+        seq = self.tokenizer.generate_input(token_seq, label)
         return seq
