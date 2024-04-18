@@ -12,7 +12,7 @@ def load_prediction_log(experiment_name, epoch):
     return pd.read_csv(log_path)
 
 def calculate_scores(df):
-    num_labels = df['labels'].nunique()
+    labels = df['labels'].unique()
     num_correct = (df['labels'] == df['predictions']).sum()
     accuracy = num_correct / len(df)
     precision = num_correct / len(df[df['predictions'] == 1])
@@ -21,10 +21,10 @@ def calculate_scores(df):
 
     # Now calculate the precision/recall/f1 for each label
     label_scores = {}
-    for label in range(num_labels):
+    for label in labels:
         label_df = df[df['labels'] == label]
         num_correct = (label_df['labels'] == label_df['predictions']).sum()
-        precision = num_correct / len(label_df[label_df['predictions'] == label])
+        precision = num_correct / len(df[df['predictions'] == label])
         recall = num_correct / len(label_df)
         f1 = 2 * precision * recall / (precision + recall)
         label_scores[label] = {'precision': precision, 'recall': recall, 'f1': f1}
