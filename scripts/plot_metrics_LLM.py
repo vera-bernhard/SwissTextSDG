@@ -25,7 +25,7 @@ def plot_metrics(models):
 
 
 def main():
-    models = ['Mistral']
+    models = ['Mistral', 'Llama2']
     plot_metrics(models)
 
 

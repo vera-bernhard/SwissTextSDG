@@ -26,7 +26,7 @@ def create_confusion_matrix(models):
 
 
 def main():
-    models = ['Mistral']
+    models = ['Mistral', 'Llama2']
     create_confusion_matrix(models)
 
 
