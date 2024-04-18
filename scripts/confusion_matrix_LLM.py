@@ -20,7 +20,7 @@ def create_confusion_matrix(models):
         plt.xlabel('Predicted Label')
         plt.ylabel('True Label')
         plt.title(f'Confusion Matrix: {model}')
-        plt.savefig(f'confusion_matrix_{model}.png', dpi=300, bbox_inches='tight')
+        plt.savefig(f'../{model}/confusion_matrix_{model}.png', dpi=300, bbox_inches='tight')
 
         plt.show()
 

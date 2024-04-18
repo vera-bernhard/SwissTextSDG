@@ -18,7 +18,7 @@ def plot_metrics(models):
         plt.xticks(df['Class'])
         plt.legend()
         plt.grid(axis='y')
-        plt.savefig(f'metrics_plot_{model}.png', dpi=300, bbox_inches='tight')
+        plt.savefig(f'../{model}/metrics_plot_{model}.png', dpi=300, bbox_inches='tight')
 
         plt.show()
 
