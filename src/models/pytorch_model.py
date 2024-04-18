@@ -232,7 +232,7 @@ class PyTorchModel:
         for step, batch_tuple in tqdm(enumerate(self.val_data_loader), desc=f'[VALIDATE] Running epoch {epoch} ...',
                                       total=len(self.val_data_loader)):
             self.network.eval()
-            outputs, inputs, raw_inputs = self.predict(batch_tuple)
+            outputs, inputs = self.predict(batch_tuple)
 
             loss = outputs[0]
             output = outputs[1]

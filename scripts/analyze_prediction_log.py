@@ -3,7 +3,7 @@ import os
 import pandas as pd
 from matplotlib import pyplot as plt
 
-from helpers.path_helper import *
+from src.helpers.path_helper import experiment_file_path
 
 def load_prediction_log(experiment_name, epoch):
     log_path = experiment_file_path(experiment_name, "".join(['mbert', '__prediction_log__ep', str(epoch), '.csv']))
@@ -48,12 +48,14 @@ def save_scores(scores, experiment_name, epoch):
 
 def main():
     experiment_name = 'mbert_seed_0_enlargedOSDG'
-    epoch = 5
+    epochs = [1, 2, 3, 4, 5]
 
-    df = load_prediction_log(experiment_name, epoch)
-    scores = calculate_scores(df)
-    save_scores(scores[-1], experiment_name, epoch)
-
+    for epoch in epochs:
+        df = load_prediction_log(experiment_name, epoch)
+        scores = calculate_scores(df)
+        save_scores(scores[-1], experiment_name, epoch)
+        plot_scores(scores[-1], experiment_name, epoch)
+    
 
 if __name__ == '__main__':
     main()
