@@ -7,7 +7,7 @@ from sklearn.metrics import confusion_matrix
 def create_confusion_matrix(models):
 
     for model in models:
-        filepath = f'../../{model}/classification_results.csv'
+        filepath = f'../{model}/classification_results.csv'
         df = pd.read_csv(filepath)
 
         conf_matrix = confusion_matrix(df['Gold_Standard'], df['Response'])

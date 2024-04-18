@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 def plot_metrics(models):
 
     for model in models:
-        filepath = f'../../{model}/eval_metrics.csv'
+        filepath = f'../{model}/eval_metrics.csv'
         df = pd.read_csv(filepath)
 
         # Plotting the accuracy and F1 score for each class
