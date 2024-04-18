@@ -93,13 +93,15 @@ class PyTorchModel:
         model_class = Config.MODELS[model_name].model_class
 
         config = config_class.from_pretrained(pretrained_model)
+        # Change the number of labels
+        config.num_labels = self.dataset.num_labels
         network = model_class.from_pretrained(pretrained_model, config=config)
 
         # (Log)SoftmaxLayer to get softmax probabilities as output of our network, rather than logits
         if self.args.use_softmax_layer:
             new_clf = nn.Sequential(
                 network.classifier,
-                nn.LogSoftmax(dim=self.dataset.no_labels),
+                nn.LogSoftmax(dim=1),
             )
             network.classifier = new_clf
 
@@ -116,7 +118,7 @@ class PyTorchModel:
         }
 
         if self.args.model_name != 'distilbert':
-            inputs['token_type_ids'] = batch[2] if self.args.model_name in ['bert', 'xlnet'] else None
+            inputs['token_type_ids'] = batch[2] if self.args.model_name in ['bert', 'mbert'] else None
 
         outputs = self.network(**inputs)
 
@@ -138,7 +140,7 @@ class PyTorchModel:
                                           desc=f'[TRAINING] Running epoch {epoch}/{self.args.num_epochs} ...',
                                           total=len(self.train_data_loader)):
                 self.network.train()
-                outputs, inputs, _ = self.predict(batch_tuple)
+                outputs, inputs = self.predict(batch_tuple)
 
                 loss = outputs[0]
                 output = outputs[1]
@@ -194,7 +196,7 @@ class PyTorchModel:
         for step, batch_tuple in tqdm(enumerate(self.test_data_loader), desc=f'[TESTING] Running epoch {epoch} ...',
                                       total=len(self.test_data_loader)):
             self.network.eval()
-            outputs, inputs, raw_inputs = self.predict(batch_tuple)
+            outputs, inputs = self.predict(batch_tuple)
 
             loss = outputs[0]
             output = outputs[1]
@@ -204,11 +206,11 @@ class PyTorchModel:
             predictions = torch.argmax(output, axis=1)
 
             if self.args.use_softmax_layer:
-                prediction_proba = torch.exp(output)[:, 1, predictions]
+                prediction_proba, _ = torch.max(torch.exp(output)[:, predictions], dim=1)
             else:
-                prediction_proba = torch.nn.functional.softmax(output, dim=2)[:, 1, predictions]
+                prediction_proba, _ = torch.max(torch.nn.functional.softmax(output, dim=2)[:, predictions], dim=1)
 
-            self.log_predictions(raw_inputs, predictions, prediction_proba, step=step)
+            self.log_predictions(inputs['labels'], predictions, prediction_proba, step=step)
 
             sample_count += len(predictions)
             sample_correct += (predictions == inputs['labels'].squeeze()).detach().cpu().numpy().sum()
@@ -240,11 +242,11 @@ class PyTorchModel:
             predictions = torch.argmax(output, axis=1)
 
             if self.args.use_softmax_layer:
-                prediction_proba = torch.exp(output)[:, 1, predictions]
+                prediction_proba, _ = torch.max(torch.exp(output)[:, predictions], dim=1)
             else:
-                prediction_proba = torch.nn.functional.softmax(output, dim=2)[:, 1, predictions]
+                prediction_proba, _ = torch.max(torch.nn.functional.softmax(output, dim=2)[:, predictions], dim=1)
 
-            self.log_predictions(raw_inputs, predictions, prediction_proba, step=step, is_test=False)
+            self.log_predictions(inputs['labels'], predictions, prediction_proba, step=step, is_test=False)
 
             sample_count += len(predictions)
             sample_correct += (predictions == inputs['labels'].squeeze()).detach().cpu().numpy().sum()
@@ -275,7 +277,7 @@ class PyTorchModel:
         return all_predictions
 
 
-    def log_predictions(self, raw_inputs, predictions, prediction_proba, step=0, is_test=True):
+    def log_predictions(self, labels, predictions, prediction_proba, step=0, is_test=True):
         def tensor_to_list(tensor_data):
             return tensor_data.detach().cpu().numpy().reshape(-1).tolist()
 
@@ -286,9 +288,7 @@ class PyTorchModel:
         end_idx = np.min([((step + 1) * batch_size), num_samples])
 
         # Save the IDs, labels and predictions in the buffer
-        self.prediction_buffer['lids'][start_idx:end_idx] = tensor_to_list(raw_inputs['lids'])
-        self.prediction_buffer['rids'][start_idx:end_idx] = tensor_to_list(raw_inputs['rids'])
-        self.prediction_buffer['labels'][start_idx:end_idx] = tensor_to_list(raw_inputs['labels'])
+        self.prediction_buffer['labels'][start_idx:end_idx] = tensor_to_list(labels)
         self.prediction_buffer['predictions'][start_idx:end_idx] = tensor_to_list(predictions)
         self.prediction_buffer['prediction_proba'][start_idx:end_idx] = tensor_to_list(prediction_proba)
 

@@ -47,31 +47,60 @@ class SwissTextTokenizer(ABC):
 
         logging.info(f'Start tokenizing.')
 
-        tokenized_df = df \
-            .swifter \
-            .allow_dask_on_strings(enable=True) \
-            .progress_bar(desc='Concatenating rows...') \
-            .apply(self._get_concat_fn(), axis=1) \
-            .to_frame(name='concat_data')
+        tokenized_df = copy.deepcopy(df)
 
         tokenized_df['tokenized'] = tokenized_df \
             .swifter \
             .progress_bar(desc='Tokenizing rows...') \
-            .apply(lambda row: self.tokenizer.tokenize(row['concat_data']), axis=1)
+            .apply(lambda row: self.tokenizer.tokenize(row['text']), axis=1)
 
         logging.info('Done tokenizing.')
 
         return tokenized_df, df
-
-    def _get_concat_fn(self):
+    
+    def generate_input(self, token_seq, label):
         '''
-        Provides the method for concatenating a single row in the dataframe
+        Generates the input for the model from a token sequence
         '''
-        def concat_fn(row):
-            def string_conversion(cell):
-                val = cell
-                return '' if pd.isna(val) else str(val)
+        token_seq = copy.deepcopy(token_seq)
+        # Truncate if necessary
+        token_seq = self.truncate_sequence(token_seq)
+        # Add special tokens
+        token_seq = ['[CLS]'] + token_seq + ['[SEP]']
+        # Convert tokens to ids
+        input_ids = self.tokenizer.convert_tokens_to_ids(token_seq)
+        # Pad sequence
+        input_ids, pad_tokens = self.pad_sequence(input_ids)
+        # Input mask
+        input_mask = [1] * len(token_seq) + [0] * pad_tokens
+        # Segment ids
+        segment_ids = [0] * len(token_seq) + [0] * pad_tokens
 
-            return " ".join(map(string_conversion, row['text'])).strip()
+        assert len(input_ids) == self.max_seq_length
+        assert len(input_mask) == self.max_seq_length
+        assert len(segment_ids) == self.max_seq_length
 
-        return concat_fn
+        input_ids = torch.tensor(input_ids, dtype=torch.long)
+        input_mask = torch.tensor(input_mask, dtype=torch.long)
+        segment_ids = torch.tensor(segment_ids, dtype=torch.long)
+        label = torch.tensor([label], dtype=torch.long)
+
+        return (input_ids, input_mask, segment_ids, label)
+
+
+    
+    def truncate_sequence(self, tokens):
+        '''
+        Truncates the sequence to the maximum sequence length, we remove the last tokens on the right
+        '''
+        if len(tokens) > self.max_seq_length - 2:
+            tokens = tokens[:self.max_seq_length - 2]
+        return tokens
+    
+    def pad_sequence(self, input_ids):
+        '''
+        Pads the sequence to the maximum sequence length
+        '''
+        pad_tokens = self.max_seq_length - len(input_ids)
+        input_ids += [0] * pad_tokens
+        return input_ids, pad_tokens

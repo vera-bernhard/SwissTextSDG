@@ -64,6 +64,8 @@ class OSDGPreprocessor(Preprocessor):
         df = copy.deepcopy(df)
         df = df.loc[pd.notnull(df['label'])]
         df = df.loc[df['label'] >= 0.5]
+        # Drop rows with less than 10 words
+        df = df.loc[df['text'].str.split().str.len() >= 10]
         # Drop rows with empty text
         df = df.loc[pd.notnull(df['text'])]
         return df
