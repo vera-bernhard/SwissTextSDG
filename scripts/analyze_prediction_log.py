@@ -1,4 +1,6 @@
 import os
+import sys
+sys.path.append(os.getcwd())
 
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -10,19 +12,19 @@ def load_prediction_log(experiment_name, epoch):
     return pd.read_csv(log_path)
 
 def calculate_scores(df):
-    num_labels = df['label'].nunique()
-    num_correct = (df['label'] == df['prediction']).sum()
+    num_labels = df['labels'].nunique()
+    num_correct = (df['labels'] == df['predictions']).sum()
     accuracy = num_correct / len(df)
-    precision = num_correct / len(df[df['prediction'] == 1])
-    recall = num_correct / len(df[df['label'] == 1])
+    precision = num_correct / len(df[df['predictions'] == 1])
+    recall = num_correct / len(df[df['labels'] == 1])
     f1_score = 2 * precision * recall / (precision + recall)
 
     # Now calculate the precision/recall/f1 for each label
     label_scores = {}
     for label in range(num_labels):
-        label_df = df[df['label'] == label]
-        num_correct = (label_df['label'] == label_df['prediction']).sum()
-        precision = num_correct / len(label_df[label_df['prediction'] == label])
+        label_df = df[df['labels'] == label]
+        num_correct = (label_df['labels'] == label_df['predictions']).sum()
+        precision = num_correct / len(label_df[label_df['predictions'] == label])
         recall = num_correct / len(label_df)
         f1 = 2 * precision * recall / (precision + recall)
         label_scores[label] = {'precision': precision, 'recall': recall, 'f1': f1}
@@ -32,7 +34,7 @@ def calculate_scores(df):
 def plot_scores(scores, experiment_name, epoch):
     plt.figure(figsize=(10, 5))
     plt.bar(scores.keys(), [score['f1'] for score in scores.values()])
-    plt.xlabel('Label')
+    plt.xlabel('SDG')
     plt.ylabel('F1 Score')
     plt.title(f'F1 Scores for {experiment_name} at epoch {epoch}')
     plt.savefig(experiment_file_path(experiment_name, "".join(['mbert', '__f1_scores__ep', str(epoch), '.png'])))
