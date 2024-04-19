@@ -9,7 +9,7 @@ import logging
 from src.helpers.logging_helper import setup_logging
 setup_logging()
 
-from transformers import BertTokenizer, BertForSequenceClassification, BertConfig
+from transformers import BertTokenizer, BertForSequenceClassification, BertConfig, MistralForSequenceClassification, MistralConfig, AutoTokenizer,
 from src.helpers.path_helper import experiment_config_path, file_exists_or_create
 
 
@@ -34,11 +34,25 @@ class Config():
             pretrained_model='bert-base-multilingual-uncased',
             tokenizer=BertTokenizer
         ),
+        'mistral': LanguageModelConfig(
+            model_class=MistralForSequenceClassification,
+            model_config=MistralConfig,
+            pretrained_model='mistralai/Mistral-7B-v0.1',
+            tokenizer=AutoTokenizer.from_pretrained('mistralai/Mistral-7B-v0.1')
+        ),
+        'zeyphir': LanguageModelConfig(
+            model_class=MistralForSequenceClassification,
+            model_config=MistralConfig,
+            pretrained_model='zephyr-7b-alpha',
+            tokenizer=AutoTokenizer.from_pretrained('zephyr-7b-alpha')
+        ),
+            
     }
 
     DATASETS = {
-        'OSDG': 'OSDG/osdg-community-data-v2024-01-01.csv',
-        'enlarged_OSDG': 'OSDG/citing_works_OSDG.csv',
+        'OSDG': 'data/OSDG/osdg-community-data-v2024-01-01.csv',
+        'enlarged_OSDG': 'data/OSD/citing_works_OSDG.csv',
+        'swiss_text': 'data/task1_train.jsonl'
     }
 
 def write_config_to_file(args):
@@ -60,9 +74,9 @@ def read_config_from_file(experiment_name: str):
     logging.info(f'\tSuccessfully loaded configuration for {experiment_name}')
     return args
 
-def read_arguments_train():
-    parser = argparse.ArgumentParser(description='Train a model on a dataset')
 
+def read_arguments_train(args):
+    parser = argparse.ArgumentParser(description='Train a model on a dataset')
     parser.add_argument('--experiment_name', type=str, default='default_experiment', help='Name of the experiment')
     parser.add_argument('--model_name', type=str, default='mbert', help='Model to use')
     parser.add_argument('--dataset', type=str, default='OSDG', help='Dataset to use')
