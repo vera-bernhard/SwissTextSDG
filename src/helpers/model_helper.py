@@ -1,7 +1,7 @@
-import src.models.config as cfg
+import models.mbert.config as cfg
 from src.helpers.path_helper import *
 from src.helpers.seed_helper import initialize_gpu_seed
-from src.models.pytorch_model import PyTorchModel
+from models.mbert.pytorch_model import PyTorchModel
 
 
 def load_model(args, update_config=False):

@@ -2,9 +2,9 @@ import os
 import sys
 
 sys.path.append(os.getcwd())
-from src.models.pytorch_model import PyTorchModel
+from models.mbert.pytorch_model import PyTorchModel
 from src.helpers.seed_helper import initialize_gpu_seed
-from src.models.config import read_arguments_test
+from models.mbert.config import read_arguments_test
 from src.helpers.logging_helper import setup_logging
 from src.helpers.path_helper import *
 
