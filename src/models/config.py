@@ -39,6 +39,9 @@ class Config():
     DATASETS = {
         'OSDG': 'OSDG/osdg-community-data-v2024-01-01.csv',
         'enlarged_OSDG': 'OSDG/citing_works_OSDG.csv',
+        'swisstext_task1_train': 'data/raw/task1_train.jsonl',
+        'enlarged_swisstext_task1_train': 'data/raw/enlarged_task1_train.csv',
+        'combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext': 'data/raw/combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext.csv',
     }
 
 def write_config_to_file(args):

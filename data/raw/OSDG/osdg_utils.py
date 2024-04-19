@@ -4,6 +4,7 @@ import re
 import requests
 import pickle
 from tqdm import tqdm
+import time
 
 import pandas as pd
 
@@ -87,9 +88,18 @@ class OSDGDataLoader:
                 related_works = pd.concat([related_works, pd.DataFrame({'paperId': [paperId], 'text': [text]})], ignore_index=True)
                 
             return related_works
+        elif response.status_code == 429:
+            return '429'
         else:
             return None
+            
 
+    def call_semantic_scholar_citations_api(self, url):
+        # Implement a function to call the Semantic Scholar API and return the response
+
+        response = requests.get(url)
+        return response
+    
     def get_related_works(self, osdg_sample):
         # Implement a function to retrieve the works that cite a given OSDG sample (i.e. a row from the OSDG dataset) using the Semantic Scholar Academic Graph API
         # The function should return a pandas dataframe with the following columns:
@@ -108,15 +118,20 @@ class OSDGDataLoader:
             response = self.responses_dict[url]
         else:
             # Call the API
-            response = requests.get(url)
+            response = self.call_semantic_scholar_citations_api(url)
+            time.sleep(1)
+            related_works = self.process_semantic_scholar_citation_response(response)
+
+            # Check if the response is a 429 status code
+            while related_works is '429':
+                # Call the API
+                response = self.call_semantic_scholar_citations_api(url)
+                related_works = self.process_semantic_scholar_citation_response(response)
+
             # Add the response to the dictionary
             self.responses_dict[url] = response
             # Save the dictionary
             self.save_responses_dict()
-
-        # Process the API response
-            
-        related_works = self.process_semantic_scholar_citation_response(response)
 
         return related_works
 
@@ -152,7 +167,7 @@ class OSDGDataLoader:
             # Get the related works for the OSDG sample
             related_works = self.get_related_works(osdg_sample)
 
-            # Check if related works is an empty dataframe
+            # Check if related works is None
             if related_works is None:
                 continue
             
