@@ -13,7 +13,7 @@ from src.helpers.logging_helper import setup_logging
 from src.helpers.seed_helper import init_seed
 from src.helpers.path_helper import *
 from src.data.dataset_utils import SplitMethod
-from src.data.preprocessor import OSDGPreprocessor
+from src.data.preprocessor import OSDGPreprocessor, TrainSwissTextPreprocessor
 from src.data.tokenizer import SwissTextTokenizer
 from src.models.mbert.config import Config, DEFAULT_SEED, DEFAULT_SEQ_LENGTH
 sys.path.append(os.getcwd())
@@ -49,6 +49,10 @@ class SwissTextDataset(ABC):
                                do_lower_case = do_lower_case, train_frac = train_frac)
         elif dataset == 'enlarged_OSDG':
             return OSDGDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
+                               use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
+                               do_lower_case = do_lower_case, train_frac = train_frac)
+        elif dataset == 'swisstext_task1_train':
+            return TrainSwissTextDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
                                use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
                                do_lower_case = do_lower_case, train_frac = train_frac)
         else:
@@ -240,6 +244,15 @@ class OSDGDataset(SwissTextDataset):
         self.label_list.append(0) # Add the 0 label for the 'non-relevant' class
         self.num_labels = len(self.label_list)
 
+class TrainSwissTextDataset(SwissTextDataset):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.preprocessor = TrainSwissTextPreprocessor(raw_file_path= self.raw_file_path, dataset_name=self.name, seed=self.seed, tf_idf=False)
+        self.tokenizer = SwissTextTokenizer(model_name=self.model_name,
+                                            max_seq_length=self.max_seq_length,
+                                            do_lower_case= self.do_lower_case)
+        raw_df = self.preprocessor.get_raw_df()
+        self.num_labels = len(raw_df['sdg'].unique())
 
 class PytorchDataset(Dataset):
     def __init__(self, model_name: str, data_df: pd.DataFrame, tokenized_data:pd.DataFrame, tokenizer: SwissTextTokenizer,
