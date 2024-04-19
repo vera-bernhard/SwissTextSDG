@@ -1,0 +1,91 @@
+// {
+//     // Use IntelliSense to learn about possible attributes.
+//     // Hover to view descriptions of existing attributes.
+//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//             "name": "Python Debugger: osdg_utils",
+//             "type": "debugpy",
+//             "request": "launch",
+//             "program": "data/OSDG/osdg_utils.py",
+//             "console": "integratedTerminal",
+//             "justMyCode": true,
+//             "env": {
+//                 "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
+//             }
+//         }
+//     ]
+// }
+
+// {
+//     // Use IntelliSense to learn about possible attributes.
+//     // Hover to view descriptions of existing attributes.
+//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//             "name": "Python Debugger: osdg_utils",
+//             "type": "debugpy",
+//             "request": "launch",
+//             "program": "data/OSDG/citing_works_OSDG_analysis.py",
+//             "console": "integratedTerminal",
+//             "justMyCode": true,
+//             "env": {
+//             "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python",
+//             },
+//             "cwd": "${workspaceFolder}",
+//             "args": [
+//                 ],
+//         }
+//     ]
+// }
+
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: osdg_utils",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "src/models/mbert/run_transformer_training.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+            "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python",
+            },
+            "cwd": "${workspaceFolder}",
+            "args": ["--experiment_name", "mbert_seed_0_enlargedOSDG",
+                     "--model_name", "mbert",
+                     "--dataset", "swisstext_task1_train",
+                     "--train_frac", "0.33",
+                     "--save_model",
+                     "--save_config",
+                ],
+        }
+    ]
+}
+// {
+//     // Use IntelliSense to learn about possible attributes.
+//     // Hover to view descriptions of existing attributes.
+//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//             "name": "Python Debugger: osdg_utils",
+//             "type": "debugpy",
+//             "request": "launch",
+//             "program": "scripts/analyze_prediction_log.py",
+//             "console": "integratedTerminal",
+//             "justMyCode": true,
+//             "env": {
+//             "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python",
+//             },
+//             "cwd": "${workspaceFolder}",
+//             "args": [],
+//         }
+//     ]
+// }

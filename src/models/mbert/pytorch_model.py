@@ -9,13 +9,14 @@ import torch
 import torch.nn as nn
 from tqdm.auto import tqdm
 
+from src.data.data_config import Config
 from src.helpers.logging_helper import setup_logging
 from src.helpers.seed_helper import initialize_gpu_seed
 from src.helpers.path_helper import *
 
 from src.data.dataset import SwissTextDataset
 from src.models.mbert.optimizer import build_optimizer
-from src.models.mbert.config import Config, write_config_to_file
+from src.models.mbert.config import write_config_to_file
 sys.path.append(os.getcwd())
 
 setup_logging()

@@ -9,13 +9,14 @@ from torch.utils.data import Dataset, DataLoader
 from abc import ABC, abstractmethod
 from sklearn.model_selection import train_test_split
 
+from src.data.data_config import Config
 from src.helpers.logging_helper import setup_logging
 from src.helpers.seed_helper import init_seed
 from src.helpers.path_helper import *
 from src.data.dataset_utils import SplitMethod
 from src.data.preprocessor import OSDGPreprocessor, TrainSwissTextPreprocessor
 from src.data.tokenizer import SwissTextTokenizer
-from src.models.mbert.config import Config, DEFAULT_SEED, DEFAULT_SEQ_LENGTH
+from src.models.mbert.config import DEFAULT_SEED, DEFAULT_SEQ_LENGTH
 sys.path.append(os.getcwd())
 
 
