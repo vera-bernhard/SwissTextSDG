@@ -9,7 +9,7 @@ import logging
 from src.helpers.logging_helper import setup_logging
 setup_logging()
 
-from transformers import BertTokenizer, BertForSequenceClassification, BertConfig, MistralForSequenceClassification, MistralConfig, AutoTokenizer,
+from transformers import BertTokenizer, BertForSequenceClassification, BertConfig, MistralForSequenceClassification, MistralConfig, AutoTokenizer
 from src.helpers.path_helper import experiment_config_path, file_exists_or_create
 
 
@@ -34,13 +34,13 @@ class Config():
             pretrained_model='bert-base-multilingual-uncased',
             tokenizer=BertTokenizer
         ),
-        'mistral': LanguageModelConfig(
+        'qlora-mistral': LanguageModelConfig(
             model_class=MistralForSequenceClassification,
             model_config=MistralConfig,
             pretrained_model='mistralai/Mistral-7B-v0.1',
             tokenizer=AutoTokenizer.from_pretrained('mistralai/Mistral-7B-v0.1')
         ),
-        'zeyphir': LanguageModelConfig(
+        'qlora-zeyphir': LanguageModelConfig(
             model_class=MistralForSequenceClassification,
             model_config=MistralConfig,
             pretrained_model='zephyr-7b-alpha',
