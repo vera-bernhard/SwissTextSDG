@@ -15,7 +15,7 @@ from src.helpers.path_helper import *
 from src.data.dataset_utils import SplitMethod
 from src.data.preprocessor import OSDGPreprocessor
 from src.data.tokenizer import SwissTextTokenizer
-from models.mbert.config import Config, DEFAULT_SEED, DEFAULT_SEQ_LENGTH
+from src.models.mbert.config import Config, DEFAULT_SEED, DEFAULT_SEQ_LENGTH
 sys.path.append(os.getcwd())
 
 

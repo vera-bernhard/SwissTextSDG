@@ -74,7 +74,7 @@ def read_arguments_train():
     parser.add_argument('--seq_length', type=int, default=DEFAULT_SEQ_LENGTH, help='Maximum sequence length')
     parser.add_argument('--train_frac', type=float, default=0.8, help='Fraction of data to use for training')
     parser.add_argument('--batch_size', type=int, default=32, help='Batch size')
-    parser.add_argument('--use_val', action='store_true', default=True, help='Use validation set')
+    parser.add_argument('--use_val', action='store_true', help='Use validation set')
     parser.add_argument('--max_seq_length', type=int, default=256, help='Maximum sequence length')
     parser.add_argument('--do_lower_case', action='store_true', default=True, help='Use lower case')
 

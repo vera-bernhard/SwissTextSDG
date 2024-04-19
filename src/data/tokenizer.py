@@ -7,7 +7,7 @@ import torch
 
 from src.helpers.logging_helper import setup_logging
 import logging
-from models.mbert.config import Config
+from src.models.mbert.config import Config
 import copy
 import swifter
 

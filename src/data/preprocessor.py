@@ -4,7 +4,7 @@ import copy
 
 import logging
 from src.helpers.path_helper import *
-from models.mbert.config import DEFAULT_SEED
+from src.models.mbert.config import DEFAULT_SEED
 from src.data.text_preprocessing import TextProcessor
 
 
