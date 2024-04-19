@@ -4,7 +4,7 @@ import copy
 
 import logging
 from src.helpers.path_helper import *
-from src.models.config import DEFAULT_SEED
+from src.models.mbert.config import DEFAULT_SEED
 from src.data.text_preprocessing import TextProcessor
 
 
@@ -64,6 +64,8 @@ class OSDGPreprocessor(Preprocessor):
         df = copy.deepcopy(df)
         df = df.loc[pd.notnull(df['label'])]
         df = df.loc[df['label'] >= 0.5]
+        # Drop rows with less than 10 words
+        df = df.loc[df['text'].str.split().str.len() >= 10]
         # Drop rows with empty text
         df = df.loc[pd.notnull(df['text'])]
         return df
@@ -90,3 +92,46 @@ class OSDGPreprocessor(Preprocessor):
 
         return df
 
+class TrainSwissTextPreprocessor(Preprocessor):
+    def __init__(self, raw_file_path: str, dataset_name: str, seed: int = DEFAULT_SEED, tf_idf: bool=False):
+        super().__init__(raw_file_path, dataset_name, seed)
+        self.tf_idf = tf_idf
+
+    def get_raw_df(self):
+        # Load the jsonl file
+        try:
+            self.raw_df
+        except AttributeError:
+            df = pd.read_json(self.raw_file_path, lines=True)
+            self.raw_df = self._preprocess_raw_df(df)
+        return self.raw_df
+    
+    def _preprocess_raw_df(self, df: pd.DataFrame):
+        # Rename SDG column to sdg
+        df = df.rename(columns={'SDG': 'sdg'})
+        return df
+    
+    def _get_entity_data__implementation(self, raw_df: pd.DataFrame):
+        df = copy.deepcopy(raw_df)
+        # Drop the ID, URL and sdg columns (not needed for tokenization)
+        df = df.drop(columns=[ 'ID', 'URL', 'sdg'])
+        # Merge rows TITLE and ABSTRACT into one column called text
+        df['text'] = df['TITLE'] + ' ' + df['ABSTRACT']
+        df = df.drop(columns=['TITLE', 'ABSTRACT'])
+        df = self.preprocess_text_samples(df)
+        return df
+
+    def preprocess_text_samples(self, df: pd.DataFrame):
+        
+        # if too slow -> multiple jobs/cores
+        # We remove the punctuation + stopwords from samples
+        df.loc[pd.notnull(df['text']), 'text'] = df.loc[pd.notnull(df['text']), 'text'] \
+            .swifter \
+            .allow_dask_on_strings(enable=True) \
+            .progress_bar(desc='[Preprocessing] Normalizing text...') \
+            .apply(lambda x: TextProcessor.normalize_text(x))
+
+        if self.tf_idf:
+            df = TextProcessor.tf_idf_ordering(df=df)
+
+        return df
