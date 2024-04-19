@@ -56,6 +56,10 @@ class SwissTextDataset(ABC):
             return TrainSwissTextDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
                                use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
                                do_lower_case = do_lower_case, train_frac = train_frac)
+        elif dataset == 'enlarged_swisstext_task1_train':
+            return TrainSwissTextDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
+                               use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
+                               do_lower_case = do_lower_case, train_frac = train_frac)
         else:
             raise ValueError(f"Dataset {dataset} not supported")
 
