@@ -10,3 +10,7 @@ matplotlib
 swifter
 scikit-learn
 pytorch_transformers
+accelerate
+peft
+bitsandbytes
+nltk
