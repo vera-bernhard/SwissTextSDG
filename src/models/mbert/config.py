@@ -9,7 +9,7 @@ import logging
 from src.helpers.logging_helper import setup_logging
 setup_logging()
 
-from transformers import BertTokenizer, BertForSequenceClassification, BertConfig, MistralForSequenceClassification, MistralConfig, AutoTokenizer
+from transformers import BertTokenizer, BertForSequenceClassification, BertConfig, MistralForSequenceClassification, MistralConfig, AutoTokenizer, LlamaTokenizerFast
 from src.helpers.path_helper import experiment_config_path, file_exists_or_create
 
 
@@ -38,13 +38,15 @@ class Config():
             model_class=MistralForSequenceClassification,
             model_config=MistralConfig,
             pretrained_model='mistralai/Mistral-7B-v0.1',
-            tokenizer=AutoTokenizer.from_pretrained('mistralai/Mistral-7B-v0.1')
+            # tokenizer=AutoTokenizer.from_pretrained('mistralai/Mistral-7B-v0.1')
+            tokenizer = LlamaTokenizerFast
         ),
         'qlora-zeyphir': LanguageModelConfig(
             model_class=MistralForSequenceClassification,
             model_config=MistralConfig,
             pretrained_model='zephyr-7b-alpha',
-            tokenizer=AutoTokenizer.from_pretrained('zephyr-7b-alpha')
+            # tokenizer=AutoTokenizer.from_pretrained('zephyr-7b-alpha')
+            tokenizer=LlamaTokenizerFast
         ),
             
     }
@@ -77,7 +79,7 @@ def read_config_from_file(experiment_name: str):
     return args
 
 
-def read_arguments_train(args):
+def read_arguments_train():
     parser = argparse.ArgumentParser(description='Train a model on a dataset')
     parser.add_argument('--experiment_name', type=str, default='default_experiment', help='Name of the experiment')
     parser.add_argument('--model_name', type=str, default='mbert', help='Model to use')
