@@ -218,3 +218,4 @@ models/*
 data/processed/*
 data/results/*
 /swisstext_env/*
+access_token
