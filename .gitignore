@@ -217,5 +217,5 @@ models/*
 
 data/processed/*
 data/results/*
-/swisstext_env/*
-access_token
+/*_env/*
+src/models/qlora/config.py

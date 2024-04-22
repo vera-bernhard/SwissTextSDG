@@ -1,4 +1,4 @@
-from pytorch_model import PytorchModel
+from ..mbert.pytorch_model import PytorchModel
 from transformers import (AutoTokenizer,
                           MistralForSequenceClassification, 
                           BitsAndBytesConfig, 

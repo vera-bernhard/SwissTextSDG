@@ -43,7 +43,6 @@ class SwissTextTokenizer(ABC):
             # For Qlora: set the padding token to the eos token
             tokenizer.pad_token = tokenizer.eos_token
             tokenizer.add_eos_token = True
-            tokenizer.add_bos_token, tokenizer.add_eos_token
             
         else:
             tokenizer = AutoTokenizer.from_pretrained(pretrained_model, do_lower_case=self.do_lower_case)

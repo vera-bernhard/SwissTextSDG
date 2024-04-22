@@ -124,6 +124,7 @@ class PyTorchModel:
 
         return outputs, inputs
     
+    
     def train(self):
         global_step = 0
         total_loss, prev_epoch_loss, prev_loss = 0.0, 0.0, 0.0
