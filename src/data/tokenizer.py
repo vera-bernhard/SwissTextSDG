@@ -39,7 +39,7 @@ class SwissTextTokenizer(ABC):
 
 
         if self.model_name.startswith('qlora'):
-            tokenizer = Config.MODELS[self.model_name].tokenizer.from_pretrained(pretrained_model)
+            tokenizer = Config.MODELS[self.model_name].tokenizer.from_pretrained(pretrained_model)            
             # For Qlora: set the padding token to the eos token
             tokenizer.pad_token = tokenizer.eos_token
             tokenizer.add_eos_token = True
