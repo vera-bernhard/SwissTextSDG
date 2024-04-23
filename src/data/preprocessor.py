@@ -165,6 +165,7 @@ class CombinedOSDGSwissTextPreprocessor(Preprocessor):
 
             self.raw_df = pd.concat([osdg_df, enlarged_osdg_df, swisstext_df, enlarged_swisstext_df])
             self.raw_df = self.raw_df.reset_index(drop=True)
+            self.raw_df = self._preprocess_raw_df(self.raw_df)
 
         return self.raw_df        
         
