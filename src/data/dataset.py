@@ -291,9 +291,7 @@ class PytorchDataset(Dataset):
                  max_seq_length: int):
         self.model_name = model_name
         self.data_df = data_df
-        # Merge the tokenized data with the data_df
-        tokenized_data['id'] = tokenized_data.index
-        self.tokenized_data = pd.merge(data_df, tokenized_data, how='left', on='id')
+        self.tokenized_data = tokenized_data
         self.tokenizer = tokenizer
         self.max_seq_length = max_seq_length
 

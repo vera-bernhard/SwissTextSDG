@@ -66,7 +66,8 @@ def main(args):
     new_args.epoch = 5
     new_args = update_args_with_config(experiment_name = new_args.experiment_name, args = new_args)
 
-    swisstext_model = PyTorchModel(new_args)
+    swisstext_model = PyTorchModel.load_from_checkpoint(new_args, experiment_file_path(new_args.experiment_name, file_name))
+    swisstext_model.test(new_args.epoch)
 
     # Now set the test data loader of our model to that of the swisstext_model
     model.test_data_loader = swisstext_model.test_data_loader

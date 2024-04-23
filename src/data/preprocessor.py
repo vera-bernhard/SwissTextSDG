@@ -173,16 +173,31 @@ class CombinedOSDGSwissTextPreprocessor(Preprocessor):
         df = copy.deepcopy(df)
         df = df.loc[pd.notnull(df['text'])]
 
+        # Drop duplicate rows 
+        df = df.drop_duplicates(subset=['text'], keep='first')
+
         # Drop rows with less than 10 words
         df = df.loc[df['text'].str.split().str.len() >= 10]
 
-        # Get the min number of samples per class, we want all classes to have the same number of samples
-        samples_per_class = df['sdg'].value_counts().min()
+        # Get the min number of samples per class, we want all classes to have at most 5x the number of samples of the smallest class
+        samples_per_class = df['sdg'].value_counts()
+        max_samples_per_class = samples_per_class.min() * 5
 
-        # Downsample the overrepresented classes
+        # Get the number of samples per class (either the max_samples_per_class or the number of samples in the class)
 
-        df = df.groupby('sdg').apply(lambda x: x.sample(samples_per_class, random_state=DEFAULT_SEED)).reset_index(drop=True)
-
+        sdg_groups = df.groupby('sdg')
+        new_df = pd.DataFrame()
+        for sdg, group in sdg_groups:
+            if len(group) > max_samples_per_class:
+                new_df = pd.concat([new_df, group.sample(max_samples_per_class, random_state=self.seed)])
+            else:
+                new_df = pd.concat([new_df, group])
+        df = new_df
+        # Make sure there are no line separators in the text
+        df['text'] = df['text'].str.replace('\n', '')
+        df['text'] = df['text'].str.replace('\r', '')
+        df['text'] = df['text'].str.replace('\t', '')
+        df.reset_index(drop=True, inplace=True)
         return df
     
     def _get_entity_data__implementation(self, raw_df):
