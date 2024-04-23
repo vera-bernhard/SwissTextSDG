@@ -135,3 +135,75 @@ class TrainSwissTextPreprocessor(Preprocessor):
             df = TextProcessor.tf_idf_ordering(df=df)
 
         return df
+
+class CombinedOSDGSwissTextPreprocessor(Preprocessor):
+
+    def __init__(self, raw_file_path: str, dataset_name: str, seed: int = DEFAULT_SEED, tf_idf: bool=False):
+        super().__init__(raw_file_path, dataset_name, seed)
+        self.tf_idf = tf_idf
+    
+    def get_raw_df(self):
+        try: 
+            self.raw_df
+        except AttributeError:
+            osdg_path = dataset_raw_file_path('OSDG/osdg-community-data-v2024-01-01.csv')
+            osdg_df = pd.read_csv(osdg_path, header=0, delimiter = '\t', encoding='utf-8')
+            osdg_df = osdg_df[['text', 'sdg']]
+
+            enlarged_osdg_path = dataset_raw_file_path('OSDG/citing_works_OSDG.csv')
+            enlarged_osdg_df = pd.read_csv(enlarged_osdg_path)
+            enlarged_osdg_df = enlarged_osdg_df[['text', 'sdg']]
+
+            swisstext_path = dataset_processed_folder_path('swisstext_task1_train/seed_44/train__random__samples.csv') # We take only the train split, so we can evaluate on the test samples
+            swisstext_df = pd.read_csv(swisstext_path)
+            swisstext_df['text'] = swisstext_df['TITLE'] + ' ' + swisstext_df['ABSTRACT']
+            swisstext_df = swisstext_df[['text', 'sdg']]
+
+            enlarged_swisstext_path = dataset_raw_file_path('swisstext/citing_works_swisstext.csv')
+            enlarged_swisstext_df = pd.read_csv(enlarged_swisstext_path)
+            enlarged_swisstext_df = enlarged_swisstext_df[['text', 'sdg']]
+
+            self.raw_df = pd.concat([osdg_df, enlarged_osdg_df, swisstext_df, enlarged_swisstext_df])
+            self.raw_df = self.raw_df.reset_index(drop=True)
+
+        return self.raw_df        
+        
+    def _preprocess_raw_df(self, df: pd.DataFrame):
+        df = copy.deepcopy(df)
+        df = df.loc[pd.notnull(df['text'])]
+
+        # Drop rows with less than 10 words
+        df = df.loc[df['text'].str.split().str.len() >= 10]
+
+        # Get the min number of samples per class, we want all classes to have the same number of samples
+        samples_per_class = df['sdg'].value_counts().min()
+
+        # Downsample the overrepresented classes
+
+        df = df.groupby('sdg').apply(lambda x: x.sample(samples_per_class, random_state=DEFAULT_SEED)).reset_index(drop=True)
+
+        return df
+    
+    def _get_entity_data__implementation(self, raw_df):
+        df = copy.deepcopy(raw_df)
+        df = self.preprocess_text_samples(df)
+        return df
+
+    def preprocess_text_samples(self, df: pd.DataFrame):
+        
+        # if too slow -> multiple jobs/cores
+        # We remove the punctuation + stopwords from samples
+        df.loc[pd.notnull(df['text']), 'text'] = df.loc[pd.notnull(df['text']), 'text'] \
+            .swifter \
+            .allow_dask_on_strings(enable=True) \
+            .progress_bar(desc='[Preprocessing] Normalizing text...') \
+            .apply(lambda x: TextProcessor.normalize_text(x))
+
+        if self.tf_idf:
+            df = TextProcessor.tf_idf_ordering(df=df)
+
+        return df
+
+
+
+

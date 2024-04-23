@@ -46,7 +46,8 @@ class PyTorchModel:
 
         self._setup_data_loaders()
         self._setup_optimizer()
-        self._reset_prediction_buffer()
+        if self.test_data_loader is not None:
+            self._reset_prediction_buffer()
 
 
     @staticmethod
@@ -130,9 +131,10 @@ class PyTorchModel:
         total_loss, prev_epoch_loss, prev_loss = 0.0, 0.0, 0.0
 
         # Run zero-shot on test set
-        self.test()
-        if self.args.save_model:
-            self.save(suffix='__epoch0__zeroshot')
+        if self.test_data_loader is not None:
+            self.test()
+            if self.args.save_model:
+                self.save(suffix='__epoch0__zeroshot')
 
         for epoch in tqdm(range(1, self.args.num_epochs + 1), desc=f'Training for {self.args.num_epochs} epochs ...'):
             sample_count, sample_correct = 0, 0
@@ -184,7 +186,8 @@ class PyTorchModel:
                 self.save(suffix=f'__epoch{epoch}')
 
             # Run test+val set after each epoch
-            self.test(epoch)
+            if self.test_data_loader is not None:
+                self.test(epoch)
             if self.use_val:
                 self.validate(epoch)
 

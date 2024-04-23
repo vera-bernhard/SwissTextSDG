@@ -14,7 +14,7 @@ from src.helpers.logging_helper import setup_logging
 from src.helpers.seed_helper import init_seed
 from src.helpers.path_helper import *
 from src.data.dataset_utils import SplitMethod
-from src.data.preprocessor import OSDGPreprocessor, TrainSwissTextPreprocessor
+from src.data.preprocessor import OSDGPreprocessor, TrainSwissTextPreprocessor, CombinedOSDGSwissTextPreprocessor
 from src.data.tokenizer import SwissTextTokenizer
 from src.models.mbert.config import DEFAULT_SEED, DEFAULT_SEQ_LENGTH
 sys.path.append(os.getcwd())
@@ -60,6 +60,11 @@ class SwissTextDataset(ABC):
             return TrainSwissTextDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
                                use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
                                do_lower_case = do_lower_case, train_frac = train_frac)
+        elif dataset == 'combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext':
+            return EnlargedOSDGSwissTextDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
+                               use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
+                               do_lower_case = do_lower_case, train_frac = train_frac)
+
         else:
             raise ValueError(f"Dataset {dataset} not supported")
 
@@ -123,11 +128,15 @@ class SwissTextDataset(ABC):
 
         train_ds = PytorchDataset(model_name=self.name, data_df=train_df, tokenized_data=self.get_tokenized_data(),
                                   tokenizer=self.tokenizer, max_seq_length=self.max_seq_length)
-        test_ds = PytorchDataset(model_name=self.name, data_df=test_df, tokenized_data=self.get_tokenized_data(),
-                                 tokenizer=self.tokenizer, max_seq_length=self.max_seq_length)
-
         train_dl = DataLoader(train_ds, shuffle=True, batch_size=batch_size)
-        test_dl = DataLoader(test_ds, shuffle=False, batch_size=batch_size)
+
+        if test_df.empty:
+           test_dl = None
+        else:
+            test_ds = PytorchDataset(model_name=self.name, data_df=test_df, tokenized_data=self.get_tokenized_data(),
+                        tokenizer=self.tokenizer, max_seq_length=self.max_seq_length)
+            test_dl = DataLoader(test_ds, shuffle=False, batch_size=batch_size)
+
 
         if validation_df.empty:
             val_dl = None
@@ -157,7 +166,10 @@ class SwissTextDataset(ABC):
 
             if file_exists_or_create(train_file_path) and file_exists_or_create(train_file_path) and check_val:
                 self.train_df = pd.read_csv(train_file_path)
-                self.test_df = pd.read_csv(test_file_path)
+                try:
+                    self.test_df = pd.read_csv(test_file_path)
+                except pd.errors.EmptyDataError:
+                    self.test_df = pd.DataFrame()
                 self.validation_df = pd.read_csv(validation_file_path) if self.use_val else pd.DataFrame()
             else:
                 # Split the dataset into train, test, and validation
@@ -178,6 +190,10 @@ class SwissTextDataset(ABC):
             # Stratified split of the dataset into train and test (and validation if needed) preserving the proportion of labels
             # First add an id column
             df['id'] = range(len(df))
+
+            if train_frac == 1:
+                return df, pd.DataFrame(), pd.DataFrame()
+            
             train_df, test_df = train_test_split(df, test_size=1 - train_frac, stratify=df['sdg'], random_state=self.seed)
             val_df = pd.DataFrame()
             if self.use_val:
@@ -259,12 +275,24 @@ class TrainSwissTextDataset(SwissTextDataset):
         raw_df = self.preprocessor.get_raw_df()
         self.num_labels = len(raw_df['sdg'].unique())
 
+class EnlargedOSDGSwissTextDataset(SwissTextDataset):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.preprocessor = CombinedOSDGSwissTextPreprocessor(raw_file_path= self.raw_file_path, dataset_name=self.name, seed=self.seed, tf_idf=False)
+
+        self.tokenizer = SwissTextTokenizer(model_name=self.model_name,
+                                            max_seq_length=self.max_seq_length,
+                                            do_lower_case= self.do_lower_case)
+        raw_df = self.preprocessor.get_raw_df()
+        self.num_labels = len(raw_df['sdg'].unique())
+    
 class PytorchDataset(Dataset):
     def __init__(self, model_name: str, data_df: pd.DataFrame, tokenized_data:pd.DataFrame, tokenizer: SwissTextTokenizer,
                  max_seq_length: int):
         self.model_name = model_name
         self.data_df = data_df
         # Merge the tokenized data with the data_df
+        tokenized_data['id'] = tokenized_data.index
         self.tokenized_data = pd.merge(data_df, tokenized_data, how='left', on='id')
         self.tokenizer = tokenizer
         self.max_seq_length = max_seq_length
