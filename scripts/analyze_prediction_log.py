@@ -37,8 +37,11 @@ def plot_scores(scores, experiment_name, epoch):
     plt.title(f'F1 Scores for {experiment_name} at epoch {epoch}')
     plt.savefig(experiment_file_path(experiment_name, "".join(['mbert', '__f1_scores__ep', str(epoch), '.png'])))
 
-def save_label_scores(scores, experiment_name, epoch):
-    scores_path = experiment_file_path(experiment_name, "".join(['mbert', '__scores__ep', str(epoch), '.csv']))
+def save_label_scores(scores, experiment_name, epoch, benchmark: bool = False):
+    if benchmark:
+        scores_path = experiment_file_path(experiment_name, "".join(['mbert', '__scores__ep', str(epoch), '_benchmark.csv']))
+    else:
+        scores_path = experiment_file_path(experiment_name, "".join(['mbert', '__scores__ep', str(epoch), '.csv']))
     # Save the scores as a CSV with the following columns:
     # label, precision, recall, f1
     with open(scores_path, 'w') as f:
@@ -46,11 +49,14 @@ def save_label_scores(scores, experiment_name, epoch):
         for label, score in scores.items():
             f.write(f'{label},{score["precision"]},{score["recall"]},{score["f1"]}\n')
 
-def save_accuracy_score(scores, experiment_name, epoch):
-    scores_path = experiment_file_path(experiment_name, "".join(['mbert', '__accuracy_score__ep', str(epoch), '.csv']))
+def save_accuracy_score(score, experiment_name, epoch, benchmark: bool = False):
+    if benchmark:
+        scores_path = experiment_file_path(experiment_name, "".join(['mbert', '__accuracy_score__ep', str(epoch), '_benchmark.csv']))
+    else:
+        scores_path = experiment_file_path(experiment_name, "".join(['mbert', '__accuracy_score__ep', str(epoch), '.csv']))
     with open(scores_path, 'w') as f:
         f.write('accuracy\n')
-        f.write(f'{scores[0]}\n')
+        f.write(f'{score[0]}\n')
 
 def plot_confusion_matrix(df, experiment_name, epoch):
 

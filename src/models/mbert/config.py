@@ -110,3 +110,52 @@ def read_arguments_train():
         write_config_to_file(args)
 
     return args    
+
+def read_arguments_test():
+    parser = argparse.ArgumentParser(description='Test model with following arguments')
+
+    parser.add_argument('--experiment_name', type=str, required=True)
+    parser.add_argument('--epoch', type=int, required=True)
+
+
+    args = parser.parse_args()
+    args = update_args_with_config(args.experiment_name, args)
+
+    for argument in vars(args):
+        logging.info("argument: {} =\t{}".format(str(argument).ljust(20), getattr(args, argument)))
+
+    return args
+
+def update_args_with_config(experiment_name: str, args: argparse.Namespace = argparse.Namespace()) -> argparse.Namespace:
+    if os.path.isfile(experiment_config_path(experiment_name)):
+        found_config = read_config_from_file(experiment_name)
+
+        # Use the value of the seed parameter for the
+        # model seed, when it is not present
+        # #
+        try:
+            found_config['model_seed']
+        except KeyError:
+            found_config['model_seed'] = found_config['seed']
+
+        args.__dict__.update(found_config)
+
+    else:
+        raise FileNotFoundError(f"Config could not be found at {experiment_config_path(args.experiment_name)}")
+
+    return args
+
+
+def read_arguments_eval():
+    parser = argparse.ArgumentParser(description='Evaluate model with following arguments')
+
+    parser.add_argument('--experiment_name', type=str, required=True)
+    parser.add_argument('--epoch', type=int, required=True)
+
+    args = parser.parse_args()
+    args = update_args_with_config(args.experiment_name, args)
+
+    for argument in vars(args):
+        logging.info("argument: {} =\t{}".format(str(argument).ljust(20), getattr(args, argument)))
+
+    return args
