@@ -116,6 +116,7 @@ class OSDGDataLoader:
 
         if url in self.responses_dict:
             response = self.responses_dict[url]
+            related_works = self.process_semantic_scholar_citation_response(response)
         else:
             # Call the API
             response = self.call_semantic_scholar_citations_api(url)
@@ -123,7 +124,7 @@ class OSDGDataLoader:
             related_works = self.process_semantic_scholar_citation_response(response)
 
             # Check if the response is a 429 status code
-            while related_works is '429':
+            while related_works == '429':
                 # Call the API
                 response = self.call_semantic_scholar_citations_api(url)
                 related_works = self.process_semantic_scholar_citation_response(response)
