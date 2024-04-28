@@ -14,3 +14,4 @@ accelerate
 peft
 bitsandbytes
 nltk
+huggingface_hub
