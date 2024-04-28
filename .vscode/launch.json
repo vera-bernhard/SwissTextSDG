@@ -1,0 +1,46 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "mBert debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "src/models/mbert/run_transformer_training.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+            "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env/bin/python",
+            },
+            "cwd": "${workspaceFolder}",
+            "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train",
+                     "--model_name", "mbert",
+                     "--dataset", "swisstext_task1_train",
+                     "--save_model",
+                     "--save_config",
+                     "--train_frac", "0.33",
+                ],
+        },
+        {
+            "name": "Qlora debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "src/models/qlora/run_qlora.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+            "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env/bin/python",
+            },
+            "cwd": "${workspaceFolder}",
+            "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train",
+                     "--model_name", "qlora-mistral",
+                     "--dataset", "swisstext_task1_train",
+                     "--save_model",
+                     "--save_config",
+                     "--train_frac", "0.33",
+                ],
+        }
+    ]
+}
