@@ -1,4 +1,4 @@
-from ..mbert.pytorch_model import PytorchModel
+from src.models.mbert.pytorch_model import PyTorchModel
 from transformers import (AutoTokenizer,
                           MistralForSequenceClassification, 
                           BitsAndBytesConfig, 
@@ -10,21 +10,54 @@ from peft import (LoraConfig,
                   get_peft_model,
                   prepare_model_for_kbit_training)
 import torch
+from src.data.dataset import SwissTextDataset
+from src.data.data_config import Config
+from src.helpers.seed_helper import initialize_gpu_seed
 
 
-class QloraModel(PytorchModel):
+from huggingface_hub import login
+from config import *
+login(token=HUGGINGFACE_TOKEN)
+
+
+class QloraModel(PyTorchModel):
     
     def __init__(self, args):
-        super().__init__(args)
+        self.args = args
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.dataset = SwissTextDataset.create_instance(dataset=self.args.dataset, model_name=self.args.model_name,
+                                                        use_val=self.args.use_val, seed=self.args.seed,
+                                                        max_seq_length=self.args.max_seq_length,
+                                                        do_lower_case=self.args.do_lower_case,
+                                                        train_frac = self.args.train_frac,)
+    
+
+        self.seed = self.args.seed
+        self.model_seed = self.args.model_seed
+        self.use_val = self.args.use_val
+
+        self.model_config = Config.MODELS[self.args.model_name]
+
+        self.network = self._get_pretrained_networks(args.model_name, self.model_config.pretrained_model)
+        self.network = self._prepare_for_peft(self.network)   
         
-        self.network = self._get_pretrained_networks(args.model_name, args.pretrained_model)
-        self.network = self._prepare_for_peft(self.network)                
+        self.device, _ = initialize_gpu_seed(self.model_seed)
+        self.network.to(self.device)
+
+        self._setup_data_loaders()
+        self._setup_optimizer()
+        if self.test_data_loader is not None:
+            self._reset_prediction_buffer()
+
+        
+             
     # def train():
     #     pass
         
         
-    # def predict():
-    #     pass
+   # def predict(self, batch_tuple):
+        
+        
     
     def _get_pretrained_networks(self, model_name, pretrained_model):
         # Loading in 4-bits & FN4 quantization as in QLORA
@@ -35,11 +68,10 @@ class QloraModel(PytorchModel):
             bnb_4bit_use_double_quant= True,
         )
         
-        config_class = self.MODELS[model_name].model_config
-        model_name = self.MODELS[model_name].pretrained_model
-        
-        network = config_class.from_pretrained(
-            model_name,
+        pretrained_model = Config.MODELS[model_name].pretrained_model
+        model_class = Config.MODELS[model_name].model_class   
+        network = model_class.from_pretrained(
+            pretrained_model,
             num_labels = self.dataset.num_labels,
             quantization_config = bnb_config,
             device_map = self.device,
