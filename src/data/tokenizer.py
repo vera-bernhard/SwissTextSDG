@@ -95,8 +95,6 @@ class SwissTextTokenizer(ABC):
         label = torch.tensor([label], dtype=torch.long)
 
         return (input_ids, input_mask, segment_ids, label)
-
-
     
     def truncate_sequence(self, tokens):
         '''
