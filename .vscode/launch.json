@@ -34,7 +34,7 @@
             "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env/bin/python",
             },
             "cwd": "${workspaceFolder}",
-            "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train_softmax",
+            "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train",
                      "--model_name", "qlora-mistral",
                      "--dataset", "swisstext_task1_train",
                      "--save_model",
