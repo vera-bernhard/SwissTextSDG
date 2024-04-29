@@ -291,7 +291,7 @@ class PytorchDataset(Dataset):
                  max_seq_length: int):
         self.model_name = model_name
         self.data_df = data_df
-        self.tokenized_data = tokenized_data
+        self.data_df = pd.merge(self.data_df, tokenized_data, on='id', how = 'inner')
         self.tokenizer = tokenizer
         self.max_seq_length = max_seq_length
 
@@ -299,7 +299,7 @@ class PytorchDataset(Dataset):
         return len(self.data_df)
 
     def __getitem__(self, idx):
-        token_seq = self.tokenized_data.iloc[idx]['tokenized']
+        token_seq = self.data_df.iloc[idx]['tokenized']
         label = self.data_df.iloc[idx]['sdg']
         seq = self.tokenizer.generate_input(token_seq, label)
         return seq

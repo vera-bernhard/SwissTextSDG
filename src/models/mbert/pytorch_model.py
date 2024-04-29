@@ -119,9 +119,6 @@ class PyTorchModel:
             'labels': batch[3]
         }
 
-        if self.args.model_name != 'distilbert':
-            inputs['token_type_ids'] = batch[2] if self.args.model_name in ['bert', 'mbert'] else None
-
         outputs = self.network(**inputs)
 
         return outputs, inputs
