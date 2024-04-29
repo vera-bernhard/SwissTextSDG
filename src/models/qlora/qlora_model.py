@@ -17,12 +17,12 @@ from src.helpers.seed_helper import initialize_gpu_seed
 
 from huggingface_hub import login
 from config import *
-login(token=HUGGINGFACE_TOKEN)
 
 
 class QloraModel(PyTorchModel):
     
     def __init__(self, args):
+        login(token=HUGGINGFACE_TOKEN)
         self.args = args
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.dataset = SwissTextDataset.create_instance(dataset=self.args.dataset, model_name=self.args.model_name,
@@ -49,15 +49,11 @@ class QloraModel(PyTorchModel):
         if self.test_data_loader is not None:
             self._reset_prediction_buffer()
 
-        
-             
-    # def train():
-    #     pass
-        
-        
-   # def predict(self, batch_tuple):
-        
-        
+
+    # def load_from_checkpoint(args, model_path: str = None):
+        # pass
+    
+    # def load(self, model_path):
     
     def _get_pretrained_networks(self, model_name, pretrained_model):
         # Loading in 4-bits & FN4 quantization as in QLORA

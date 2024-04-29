@@ -216,3 +216,4 @@ data/processed/*
 data/results/*
 /*_env/*
 src/models/qlora/config.py
+checkpoints/*

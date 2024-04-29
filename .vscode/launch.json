@@ -27,7 +27,7 @@
             "name": "Qlora debugger",
             "type": "debugpy",
             "request": "launch",
-            "program": "src/models/qlora/run_qlora.py",
+            "program": "src/models/qlora/run_qlora_train.py",
             "console": "integratedTerminal",
             "justMyCode": true,
             "env": {
@@ -40,6 +40,9 @@
                      "--save_model",
                      "--save_config",
                      "--train_frac", "0.33",
+                     "--batch_size", "1",
+                     "--num_epochs", "5",
+                     "--use_val",
                 ],
         }
     ]

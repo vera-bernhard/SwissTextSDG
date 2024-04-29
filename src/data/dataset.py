@@ -147,6 +147,26 @@ class SwissTextDataset(ABC):
 
         return train_dl, test_dl, val_dl
     
+    def get_data_sets(self, batch_size: int = 8):
+        train_df, test_df, validation_df = self.get_train_test_val()
+
+        train_ds = PytorchDataset(model_name=self.name, data_df=train_df, tokenized_data=self.get_tokenized_data(),
+                                  tokenizer=self.tokenizer, max_seq_length=self.max_seq_length)
+       
+        if test_df.empty:
+           test_ds = None
+        else:
+            test_ds = PytorchDataset(model_name=self.name, data_df=test_df, tokenized_data=self.get_tokenized_data(),
+                        tokenizer=self.tokenizer, max_seq_length=self.max_seq_length)
+
+        if validation_df.empty:
+            val_ds = None
+        else:
+            val_ds = PytorchDataset(model_name=self.name, data_df=validation_df, tokenized_data=self.get_tokenized_data(),
+                                 tokenizer=self.tokenizer, max_seq_length=self.max_seq_length)
+
+        return train_ds, test_ds, val_ds
+    
     def get_split_method_name(self):
         return str(self.split_method).split('.')[1].lower()
 
