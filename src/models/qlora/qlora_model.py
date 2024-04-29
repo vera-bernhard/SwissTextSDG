@@ -13,10 +13,14 @@ import torch
 from src.data.dataset import SwissTextDataset
 from src.data.data_config import Config
 from src.helpers.seed_helper import initialize_gpu_seed
-
+from tqdm.auto import tqdm
 
 from huggingface_hub import login
 from config import *
+import torch.nn as nn
+from src.helpers.logging_helper import setup_logging
+import logging
+setup_logging()
 
 
 class QloraModel(PyTorchModel):
@@ -38,7 +42,7 @@ class QloraModel(PyTorchModel):
 
         self.model_config = Config.MODELS[self.args.model_name]
 
-        self.network = self._get_pretrained_networks(args.model_name, self.model_config.pretrained_model)
+        self.network = self._get_pretrained_network(args.model_name, self.model_config.pretrained_model)
         self.network = self._prepare_for_peft(self.network)   
         
         self.device, _ = initialize_gpu_seed(self.model_seed)
@@ -55,7 +59,104 @@ class QloraModel(PyTorchModel):
     
     # def load(self, model_path):
     
-    def _get_pretrained_networks(self, model_name, pretrained_model):
+    
+    # def save(): 
+                
+    def train(self):
+        global_step = 0
+        total_loss, prev_epoch_loss, prev_loss = 0.0, 0.0, 0.0
+
+        # Run zero-shot on test set
+        if self.test_data_loader is not None:
+            self.test()
+            if self.args.save_model:
+                self.save(suffix='__epoch0__zeroshot')
+
+        for epoch in tqdm(range(1, self.args.num_epochs + 1), desc=f'Training for {self.args.num_epochs} epochs ...'):
+            sample_count, sample_correct = 0, 0
+
+            for step, batch_tuple in tqdm(enumerate(self.train_data_loader),
+                                          desc=f'[TRAINING] Running epoch {epoch}/{self.args.num_epochs} ...',
+                                          total=len(self.train_data_loader)):
+                self.network.train()
+                outputs, inputs = self.predict(batch_tuple)
+
+                loss = outputs[0]
+                output = torch.nn.functional.softmax(outputs[1], dim=1)
+                #  We use a (Log)SoftmaxLayer in addition to the appropriate loss function
+                # (see https://pytorch.org/docs/stable/generated/torch.nn.NLLLoss.html)
+                #
+                loss_fn = nn.NLLLoss()
+                loss = loss_fn(output, inputs['labels'].view(-1))
+
+                loss.backward()
+                torch.nn.utils.clip_grad_norm_(self.network.parameters(), self.args.max_grad_norm)
+
+                total_loss += loss.item()
+
+                self.optimizer.step()
+                self.scheduler.step()  # Update learning rate schedule
+                self.network.zero_grad()
+
+                # Calculate how many were correct
+                predictions = torch.argmax(output, axis=1)
+                batch_count = len(predictions)
+                batch_correct = (predictions == inputs['labels'].squeeze()).detach().cpu().numpy().sum()
+
+                sample_count += batch_count
+                sample_correct += batch_correct
+                prev_loss = total_loss
+                global_step += 1
+
+            train_loss = round((total_loss - prev_epoch_loss) / len(self.train_data_loader), 4)
+            train_acc = round(sample_correct / sample_count, 4)
+
+            logging.info(
+                f"[Epoch {epoch}/{self.args.num_epochs}]\tTrain Loss: {train_loss}\tTrain Accuracy: {train_acc}")
+
+            prev_epoch_loss = total_loss
+
+            if self.args.save_model:
+                self.save(suffix=f'__epoch{epoch}')
+
+            # Run test+val set after each epoch
+            if self.test_data_loader is not None:
+                self.test(epoch)
+            if self.use_val:
+                self.validate(epoch)
+
+
+    def test(self, epoch: int = 0, global_step: int = 0):
+        self._reset_prediction_buffer()
+        total_loss, prev_loss = 0.0, 0.0
+        sample_count, sample_correct = 0, 0
+
+        for step, batch_tuple in tqdm(enumerate(self.test_data_loader), desc=f'[TESTING] Running epoch {epoch} ...',
+                                      total=len(self.test_data_loader)):
+            self.network.eval()
+            outputs, inputs = self.predict(batch_tuple)
+
+            loss = outputs[0]
+            output = torch.nn.functional.softmax(outputs[1], dim=1)
+            total_loss += loss.item()
+
+            # Calculate how many were correct
+            predictions = torch.argmax(output, axis=1)
+
+            prediction_proba = output[:, predictions]
+
+            self.log_predictions(inputs['labels'], predictions, prediction_proba, step=step)
+
+            sample_count += len(predictions)
+            sample_correct += (predictions == inputs['labels'].squeeze()).detach().cpu().numpy().sum()
+
+        test_loss = round(total_loss / len(self.test_data_loader), 4)
+        test_acc = round(sample_correct / sample_count, 4)
+
+        logging.info(f"[Epoch {epoch}/{self.args.num_epochs}]\tTest Loss: {test_loss}\tTest Accuracy: {test_acc}")
+        self.save_test_predictions(epoch)
+
+    def _get_pretrained_network(self, model_name, pretrained_model):
         # Loading in 4-bits & FN4 quantization as in QLORA
         bnb_config = BitsAndBytesConfig(
             load_in_4bit= True,
