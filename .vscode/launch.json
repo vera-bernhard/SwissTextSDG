@@ -34,15 +34,14 @@
             "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env/bin/python",
             },
             "cwd": "${workspaceFolder}",
-            "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train",
+            "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train_fix_prob",
                      "--model_name", "qlora-mistral",
                      "--dataset", "swisstext_task1_train",
                      "--save_model",
                      "--save_config",
-                     "--train_frac", "0.33",
+                     "--train_frac", "0.10",
                      "--batch_size", "1",
-                     "--num_epochs", "5",
-                     "--use_val",
+                     "--num_epochs", "1",
                 ],
         }
     ]
