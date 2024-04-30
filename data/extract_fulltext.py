@@ -234,4 +234,4 @@ if __name__ == '__main__':
 
     # text_mine_pdfs('pdf')
 
-    preprocess_train_data('raw/task1_train.jsonl', 'preprocessed/task1_train_doi.jsonl')
+    preprocess_train_data('raw/swisstext/task1_train.jsonl', 'preprocessed/task1_train_doi.jsonl')

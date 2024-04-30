@@ -15,3 +15,5 @@ peft
 bitsandbytes
 nltk
 huggingface_hub
+bs4
+selenium
