@@ -10,3 +10,5 @@ matplotlib
 swifter
 scikit-learn
 pytorch_transformers
+bs4
+selenium
