@@ -53,6 +53,9 @@ class SwissTextTokenizer(ABC):
             .swifter \
             .progress_bar(desc='Tokenizing rows...') \
             .apply(lambda row: self.tokenizer.tokenize(row['text']), axis=1)
+        
+        if 'sdg' in tokenized_df.columns:
+            tokenized_df.drop(columns=['sdg'], inplace=True)
 
         logging.info('Done tokenizing.')
 
