@@ -185,8 +185,6 @@ class SwissTextDataset(ABC):
     def _random_split(self):
         def split_fn(df: pd.DataFrame, train_frac: float):
             # Stratified split of the dataset into train and test (and validation if needed) preserving the proportion of labels
-            # First add an id column
-            df['id'] = range(len(df))
 
             if train_frac == 1:
                 return df, pd.DataFrame(), pd.DataFrame()

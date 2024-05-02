@@ -197,8 +197,13 @@ class PyTorchModel:
         file_exists_or_create(log_path)
         with open(log_path, 'w') as f:
             writer = csv.writer(f)
-            writer.writerow(['loss', 'train_accuracy', 'test_accuracy'])
-            writer.writerows(zip(self.epoch_losses, self.train_accuracies, self.test_accuracies))
+            if len(self.test_accuracies) == 0:
+                writer.writerow(['loss', 'train_accuracy'])
+                writer.writerows(zip(self.epoch_losses, self.train_accuracies))
+
+            else:   
+                writer.writerow(['loss', 'train_accuracy', 'test_accuracy'])
+                writer.writerows(zip(self.epoch_losses, self.train_accuracies, self.test_accuracies))
 
 
     def test(self, epoch: int = 0, global_step: int = 0):
@@ -230,7 +235,8 @@ class PyTorchModel:
 
         test_loss = round(total_loss / len(self.test_data_loader), 4)
         test_acc = round(sample_correct / sample_count, 4)
-        self.test_accuracies.append(test_acc)
+        if hasattr(self, 'test_accuracies'):
+            self.test_accuracies.append(test_acc)
 
         logging.info(f"[Epoch {epoch}/{self.args.num_epochs}]\tTest Loss: {test_loss}\tTest Accuracy: {test_acc}")
         self.save_test_predictions(epoch)

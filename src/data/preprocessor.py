@@ -21,6 +21,7 @@ class Preprocessor(ABC):
         except AttributeError:
             df = pd.read_csv(self.raw_file_path)
             self.raw_df = self._preprocess_raw_df(df)
+            self.raw_df['id'] = self.raw_df.index
         return self.raw_df
 
 
@@ -104,6 +105,7 @@ class TrainSwissTextPreprocessor(Preprocessor):
         except AttributeError:
             df = pd.read_json(self.raw_file_path, lines=True)
             self.raw_df = self._preprocess_raw_df(df)
+            self.raw_df['id'] = self.raw_df.index
         return self.raw_df
     
     def _preprocess_raw_df(self, df: pd.DataFrame):
@@ -142,15 +144,6 @@ class EnlargedTrainSwissTextPreprocessor(Preprocessor):
     def __init__(self, raw_file_path: str, dataset_name: str, seed: int = DEFAULT_SEED, tf_idf: bool=False):
         super().__init__(raw_file_path, dataset_name, seed)
         self.tf_idf = tf_idf
-
-    def get_raw_df(self):
-        # Load the jsonl file
-        try:
-            self.raw_df
-        except AttributeError:
-            df = pd.read_json(self.raw_file_path, lines=True)
-            self.raw_df = self._preprocess_raw_df(df)
-        return self.raw_df
     
     def _preprocess_raw_df(self, raw_df: pd.DataFrame):
         df = copy.deepcopy(raw_df)
@@ -162,11 +155,11 @@ class EnlargedTrainSwissTextPreprocessor(Preprocessor):
         # Drop rows with less than 10 words
         df = df.loc[df['text'].str.split().str.len() >= 10]
 
-        # Get the min number of samples per class, we want all classes to have at most the number of samples of the smallest class
+        # We want all classes to have at most 500 samples
         samples_per_class = df['sdg'].value_counts()
-        max_samples_per_class = samples_per_class.min() 
+        max_samples_per_class = 500
         
-        # Get the number of samples per class (either the max_samples_per_class or the number of samples in the class)
+        # Get the number of samples per class (either 500 or the number of samples in the class)
 
         sdg_groups = df.groupby('sdg')
         new_df = pd.DataFrame()
@@ -231,7 +224,7 @@ class CombinedOSDGSwissTextPreprocessor(Preprocessor):
             self.raw_df = pd.concat([osdg_df, enlarged_osdg_df, swisstext_df, enlarged_swisstext_df])
             self.raw_df = self.raw_df.reset_index(drop=True)
             self.raw_df = self._preprocess_raw_df(self.raw_df)
-
+            self.raw_df['id'] = self.raw_df.index
         return self.raw_df        
         
     def _preprocess_raw_df(self, raw_df: pd.DataFrame):
@@ -244,11 +237,11 @@ class CombinedOSDGSwissTextPreprocessor(Preprocessor):
         # Drop rows with less than 10 words
         df = df.loc[df['text'].str.split().str.len() >= 10]
 
-        # Get the min number of samples per class, we want all classes to have at most the number of samples of the smallest class
+        # We want all classes to have at most 1000 samples
         samples_per_class = df['sdg'].value_counts()
-        max_samples_per_class = samples_per_class.min() 
+        max_samples_per_class = 1000
 
-        # Get the number of samples per class (either the max_samples_per_class or the number of samples in the class)
+        # Get the number of samples per class (either 1000 or the number of samples in the class)
 
         sdg_groups = df.groupby('sdg')
         new_df = pd.DataFrame()
@@ -259,11 +252,6 @@ class CombinedOSDGSwissTextPreprocessor(Preprocessor):
                 new_df = pd.concat([new_df, group])
 
         df = new_df
-        # Make sure there are no line separators in the text
-        df['text'] = df['text'].str.replace('\n', '')
-        df['text'] = df['text'].str.replace('\r', '')
-        df['text'] = df['text'].str.replace('\t', '')
-        df.reset_index(drop=True, inplace=True)
         return df
     
     def _get_entity_data__implementation(self, raw_df):
