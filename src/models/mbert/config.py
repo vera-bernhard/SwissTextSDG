@@ -9,6 +9,7 @@ import logging
 from src.helpers.logging_helper import setup_logging
 setup_logging()
 
+from transformers import BertTokenizer, BertForSequenceClassification, BertConfig, MistralForSequenceClassification, MistralConfig, AutoTokenizer, LlamaTokenizerFast
 from src.helpers.path_helper import experiment_config_path, file_exists_or_create
 
 
@@ -22,6 +23,40 @@ class LanguageModelConfig:
     model_class: object
     model_config: object
     pretrained_model: str
+
+class Config():
+
+    MODELS = {
+        'mbert': LanguageModelConfig(
+            model_class=BertForSequenceClassification,
+            model_config=BertConfig,
+            pretrained_model='bert-base-multilingual-uncased',
+            tokenizer=BertTokenizer
+        ),
+        'qlora-mistral': LanguageModelConfig(
+            model_class=MistralForSequenceClassification,
+            model_config=MistralConfig,
+            pretrained_model='mistralai/Mistral-7B-v0.1',
+            # tokenizer=AutoTokenizer.from_pretrained('mistralai/Mistral-7B-v0.1')
+            tokenizer = LlamaTokenizerFast
+        ),
+        'qlora-zeyphir': LanguageModelConfig(
+            model_class=MistralForSequenceClassification,
+            model_config=MistralConfig,
+            pretrained_model='zephyr-7b-alpha',
+            # tokenizer=AutoTokenizer.from_pretrained('zephyr-7b-alpha')
+            tokenizer=LlamaTokenizerFast
+        ),
+            
+    }
+    # Dataset paths (relative to data/raw/)
+    DATASETS = {
+        'OSDG': 'OSDG/osdg-community-data-v2024-01-01.csv',
+        'enlarged_OSDG': 'OSDG/citing_works_OSDG.csv',
+        'swisstext_task1_train': 'task1_train.jsonl',
+        'enlarged_swisstext_task1_train': 'enlarged_task1_train.csv',
+        'combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext': 'combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext.csv',
+    }
 
 def write_config_to_file(args):
     config_path = experiment_config_path(args.experiment_name)
@@ -42,9 +77,9 @@ def read_config_from_file(experiment_name: str):
     logging.info(f'\tSuccessfully loaded configuration for {experiment_name}')
     return args
 
+
 def read_arguments_train():
     parser = argparse.ArgumentParser(description='Train a model on a dataset')
-
     parser.add_argument('--experiment_name', type=str, default='default_experiment', help='Name of the experiment')
     parser.add_argument('--model_name', type=str, default='mbert', help='Model to use')
     parser.add_argument('--dataset', type=str, default='OSDG', help='Dataset to use')
@@ -67,6 +102,7 @@ def read_arguments_train():
 
     parser.add_argument('--save_model', action='store_true')
     parser.add_argument('--save_config', action='store_true')
+    parser.add_argument('--no_stopword_removal', action='store_true')
 
     args = parser.parse_args()
 
