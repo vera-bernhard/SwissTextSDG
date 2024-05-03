@@ -14,14 +14,14 @@ from src.helpers.logging_helper import setup_logging
 from src.helpers.seed_helper import init_seed
 from src.helpers.path_helper import *
 from src.data.dataset_utils import SplitMethod
-from src.data.preprocessor import OSDGPreprocessor, TrainSwissTextPreprocessor, CombinedOSDGSwissTextPreprocessor
+from src.data.preprocessor import OSDGPreprocessor, TrainSwissTextPreprocessor, EnlargedTrainSwissTextPreprocessor, CombinedOSDGSwissTextPreprocessor
 from src.data.tokenizer import SwissTextTokenizer
 from src.models.mbert.config import DEFAULT_SEED, DEFAULT_SEQ_LENGTH
 sys.path.append(os.getcwd())
 
 
 setup_logging()
-
+SDG_LABELS = 18
 
 # Wrapper class for datasets. The goal is to have all relevant CSVs accessed through this class, so that
 # we do not have to wrangle with files and paths directly, but rather get what's' needed easily.
@@ -58,7 +58,7 @@ class SwissTextDataset(ABC):
                                use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
                                do_lower_case = do_lower_case, train_frac = train_frac, no_stopword_removal = no_stopword_removal)
         elif dataset == 'enlarged_swisstext_task1_train':
-            return TrainSwissTextDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
+            return EnlargedTrainSwissTextDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
                                use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
                                do_lower_case = do_lower_case, train_frac = train_frac, no_stopword_removal = no_stopword_removal)
         elif dataset == 'combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext':
@@ -82,6 +82,8 @@ class SwissTextDataset(ABC):
         self.do_lower_case = do_lower_case
         self.train_frac = train_frac
         self.stopword_removal = not no_stopword_removal
+        self.num_labels = SDG_LABELS
+
 
         # Set the seed on all libraries
         init_seed(self.seed)
@@ -99,11 +101,7 @@ class SwissTextDataset(ABC):
         if model_name not in configured_model_names:
             raise ValueError(f':model_name {model_name} should be one of [{configured_model_names}]')
         return model_name
-    
-    def _get_label_list(self):
-        data_df = self.preprocessor.get_raw_df()
-        return data_df['sdg'].astype(int).unique().tolist()
-    
+        
     def get_raw_df(self):
         return self.preprocessor.get_raw_df()
     
@@ -209,8 +207,6 @@ class SwissTextDataset(ABC):
     def _random_split(self):
         def split_fn(df: pd.DataFrame, train_frac: float):
             # Stratified split of the dataset into train and test (and validation if needed) preserving the proportion of labels
-            # First add an id column
-            df['id'] = range(len(df))
 
             if train_frac == 1:
                 return df, pd.DataFrame(), pd.DataFrame()
@@ -282,9 +278,7 @@ class OSDGDataset(SwissTextDataset):
         self.tokenizer = SwissTextTokenizer(model_name=self.model_name,
                                             max_seq_length=self.max_seq_length,
                                             do_lower_case= self.do_lower_case)
-        self.label_list = self._get_label_list()
-        self.label_list.append(0) # Add the 0 label for the 'non-relevant' class
-        self.num_labels = len(self.label_list)
+        
 
 class TrainSwissTextDataset(SwissTextDataset):
     def __init__(self, **kwargs):
@@ -293,8 +287,16 @@ class TrainSwissTextDataset(SwissTextDataset):
         self.tokenizer = SwissTextTokenizer(model_name=self.model_name,
                                             max_seq_length=self.max_seq_length,
                                             do_lower_case= self.do_lower_case)
-        raw_df = self.preprocessor.get_raw_df()
-        self.num_labels = len(raw_df['sdg'].unique())
+        
+
+class EnlargedTrainSwissTextDataset(SwissTextDataset):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.preprocessor = EnlargedTrainSwissTextPreprocessor(raw_file_path= self.raw_file_path, dataset_name=self.name, seed=self.seed, tf_idf=False)
+        self.tokenizer = SwissTextTokenizer(model_name=self.model_name,
+                                            max_seq_length=self.max_seq_length,
+                                            do_lower_case= self.do_lower_case)
+
 
 class EnlargedOSDGSwissTextDataset(SwissTextDataset):
     def __init__(self, **kwargs):
@@ -304,15 +306,13 @@ class EnlargedOSDGSwissTextDataset(SwissTextDataset):
         self.tokenizer = SwissTextTokenizer(model_name=self.model_name,
                                             max_seq_length=self.max_seq_length,
                                             do_lower_case= self.do_lower_case)
-        raw_df = self.preprocessor.get_raw_df()
-        self.num_labels = len(raw_df['sdg'].unique())
     
 class PytorchDataset(Dataset):
     def __init__(self, model_name: str, data_df: pd.DataFrame, tokenized_data:pd.DataFrame, tokenizer: SwissTextTokenizer,
                  max_seq_length: int):
         self.model_name = model_name
         self.data_df = data_df
-        self.tokenized_data = tokenized_data
+        self.data_df = pd.merge(self.data_df, tokenized_data, on='id', how = 'inner')
         self.tokenizer = tokenizer
         self.max_seq_length = max_seq_length
 
@@ -320,7 +320,7 @@ class PytorchDataset(Dataset):
         return len(self.data_df)
 
     def __getitem__(self, idx):
-        token_seq = self.tokenized_data.iloc[idx]['tokenized']
+        token_seq = self.data_df.iloc[idx]['tokenized']
         label = self.data_df.iloc[idx]['sdg']
         seq = self.tokenizer.generate_input(token_seq, label)
         return seq

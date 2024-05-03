@@ -131,6 +131,7 @@ class PyTorchModel:
     def train(self):
         global_step = 0
         total_loss, prev_epoch_loss, prev_loss = 0.0, 0.0, 0.0
+        self.epoch_losses, self.train_accuracies, self.test_accuracies = [], [], []
 
         # Run zero-shot on test set
         if self.test_data_loader is not None:
@@ -178,6 +179,8 @@ class PyTorchModel:
 
             train_loss = round((total_loss - prev_epoch_loss) / len(self.train_data_loader), 4)
             train_acc = round(sample_correct / sample_count, 4)
+            self.epoch_losses.append(train_loss)
+            self.train_accuracies.append(train_acc)
 
             logging.info(
                 f"[Epoch {epoch}/{self.args.num_epochs}]\tTrain Loss: {train_loss}\tTrain Accuracy: {train_acc}")
@@ -192,6 +195,20 @@ class PyTorchModel:
                 self.test(epoch)
             if self.use_val:
                 self.validate(epoch)
+        
+        # Save the training losses and accuracies
+        file_name = "".join([self.args.model_name, '__training_log.csv']) 
+        log_path = experiment_file_path(self.args.experiment_name, file_name)
+        file_exists_or_create(log_path)
+        with open(log_path, 'w') as f:
+            writer = csv.writer(f)
+            if len(self.test_accuracies) == 0:
+                writer.writerow(['loss', 'train_accuracy'])
+                writer.writerows(zip(self.epoch_losses, self.train_accuracies))
+
+            else:   
+                writer.writerow(['loss', 'train_accuracy', 'test_accuracy'])
+                writer.writerows(zip(self.epoch_losses, self.train_accuracies, self.test_accuracies))
 
 
     def test(self, epoch: int = 0, global_step: int = 0):
@@ -223,6 +240,8 @@ class PyTorchModel:
 
         test_loss = round(total_loss / len(self.test_data_loader), 4)
         test_acc = round(sample_correct / sample_count, 4)
+        if hasattr(self, 'test_accuracies'):
+            self.test_accuracies.append(test_acc)
 
         logging.info(f"[Epoch {epoch}/{self.args.num_epochs}]\tTest Loss: {test_loss}\tTest Accuracy: {test_acc}")
         self.save_test_predictions(epoch)
@@ -305,8 +324,6 @@ class PyTorchModel:
         log_path = experiment_file_path(self.args.experiment_name, file_name)
 
         file_exists_or_create(log_path)
-
-        field_names = ['id', 'label', 'prediction', 'prediction_proba']
         with open(log_path, 'w') as f:
             writer = csv.writer(f)
             writer.writerow(self.prediction_buffer.keys())
@@ -315,7 +332,6 @@ class PyTorchModel:
     def _reset_prediction_buffer(self, is_test=True):
         num_test_samples = len(self.test_data_loader.dataset) if is_test else len(self.val_data_loader.dataset)
         self.prediction_buffer = {
-            'ids': np.zeros(num_test_samples, dtype=int),
             'labels': np.zeros(num_test_samples, dtype=int),
             'predictions': np.zeros(num_test_samples, dtype=int),
             'prediction_proba': np.zeros(num_test_samples, dtype=float)

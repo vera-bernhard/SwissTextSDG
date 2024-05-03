@@ -16,7 +16,7 @@ setup_logging()
 
 def main(args):
     # Load the prediction log of the model
-    prediction_log_path = 'models/{}'.format(args.experiment_name) + '/mbert__prediction_log__ep{}.csv'.format(args.epoch)
+    prediction_log_path = 'models/{}'.format(args.experiment_name) + '/{}__prediction_log__ep{}.csv'.format(args.model_name, args.epoch)
     model_predictions = pd.read_csv(prediction_log_path)
     model_acc, model_scores = calculate_scores(model_predictions)
 

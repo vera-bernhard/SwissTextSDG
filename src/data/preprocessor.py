@@ -21,6 +21,7 @@ class Preprocessor(ABC):
         except AttributeError:
             df = pd.read_csv(self.raw_file_path)
             self.raw_df = self._preprocess_raw_df(df)
+            self.raw_df['id'] = self.raw_df.index
         return self.raw_df
 
 
@@ -107,6 +108,7 @@ class TrainSwissTextPreprocessor(Preprocessor):
         except AttributeError:
             df = pd.read_json(self.raw_file_path, lines=True)
             self.raw_df = self._preprocess_raw_df(df)
+            self.raw_df['id'] = self.raw_df.index
         return self.raw_df
     
     def _preprocess_raw_df(self, df: pd.DataFrame):
@@ -139,6 +141,62 @@ class TrainSwissTextPreprocessor(Preprocessor):
             df = TextProcessor.tf_idf_ordering(df=df)
 
         return df
+    
+
+
+class EnlargedTrainSwissTextPreprocessor(Preprocessor):
+    def __init__(self, raw_file_path: str, dataset_name: str, seed: int = DEFAULT_SEED, tf_idf: bool=False):
+        super().__init__(raw_file_path, dataset_name, seed)
+        self.tf_idf = tf_idf
+    
+    def _preprocess_raw_df(self, raw_df: pd.DataFrame):
+        df = copy.deepcopy(raw_df)
+        df = df.loc[pd.notnull(df['text'])]
+
+        # Drop duplicate rows 
+        df = df.drop_duplicates(subset=['text'], keep='first')
+
+        # Drop rows with less than 10 words
+        df = df.loc[df['text'].str.split().str.len() >= 10]
+
+        # We want all classes to have at most 500 samples
+        samples_per_class = df['sdg'].value_counts()
+        max_samples_per_class = 500
+        
+        # Get the number of samples per class (either 500 or the number of samples in the class)
+
+        sdg_groups = df.groupby('sdg')
+        new_df = pd.DataFrame()
+        for sdg, group in sdg_groups:
+            if len(group) > max_samples_per_class:
+                new_df = pd.concat([new_df, group.sample(max_samples_per_class, random_state=self.seed)])
+            else:
+                new_df = pd.concat([new_df, group])
+                
+        return new_df
+    
+    def _get_entity_data__implementation(self, raw_df: pd.DataFrame):
+        df = copy.deepcopy(raw_df)
+        # Drop the paperId, sdg columns (not needed for tokenization)
+        df = df.drop(columns=['paperId', 'sdg'])
+        df = self.preprocess_text_samples(df)
+        return df
+
+    def preprocess_text_samples(self, df: pd.DataFrame):
+        
+        # if too slow -> multiple jobs/cores
+        # We remove the punctuation + stopwords from samples
+        df.loc[pd.notnull(df['text']), 'text'] = df.loc[pd.notnull(df['text']), 'text'] \
+            .swifter \
+            .allow_dask_on_strings(enable=True) \
+            .progress_bar(desc='[Preprocessing] Normalizing text...') \
+            .apply(lambda x: TextProcessor.normalize_text(x))
+
+        if self.tf_idf:
+            df = TextProcessor.tf_idf_ordering(df=df)
+
+        return df
+
 
 class CombinedOSDGSwissTextPreprocessor(Preprocessor):
 
@@ -171,11 +229,11 @@ class CombinedOSDGSwissTextPreprocessor(Preprocessor):
             self.raw_df = pd.concat([osdg_df, enlarged_osdg_df, swisstext_df, enlarged_swisstext_df])
             self.raw_df = self.raw_df.reset_index(drop=True)
             self.raw_df = self._preprocess_raw_df(self.raw_df)
-
+            self.raw_df['id'] = self.raw_df.index
         return self.raw_df        
         
-    def _preprocess_raw_df(self, df: pd.DataFrame):
-        df = copy.deepcopy(df)
+    def _preprocess_raw_df(self, raw_df: pd.DataFrame):
+        df = copy.deepcopy(raw_df)
         df = df.loc[pd.notnull(df['text'])]
 
         # Drop duplicate rows 
@@ -184,11 +242,11 @@ class CombinedOSDGSwissTextPreprocessor(Preprocessor):
         # Drop rows with less than 10 words
         df = df.loc[df['text'].str.split().str.len() >= 10]
 
-        # Get the min number of samples per class, we want all classes to have at most 5x the number of samples of the smallest class
+        # We want all classes to have at most 1000 samples
         samples_per_class = df['sdg'].value_counts()
-        max_samples_per_class = samples_per_class.min() * 5
+        max_samples_per_class = 1000
 
-        # Get the number of samples per class (either the max_samples_per_class or the number of samples in the class)
+        # Get the number of samples per class (either 1000 or the number of samples in the class)
 
         sdg_groups = df.groupby('sdg')
         new_df = pd.DataFrame()
@@ -197,12 +255,8 @@ class CombinedOSDGSwissTextPreprocessor(Preprocessor):
                 new_df = pd.concat([new_df, group.sample(max_samples_per_class, random_state=self.seed)])
             else:
                 new_df = pd.concat([new_df, group])
+
         df = new_df
-        # Make sure there are no line separators in the text
-        df['text'] = df['text'].str.replace('\n', '')
-        df['text'] = df['text'].str.replace('\r', '')
-        df['text'] = df['text'].str.replace('\t', '')
-        df.reset_index(drop=True, inplace=True)
         return df
     
     def _get_entity_data__implementation(self, raw_df):

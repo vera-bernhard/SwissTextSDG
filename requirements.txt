@@ -13,7 +13,6 @@ pypdf
 requests
 matplotlib
 scikit-learn
-nltk
 huggingface_hub
 bs4
 selenium

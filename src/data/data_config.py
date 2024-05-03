@@ -11,7 +11,6 @@ class Config():
             model_class=BertForSequenceClassification,
             model_config=BertConfig,
             pretrained_model='bert-base-multilingual-uncased',
-            tokenizer=BertTokenizer
         ),
         'qlora-mistral': LanguageModelConfig(
             model_class=MistralForSequenceClassification,
@@ -19,6 +18,26 @@ class Config():
             pretrained_model='mistralai/Mistral-7B-v0.1',
             # tokenizer=AutoTokenizer.from_pretrained('mistralai/Mistral-7B-v0.1')
             tokenizer = LlamaTokenizerFast
+        ),
+        'scibert': LanguageModelConfig(
+            model_class=BertForSequenceClassification,
+            model_config=BertConfig,
+            pretrained_model='allenai/scibert_scivocab_uncased',
+        ),
+        'roberta': LanguageModelConfig(
+            model_class=BertForSequenceClassification,
+            model_config=BertConfig,
+            pretrained_model='FacebookAI/roberta-base',
+        ),
+        'deberta': LanguageModelConfig(
+            model_class=BertForSequenceClassification,
+            model_config=BertConfig,
+            pretrained_model='microsoft/deberta-v3-base',
+        ),
+        'biobert': LanguageModelConfig(
+            model_class=BertForSequenceClassification,
+            model_config=BertConfig,
+            pretrained_model='dmis-lab/biobert-base-cased-v1.2',
         ),
     }
     # Dataset paths (relative to data/raw/)
