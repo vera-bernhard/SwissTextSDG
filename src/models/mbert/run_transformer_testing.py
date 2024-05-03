@@ -59,7 +59,7 @@ def main(args):
 #     ]
 # }
 
-  
+
     # Modify the args to load the swisstext_task1_train dataset
     new_args = copy.deepcopy(args)
     new_args.experiment_name = 'mbert_seed_0_swisstext_task1_train'
@@ -68,18 +68,26 @@ def main(args):
 
     swisstext_file_name = "".join(['mbert', checkpoint_suffix, '.pt'])
     swisstext_model = PyTorchModel.load_from_checkpoint(new_args, experiment_file_path(new_args.experiment_name, swisstext_file_name))
-    swisstext_model.test(new_args.epoch)
+
+    # Check whether the mbert_seed_0_swisstext_task1_train has already been evaluated on the test set
+    if not os.path.exists(experiment_file_path('mbert_seed_0_swisstext_task1_train', 'mbert__prediction_log__ep5.csv')): 
+        swisstext_model.test(new_args.epoch)
+
+
+    # Now evaluate the model on the swisstext_task1_test dataset
 
     if args.model_name == 'mbert':
-        # Now set the test data loader of our model to that of the swisstext_model
+        # Set the test data loader of our model to that of the swisstext_model
         model.test_data_loader = swisstext_model.test_data_loader
         model.test(args.epoch)
     else:
-        # If the model is different, we need to tokenize the swisstext data with the model's tokenizer
+        # If the model is different, we need to tokenize the swisstext data with the model's tokenizer first
         test_dataloader = swisstext_model.test_data_loader
         test_df = test_dataloader.dataset.data_df
         tokenized_test_df, _ = model.dataset.tokenizer.tokenize_df(test_df)
         swisstext_model.test_data_loader.dataset.data_df['tokenized'] = tokenized_test_df['tokenized']
+        swisstext_model.test_data_loader.dataset.tokenizer = model.dataset.tokenizer
+
         model.test_data_loader = swisstext_model.test_data_loader
         model.test(args.epoch)
 
