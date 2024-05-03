@@ -23,7 +23,6 @@ class LanguageModelConfig:
     model_class: object
     model_config: object
     pretrained_model: str
-    tokenizer: object
 
 class Config():
 
@@ -32,21 +31,18 @@ class Config():
             model_class=BertForSequenceClassification,
             model_config=BertConfig,
             pretrained_model='bert-base-multilingual-uncased',
-            tokenizer=BertTokenizer
         ),
         'qlora-mistral': LanguageModelConfig(
             model_class=MistralForSequenceClassification,
             model_config=MistralConfig,
             pretrained_model='mistralai/Mistral-7B-v0.1',
             # tokenizer=AutoTokenizer.from_pretrained('mistralai/Mistral-7B-v0.1')
-            tokenizer = LlamaTokenizerFast
         ),
         'qlora-zeyphir': LanguageModelConfig(
             model_class=MistralForSequenceClassification,
             model_config=MistralConfig,
             pretrained_model='zephyr-7b-alpha',
             # tokenizer=AutoTokenizer.from_pretrained('zephyr-7b-alpha')
-            tokenizer=LlamaTokenizerFast
         ),
             
     }

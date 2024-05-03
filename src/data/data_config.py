@@ -17,7 +17,6 @@ class Config():
             model_config=MistralConfig,
             pretrained_model='mistralai/Mistral-7B-v0.1',
             # tokenizer=AutoTokenizer.from_pretrained('mistralai/Mistral-7B-v0.1')
-            tokenizer = LlamaTokenizerFast
         ),
         'scibert': LanguageModelConfig(
             model_class=BertForSequenceClassification,
