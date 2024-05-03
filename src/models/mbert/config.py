@@ -23,6 +23,7 @@ class LanguageModelConfig:
     model_class: object
     model_config: object
     pretrained_model: str
+    tokenizer: object
 
 class Config():
 
