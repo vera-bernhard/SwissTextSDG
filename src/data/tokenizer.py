@@ -37,7 +37,16 @@ class SwissTextTokenizer(ABC):
         '''
         pretrained_model = Config.MODELS[self.model_name].pretrained_model
 
-        tokenizer = AutoTokenizer.from_pretrained(pretrained_model, do_lower_case=self.do_lower_case)
+
+        if self.model_name.startswith('qlora'):
+            tokenizer = Config.MODELS[self.model_name].tokenizer.from_pretrained(pretrained_model)            
+            # For Qlora: set the padding token to the eos token
+            tokenizer.pad_token = tokenizer.eos_token
+            tokenizer.add_eos_token = True
+            
+        else:
+            tokenizer = AutoTokenizer.from_pretrained(pretrained_model, do_lower_case=self.do_lower_case)
+        
 
         return tokenizer
 
@@ -68,8 +77,12 @@ class SwissTextTokenizer(ABC):
         token_seq = copy.deepcopy(token_seq)
         # Truncate if necessary
         token_seq = self.truncate_sequence(token_seq)
+        
         # Add special tokens
-        token_seq = ['[CLS]'] + token_seq + ['[SEP]']
+        if self.model_name.startswith('qlora'):
+            token_seq = [self.tokenizer.bos_token] + token_seq + [self.tokenizer.eos_token]
+        else:
+            token_seq = ['[CLS]'] + token_seq + ['[SEP]']
         # Convert tokens to ids
         input_ids = self.tokenizer.convert_tokens_to_ids(token_seq)
         # Pad sequence
@@ -89,8 +102,6 @@ class SwissTextTokenizer(ABC):
         label = torch.tensor([label], dtype=torch.long)
 
         return (input_ids, input_mask, segment_ids, label)
-
-
     
     def truncate_sequence(self, tokens):
         '''

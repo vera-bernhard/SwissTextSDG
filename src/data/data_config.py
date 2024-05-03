@@ -2,7 +2,7 @@ from src.models.mbert.config import LanguageModelConfig
 
 
 from transformers import BertConfig, BertForSequenceClassification, BertTokenizer
-
+from transformers import BertTokenizer, BertForSequenceClassification, BertConfig, MistralForSequenceClassification, MistralConfig, AutoTokenizer, LlamaTokenizerFast
 
 class Config():
 
@@ -11,6 +11,13 @@ class Config():
             model_class=BertForSequenceClassification,
             model_config=BertConfig,
             pretrained_model='bert-base-multilingual-uncased',
+        ),
+        'qlora-mistral': LanguageModelConfig(
+            model_class=MistralForSequenceClassification,
+            model_config=MistralConfig,
+            pretrained_model='mistralai/Mistral-7B-v0.1',
+            # tokenizer=AutoTokenizer.from_pretrained('mistralai/Mistral-7B-v0.1')
+            tokenizer = LlamaTokenizerFast
         ),
         'scibert': LanguageModelConfig(
             model_class=BertForSequenceClassification,
@@ -32,7 +39,6 @@ class Config():
             model_config=BertConfig,
             pretrained_model='dmis-lab/biobert-base-cased-v1.2',
         ),
-        
     }
     # Dataset paths (relative to data/raw/)
     DATASETS = {
