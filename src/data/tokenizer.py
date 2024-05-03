@@ -74,8 +74,12 @@ class SwissTextTokenizer(ABC):
         token_seq = copy.deepcopy(token_seq)
         # Truncate if necessary
         token_seq = self.truncate_sequence(token_seq)
+        
         # Add special tokens
-        token_seq = ['[CLS]'] + token_seq + ['[SEP]']
+        if self.model_name.startswith('qlora'):
+            token_seq = [self.tokenizer.bos_token] + token_seq + [self.tokenizer.eos_token]
+        else:
+            token_seq = ['[CLS]'] + token_seq + ['[SEP]']
         # Convert tokens to ids
         input_ids = self.tokenizer.convert_tokens_to_ids(token_seq)
         # Pad sequence
