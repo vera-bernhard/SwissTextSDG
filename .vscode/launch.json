@@ -58,10 +58,10 @@
                      "--dataset", "swisstext_task1_train",
                      "--save_model",
                      "--save_config",
-                     "--train_frac", "0.10",
+                     "--train_frac", "0.33",
                      "--batch_size", "1",
                      "--num_epochs", "1",
-                     "--stopword_removal"
+                     "--no_stopword_removal"
                 ],
         },
         {
