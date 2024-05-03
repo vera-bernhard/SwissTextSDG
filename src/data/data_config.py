@@ -11,31 +11,26 @@ class Config():
             model_class=BertForSequenceClassification,
             model_config=BertConfig,
             pretrained_model='bert-base-multilingual-uncased',
-            tokenizer=BertTokenizer
+        ),
+        'scibert': LanguageModelConfig(
+            model_class=BertForSequenceClassification,
+            model_config=BertConfig,
+            pretrained_model='allenai/scibert_scivocab_uncased',
         ),
         'roberta': LanguageModelConfig(
             model_class=BertForSequenceClassification,
             model_config=BertConfig,
             pretrained_model='FacebookAI/roberta-base',
-            tokenizer=BertTokenizer
         ),
         'deberta': LanguageModelConfig(
             model_class=BertForSequenceClassification,
             model_config=BertConfig,
             pretrained_model='microsoft/deberta-v3-base',
-            tokenizer=BertTokenizer
-        ),
-        'distilbert': LanguageModelConfig(
-            model_class=BertForSequenceClassification,
-            model_config=BertConfig,
-            pretrained_model='distilbert/distilbert-base-uncased',
-            tokenizer=BertTokenizer
         ),
         'biobert': LanguageModelConfig(
             model_class=BertForSequenceClassification,
             model_config=BertConfig,
             pretrained_model='dmis-lab/biobert-base-cased-v1.2',
-            tokenizer=BertTokenizer
         ),
         
     }

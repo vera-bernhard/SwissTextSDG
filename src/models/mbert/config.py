@@ -22,7 +22,6 @@ class LanguageModelConfig:
     model_class: object
     model_config: object
     pretrained_model: str
-    tokenizer: object
 
 def write_config_to_file(args):
     config_path = experiment_config_path(args.experiment_name)
