@@ -31,7 +31,8 @@ class PyTorchModel:
                                                         use_val=self.args.use_val, seed=self.args.seed,
                                                         max_seq_length=self.args.max_seq_length,
                                                         do_lower_case=self.args.do_lower_case,
-                                                        train_frac = self.args.train_frac,)
+                                                        train_frac = self.args.train_frac, 
+                                                        no_stopword_removal = self.args.no_stopword_removal)
     
 
         self.seed = self.args.seed
@@ -124,7 +125,6 @@ class PyTorchModel:
             inputs['token_type_ids'] = batch[2] if self.args.model_name in ['bert', 'mbert'] else None
 
         outputs = self.network(**inputs)
-
         return outputs, inputs
     
     

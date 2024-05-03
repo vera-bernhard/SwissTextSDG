@@ -103,6 +103,7 @@ def read_arguments_train():
 
     parser.add_argument('--save_model', action='store_true')
     parser.add_argument('--save_config', action='store_true')
+    parser.add_argument('--no_stopword_removal', action='store_true')
 
     args = parser.parse_args()
 

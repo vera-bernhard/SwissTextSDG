@@ -55,9 +55,10 @@ class Preprocessor(ABC):
 
 
 class OSDGPreprocessor(Preprocessor):
-    def __init__(self, raw_file_path: str, dataset_name: str, seed: int=DEFAULT_SEED, tf_idf: bool=False):
+    def __init__(self, raw_file_path: str, dataset_name: str, seed: int=DEFAULT_SEED, tf_idf: bool=False, stopword_removal: bool=True):
         super().__init__(raw_file_path, dataset_name, seed)
         self.tf_idf = tf_idf
+        self.stopword_removal = stopword_removal
 
     def _preprocess_raw_df(self, df: pd.DataFrame):
         # Drop rows with label < 0.5
@@ -78,14 +79,15 @@ class OSDGPreprocessor(Preprocessor):
         return df
 
     def preprocess_text_samples(self, df: pd.DataFrame):
-        
-        # if too slow -> multiple jobs/cores
-        # We remove the punctuation + stopwords from samples
-        df.loc[pd.notnull(df['text']), 'text'] = df.loc[pd.notnull(df['text']), 'text'] \
-            .swifter \
-            .allow_dask_on_strings(enable=True) \
-            .progress_bar(desc='[Preprocessing] Normalizing text...') \
-            .apply(lambda x: TextProcessor.normalize_text(x))
+        if self.stopword_removal:
+            print("Doing stopword removal")
+            # if too slow -> multiple jobs/cores
+            # We remove the punctuation + stopwords from samples
+            df.loc[pd.notnull(df['text']), 'text'] = df.loc[pd.notnull(df['text']), 'text'] \
+                .swifter \
+                .allow_dask_on_strings(enable=True) \
+                .progress_bar(desc='[Preprocessing] Normalizing text...') \
+                .apply(lambda x: TextProcessor.normalize_text(x))
 
         if self.tf_idf:
             df = TextProcessor.tf_idf_ordering(df=df)
@@ -93,9 +95,10 @@ class OSDGPreprocessor(Preprocessor):
         return df
 
 class TrainSwissTextPreprocessor(Preprocessor):
-    def __init__(self, raw_file_path: str, dataset_name: str, seed: int = DEFAULT_SEED, tf_idf: bool=False):
+    def __init__(self, raw_file_path: str, dataset_name: str, seed: int = DEFAULT_SEED, tf_idf: bool=False, stopword_removal: bool=True):
         super().__init__(raw_file_path, dataset_name, seed)
         self.tf_idf = tf_idf
+        self.stopword_removal = stopword_removal
 
     def get_raw_df(self):
         # Load the jsonl file
@@ -122,14 +125,15 @@ class TrainSwissTextPreprocessor(Preprocessor):
         return df
 
     def preprocess_text_samples(self, df: pd.DataFrame):
-        
-        # if too slow -> multiple jobs/cores
-        # We remove the punctuation + stopwords from samples
-        df.loc[pd.notnull(df['text']), 'text'] = df.loc[pd.notnull(df['text']), 'text'] \
-            .swifter \
-            .allow_dask_on_strings(enable=True) \
-            .progress_bar(desc='[Preprocessing] Normalizing text...') \
-            .apply(lambda x: TextProcessor.normalize_text(x))
+        if self.stopword_removal:
+            print("Doing stopword removal")
+            # if too slow -> multiple jobs/cores
+            # We remove the punctuation + stopwords from samples
+            df.loc[pd.notnull(df['text']), 'text'] = df.loc[pd.notnull(df['text']), 'text'] \
+                .swifter \
+                .allow_dask_on_strings(enable=True) \
+                .progress_bar(desc='[Preprocessing] Normalizing text...') \
+                .apply(lambda x: TextProcessor.normalize_text(x))
 
         if self.tf_idf:
             df = TextProcessor.tf_idf_ordering(df=df)
@@ -138,9 +142,10 @@ class TrainSwissTextPreprocessor(Preprocessor):
 
 class CombinedOSDGSwissTextPreprocessor(Preprocessor):
 
-    def __init__(self, raw_file_path: str, dataset_name: str, seed: int = DEFAULT_SEED, tf_idf: bool=False):
+    def __init__(self, raw_file_path: str, dataset_name: str, seed: int = DEFAULT_SEED, tf_idf: bool=False, stopword_removal: bool=True):
         super().__init__(raw_file_path, dataset_name, seed)
         self.tf_idf = tf_idf
+        self.stopword_removal = stopword_removal
     
     def get_raw_df(self):
         try: 
@@ -206,14 +211,15 @@ class CombinedOSDGSwissTextPreprocessor(Preprocessor):
         return df
 
     def preprocess_text_samples(self, df: pd.DataFrame):
-        
-        # if too slow -> multiple jobs/cores
-        # We remove the punctuation + stopwords from samples
-        df.loc[pd.notnull(df['text']), 'text'] = df.loc[pd.notnull(df['text']), 'text'] \
-            .swifter \
-            .allow_dask_on_strings(enable=True) \
-            .progress_bar(desc='[Preprocessing] Normalizing text...') \
-            .apply(lambda x: TextProcessor.normalize_text(x))
+        if self.stopword_removal:
+            print("Doing stopword removal")
+            # if too slow -> multiple jobs/cores
+            # We remove the punctuation + stopwords from samples
+            df.loc[pd.notnull(df['text']), 'text'] = df.loc[pd.notnull(df['text']), 'text'] \
+                .swifter \
+                .allow_dask_on_strings(enable=True) \
+                .progress_bar(desc='[Preprocessing] Normalizing text...') \
+                .apply(lambda x: TextProcessor.normalize_text(x))
 
         if self.tf_idf:
             df = TextProcessor.tf_idf_ordering(df=df)
