@@ -13,6 +13,9 @@ import torch
 from src.data.dataset import SwissTextDataset
 from src.data.data_config import Config
 from src.helpers.seed_helper import initialize_gpu_seed
+from src.helpers.path_helper import *
+from src.models.mbert.config import write_config_to_file
+
 from tqdm.auto import tqdm
 
 from huggingface_hub import login
@@ -25,7 +28,7 @@ setup_logging()
 
 class QloraModel(PyTorchModel):
     
-    def __init__(self, args):
+    def __init__(self, args, load=False):
         login(token=HUGGINGFACE_TOKEN)
         self.args = args
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -33,34 +36,60 @@ class QloraModel(PyTorchModel):
                                                         use_val=self.args.use_val, seed=self.args.seed,
                                                         max_seq_length=self.args.max_seq_length,
                                                         do_lower_case=self.args.do_lower_case,
-                                                        train_frac = self.args.train_frac,)
+                                                        train_frac = self.args.train_frac,
+                                                        no_stopword_removal=self.args.no_stopword_removal)
     
-
+        
         self.seed = self.args.seed
         self.model_seed = self.args.model_seed
         self.use_val = self.args.use_val
 
-        self.model_config = Config.MODELS[self.args.model_name]
+        self.model_config = Config.MODELS[self.args.model_name]            
+        self.network = self._get_pretrained_network(self.model_config.pretrained_model)
 
-        self.network = self._get_pretrained_network(args.model_name, self.model_config.pretrained_model)
-        self.network = self._prepare_for_peft(self.network)   
-        
+        if load == False:
+            self.network = self._prepare_for_peft(self.network)   
+            self._prepare_for_training()
+
+    def _prepare_for_training(self, load=False):
         self.device, _ = initialize_gpu_seed(self.model_seed)
-        self.network.to(self.device)
+        if not load: 
+            self.network.to(self.device)
 
         self._setup_data_loaders()
         self._setup_optimizer()
         if self.test_data_loader is not None:
             self._reset_prediction_buffer()
+            
+    @staticmethod
+    def load_from_checkpoint(args, model_path: str = None):
+        model = QloraModel(args, load=True)
+        if model_path:
+            model.load(model_path)
+        else:
+            logging.info('No :model_path provided, only loading base class.')
+        return model
 
 
-    # def load_from_checkpoint(args, model_path: str = None):
-        # pass
-    
-    # def load(self, model_path):
-    
-    
-    # def save(): 
+    def load(self, model_path: str, trainable: bool = True):
+        self.network = PeftModel.from_pretrained(
+            self.network,
+            model_path,
+            is_trainable=trainable
+        )
+        self.network = self.network.merge_and_unload()
+        self._prepare_for_training(load=True)
+            
+    def save(self, suffix: str = ''): 
+        file_name = "".join([self.args.model_name, suffix])
+        model_path = experiment_file_path(self.args.experiment_name, file_name)
+        # self.network = self.network.merge_and_unload()
+        self.network.save_pretrained(model_path)
+        logging.info(f"\tSuccessfully saved checkpoint at {model_path}")
+
+        config_path = experiment_config_path(self.args.experiment_name)
+        if not os.path.isfile(config_path):
+            write_config_to_file(self.args)
                 
     def train(self):
         global_step = 0
@@ -125,7 +154,6 @@ class QloraModel(PyTorchModel):
             if self.use_val:
                 self.validate(epoch)
 
-
     def test(self, epoch: int = 0, global_step: int = 0):
         self._reset_prediction_buffer()
         total_loss, prev_loss = 0.0, 0.0
@@ -143,7 +171,7 @@ class QloraModel(PyTorchModel):
             # Calculate how many were correct
             predictions = torch.argmax(output, axis=1)
 
-            prediction_proba = output[:, predictions]
+            prediction_proba = torch.gather(output, 1, predictions.unsqueeze(1))
 
             self.log_predictions(inputs['labels'], predictions, prediction_proba, step=step)
 
@@ -156,7 +184,7 @@ class QloraModel(PyTorchModel):
         logging.info(f"[Epoch {epoch}/{self.args.num_epochs}]\tTest Loss: {test_loss}\tTest Accuracy: {test_acc}")
         self.save_test_predictions(epoch)
 
-    def _get_pretrained_network(self, model_name, pretrained_model):
+    def _get_pretrained_network(self, pretrained_model):
         # Loading in 4-bits & FN4 quantization as in QLORA
         bnb_config = BitsAndBytesConfig(
             load_in_4bit= True,
@@ -165,15 +193,14 @@ class QloraModel(PyTorchModel):
             bnb_4bit_use_double_quant= True,
         )
         
-        pretrained_model = Config.MODELS[model_name].pretrained_model
-        model_class = Config.MODELS[model_name].model_class   
+        model_class = self.model_config.model_class  
         network = model_class.from_pretrained(
             pretrained_model,
             num_labels = self.dataset.num_labels,
             quantization_config = bnb_config,
             device_map = self.device,
-            trust_remote_code=True
         )
+        network.config.pad_token_id = self.dataset.tokenizer.tokenizer.pad_token_id
         return network
     
     def _prepare_for_peft(self, network):
