@@ -98,7 +98,10 @@ class PyTorchModel:
         config = config_class.from_pretrained(pretrained_model)
         # Change the number of labels
         config.num_labels = self.dataset.num_labels
-        network = model_class.from_pretrained(pretrained_model, config=config)
+        try:
+            network = model_class.from_pretrained(pretrained_model, config=config)
+        except RuntimeError:
+            network = model_class.from_pretrained(pretrained_model, config=config, ignore_mismatched_sizes=True)
 
         # (Log)SoftmaxLayer to get softmax probabilities as output of our network, rather than logits
         if self.args.use_softmax_layer:

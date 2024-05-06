@@ -18,25 +18,26 @@ class Config():
             pretrained_model='mistralai/Mistral-7B-v0.1',
             # tokenizer=AutoTokenizer.from_pretrained('mistralai/Mistral-7B-v0.1')
         ),
-        'scibert': LanguageModelConfig(
-            model_class=BertForSequenceClassification,
-            model_config=BertConfig,
-            pretrained_model='allenai/scibert_scivocab_uncased',
-        ),
         'roberta': LanguageModelConfig(
             model_class=BertForSequenceClassification,
             model_config=BertConfig,
             pretrained_model='FacebookAI/roberta-base',
         ),
-        'deberta': LanguageModelConfig(
-            model_class=BertForSequenceClassification,
-            model_config=BertConfig,
-            pretrained_model='microsoft/deberta-v3-base',
-        ),
         'biobert': LanguageModelConfig(
             model_class=BertForSequenceClassification,
             model_config=BertConfig,
             pretrained_model='dmis-lab/biobert-base-cased-v1.2',
+        ),
+        'scibert': LanguageModelConfig(
+            model_class=BertForSequenceClassification,
+            model_config=BertConfig,
+            pretrained_model='allenai/scibert_scivocab_uncased',
+        ),
+
+        'aspect_acl_scibert': LanguageModelConfig(
+            model_class=BertForSequenceClassification,
+            model_config=BertConfig,
+            pretrained_model='malteos/aspect-acl-scibert-scivocab-uncased',
         ),
     }
     # Dataset paths (relative to data/raw/)

@@ -98,8 +98,8 @@
 //             "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python",
 //             },
 //             "cwd": "${workspaceFolder}",
-//             "args": ["--experiment_name", "biobert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-//                      "--model_name", "biobert",
+//             "args": ["--experiment_name", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+//                      "--model_name", "aspect_acl_scibert",
 //                      "--dataset", "combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
 //                      "--train_frac", "1",
 //                      "--save_model",
@@ -126,7 +126,7 @@
 //             "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python",
 //             },
 //             "cwd": "${workspaceFolder}",
-//             "args": ["--experiment_name", "biobert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+//             "args": ["--experiment_name", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
 //                      "--epoch", "5",
 //                 ],
 //         }
@@ -149,7 +149,7 @@
             "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python",
             },
             "cwd": "${workspaceFolder}",
-            "args": ["--experiment_name", "biobert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+            "args": ["--experiment_name", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
                      "--epoch", "5",
                 ],
         }
