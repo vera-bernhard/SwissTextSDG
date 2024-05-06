@@ -5,7 +5,7 @@ import copy
 sys.path.append(os.getcwd())
 from src.models.qlora.qlora_model import QloraModel
 from src.models.mbert.pytorch_model import PyTorchModel
-from src.data.dataset import PytorchDataset
+from src.data.dataset import PytorchDataset, SwissTextDataset
 from src.data.tokenizer import SwissTextTokenizer
 from torch.utils.data import Dataset, DataLoader
 
@@ -71,20 +71,12 @@ def main(args):
     checkpoint_path = experiment_file_path(args.experiment_name, file_name)
 
     model = QloraModel.load_from_checkpoint(args, checkpoint_path)
- 
-    # Modify the args to load the swisstext_task1_train dataset
-    # new_args = copy.deepcopy(args)
-    # new_args.experiment_name = 'mbert_seed_0_swisstext_task1_train'
-    # new_args.epoch = 5
-    # new_args = update_args_with_config(experiment_name = new_args.experiment_name, args = new_args)
-
-    # file_name = 'mbert__epoch5.pt'
-    # swisstext_model = PyTorchModel.load_from_checkpoint(new_args, experiment_file_path(new_args.experiment_name, file_name))
-    # swisstext_model.test(new_args.epoch)
-
-    # Now set the test data loader of our model to that of the swisstext_model
-    model.test_data_loader = model.test_data_loader
-    model.test(args.epoch)
+    
+    if args.other_testset:
+        test_data_loader = SwissTextDataset.create_test_instance(args)
+        model.test_data_loader = test_data_loader
+        model.test(args.epoch)
+        
     # outputs = high_level_test(checkpoint_path)
 
 if __name__ == '__main__':
