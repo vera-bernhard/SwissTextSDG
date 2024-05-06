@@ -69,8 +69,11 @@ class SwissTextDataset(ABC):
         elif dataset == 'combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext':
             return EnlargedOSDGSwissTextDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
                                use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
-                               do_lower_case = do_lower_case, train_frac = train_frac, no_stopword_removal = no_stopword_removal)
-
+                               do_lower_case = do_lower_case, train_frac = train_frac, no_stopword_removal = no_stopword_removal, all=False)
+        elif dataset == 'all':
+            return EnlargedOSDGSwissTextDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
+                               use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
+                               do_lower_case = do_lower_case, train_frac = train_frac, no_stopword_removal = no_stopword_removal, all=True)
         else:
             raise ValueError(f"Dataset {dataset} not supported")
 
@@ -99,7 +102,7 @@ class SwissTextDataset(ABC):
         
     
     def __init__(self, name: str, model_name: str, split_method: SplitMethod, use_val: bool,
-                seed: int = DEFAULT_SEED, max_seq_length: int = DEFAULT_SEQ_LENGTH, do_lower_case: bool = True, train_frac: float = 0.8, no_stopword_removal: bool = False,):
+                seed: int = DEFAULT_SEED, max_seq_length: int = DEFAULT_SEQ_LENGTH, do_lower_case: bool = True, train_frac: float = 0.8, no_stopword_removal: bool = False, all: bool = False):
         self.name = self._check_dataset_name(name)
         self.raw_file_path = dataset_raw_file_path(Config.DATASETS[self.name])
         self.model_name = self._check_model_name(model_name)
@@ -112,6 +115,7 @@ class SwissTextDataset(ABC):
         self.train_frac = train_frac
         self.stopword_removal = not no_stopword_removal
         self.num_labels = SDG_LABELS
+        self.all = all
 
 
         # Set the seed on all libraries
@@ -209,7 +213,7 @@ class SwissTextDataset(ABC):
             test_file_path = dataset_processed_file_path(self.name, f'test__{method_name}__samples.csv',
                                                          seed=self.seed)
             validation_file_path = dataset_processed_file_path(self.name, f'val__{method_name}__samples.csv',
-                                                               seed=self.seed)
+                                                               seed=self.seed)            
 
             check_val = file_exists_or_create(validation_file_path) if self.use_val else True
 
@@ -310,7 +314,7 @@ class OSDGDataset(SwissTextDataset):
 class TrainSwissTextDataset(SwissTextDataset):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.preprocessor = TrainSwissTextPreprocessor(raw_file_path= self.raw_file_path, dataset_name=self.name, seed=self.seed, tf_idf=False, stopword_removal=self.stopword_removal)
+        self.preprocessor = TrainSwissTextPreprocessor(raw_file_path=self.raw_file_path, dataset_name=self.name, seed=self.seed, tf_idf=False, stopword_removal=self.stopword_removal)
         self.tokenizer = SwissTextTokenizer(model_name=self.model_name,
                                             max_seq_length=self.max_seq_length,
                                             do_lower_case= self.do_lower_case)
@@ -328,7 +332,7 @@ class EnlargedTrainSwissTextDataset(SwissTextDataset):
 class EnlargedOSDGSwissTextDataset(SwissTextDataset):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.preprocessor = CombinedOSDGSwissTextPreprocessor(raw_file_path= self.raw_file_path, dataset_name=self.name, seed=self.seed, tf_idf=False, stopword_removal=self.stopword_removal)
+        self.preprocessor = CombinedOSDGSwissTextPreprocessor(raw_file_path= self.raw_file_path, dataset_name=self.name, seed=self.seed, tf_idf=False, stopword_removal=self.stopword_removal, all=self.all)
 
         self.tokenizer = SwissTextTokenizer(model_name=self.model_name,
                                             max_seq_length=self.max_seq_length,

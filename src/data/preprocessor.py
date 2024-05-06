@@ -200,10 +200,11 @@ class EnlargedTrainSwissTextPreprocessor(Preprocessor):
 
 class CombinedOSDGSwissTextPreprocessor(Preprocessor):
 
-    def __init__(self, raw_file_path: str, dataset_name: str, seed: int = DEFAULT_SEED, tf_idf: bool=False, stopword_removal: bool=True):
+    def __init__(self, raw_file_path: str, dataset_name: str, seed: int = DEFAULT_SEED, tf_idf: bool=False, stopword_removal: bool=True, all: bool=False):
         super().__init__(raw_file_path, dataset_name, seed)
         self.tf_idf = tf_idf
         self.stopword_removal = stopword_removal
+        self.all_data = all
     
     def get_raw_df(self):
         try: 
@@ -216,8 +217,11 @@ class CombinedOSDGSwissTextPreprocessor(Preprocessor):
             enlarged_osdg_path = dataset_raw_file_path('OSDG/citing_works_OSDG.csv')
             enlarged_osdg_df = pd.read_csv(enlarged_osdg_path)
             enlarged_osdg_df = enlarged_osdg_df[['text', 'sdg']]
-
-            swisstext_path = dataset_processed_folder_path('swisstext_task1_train/seed_44/train__random__samples.csv') # We take only the train split, so we can evaluate on the test samples
+            
+            if self.all_data:
+                swisstext_path = dataset_raw_file_path('swisstext/task1_train.csv')
+            else:
+                swisstext_path = dataset_processed_folder_path('swisstext_task1_train/seed_44/train__random__samples.csv') # We take only the train split,  
             swisstext_df = pd.read_csv(swisstext_path)
             swisstext_df['text'] = swisstext_df['TITLE'] + ' ' + swisstext_df['ABSTRACT']
             swisstext_df = swisstext_df[['text', 'sdg']]
