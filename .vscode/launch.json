@@ -1,143 +1,117 @@
-// {
-//     // Use IntelliSense to learn about possible attributes.
-//     // Hover to view descriptions of existing attributes.
-//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-//     "version": "0.2.0",
-//     "configurations": [
-//         {
-//             "name": "osdg_utils",
-//             "type": "debugpy",
-//             "request": "launch",
-//             "program": "src/models/mbert/run_transformer_training.py",
-//             "console": "integratedTerminal",
-//             "justMyCode": true,
-//             "env": {
-//             "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python",
-//             },
-//             "cwd": "${workspaceFolder}",
-//             "args": ["--experiment_name", "mbert_seed_0_swisstext_task1_train",
-//                      "--model_name", "mbert",
-//                      "--dataset", "swisstext_task1_train",
-//                      "--train_frac", "0.33",
-//                      "--save_model",
-//                      "--save_config",
-//                 ],
-//         },
-//         {
-//             "name": "mBert debugger",
-//             "type": "debugpy",
-//             "request": "launch",
-//             "program": "src/models/mbert/run_transformer_training.py",
-//             "console": "integratedTerminal",
-//             "justMyCode": true,
-//             "env": {
-//             "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env/bin/python",
-//             },
-//             "cwd": "${workspaceFolder}",
-//             "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train",
-//                      "--model_name", "mbert",
-//                      "--dataset", "swisstext_task1_train",
-//                      "--save_model",
-//                      "--save_config",
-//                      "--train_frac", "0.33",
-//                 ],
-//         },
-//         {
-//             "name": "Qlora train debugger",
-//             "type": "debugpy",
-//             "request": "launch",
-//             "program": "src/models/qlora/run_qlora_train.py",
-//             "console": "integratedTerminal",
-//             "justMyCode": true,
-//             "env": {
-//             "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env/bin/python",
-//             },
-//             "cwd": "${workspaceFolder}",
-//             "args": ["--experiment_name", "qlora-mistral_swisstext_task1_save",
-//                      "--model_name", "qlora-mistral",
-//                      "--dataset", "swisstext_task1_train",
-//                      "--save_model",
-//                      "--save_config",
-//                      "--train_frac", "0.33",
-//                      "--batch_size", "1",
-//                      "--num_epochs", "1",
-//                      "--no_stopword_removal"
-//                 ],
-//         },
-//         {
-//             "name": "Qlora save debug",
-//             "type": "debugpy",
-//             "request": "launch",
-//             "program": "src/models/qlora/run_qlora_test.py",
-//             "console": "integratedTerminal",
-//             "justMyCode": true,
-//             "env": {
-//             "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env2/bin/python",
-//             },
-//             "cwd": "${workspaceFolder}",
-//             "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train",
-//                      "--epoch", "1"
-//                 ],
-//         },      
-//     ]
-// }
-// {
-//     // Use IntelliSense to learn about possible attributes.
-//     // Hover to view descriptions of existing attributes.
-//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-//     "version": "0.2.0",
-//     "configurations": [
-//         {
-//             "name": "Python Debugger: transformer training",
-//             "type": "debugpy",
-//             "request": "launch",
-//             "program": "src/models/mbert/run_transformer_training.py",
-//             "console": "integratedTerminal",
-//             "justMyCode": true,
-//             "env": {
-//             "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python",
-//             },
-//             "cwd": "${workspaceFolder}",
-//             "args": ["--experiment_name", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-//                      "--model_name", "aspect_acl_scibert",
-//                      "--dataset", "combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-//                      "--train_frac", "1",
-//                      "--save_model",
-//                      "--save_config",
-//                      "--seed", "0",
-//                 ],
-//         }
-//     ]
-// }
-// {
-//     // Use IntelliSense to learn about possible attributes.
-//     // Hover to view descriptions of existing attributes.
-//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-//     "version": "0.2.0",
-//     "configurations": [
-//         {
-//             "name": "Python Debugger: osdg_utils",
-//             "type": "debugpy",
-//             "request": "launch",
-//             "program": "src/models/mbert/run_transformer_testing.py",
-//             "console": "integratedTerminal",
-//             "justMyCode": true,
-//             "env": {
-//             "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python",
-//             },
-//             "cwd": "${workspaceFolder}",
-//             "args": ["--experiment_name", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-//                      "--epoch", "5",
-//                 ],
-//         }
-//     ]
-// }
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        {
+            "name": "osdg_utils",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "src/models/mbert/run_transformer_training.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": ["--experiment_name", "mbert_seed_0_swisstext_task1_train",
+                     "--model_name", "mbert",
+                     "--dataset", "swisstext_task1_train",
+                     "--train_frac", "0.33",
+                     "--save_model",
+                     "--save_config"
+                 ]
+        },
+        {
+            "name": "mBert debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "src/models/mbert/run_transformer_training.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env/bin/python"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train",
+                     "--model_name", "mbert",
+                     "--dataset", "swisstext_task1_train",
+                     "--save_model",
+                     "--save_config",
+                     "--train_frac", "0.33"
+                 ]
+        },
+        {
+            "name": "Qlora train debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "src/models/qlora/run_qlora_train.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env/bin/python"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": ["--experiment_name", "qlora-mistral_swisstext_task1_save",
+                     "--model_name", "qlora-mistral",
+                     "--dataset", "swisstext_task1_train",
+                     "--save_model",
+                     "--save_config",
+                     "--train_frac", "0.33",
+                     "--batch_size", "1",
+                     "--num_epochs", "1",
+                     "--no_stopword_removal"
+                 ]
+        },
+        {
+            "name": "Qlora test",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "src/models/qlora/run_qlora_test.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env2/bin/python"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train_big",
+                     "--epoch", "4",
+                     "--other_testset", "swisstext_task1_train"
+                 ]
+        },
+        {
+            "name": "Qlora evaluate",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scripts/evaluate_transformer_model.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env2/bin/python"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train_big",
+                     "--epoch", "4",
+                 ]
+        },
+        {
+            "name": "Python Debugger: transformer training",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "src/models/mbert/run_transformer_training.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": ["--experiment_name", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+                     "--model_name", "aspect_acl_scibert",
+                     "--dataset", "combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+                     "--train_frac", "1",
+                     "--save_model",
+                     "--save_config",
+                     "--seed", "0"
+                 ]
+        },
         {
             "name": "Python Debugger: osdg_utils",
             "type": "debugpy",
@@ -146,12 +120,12 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "env": {
-            "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python",
+                "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
             },
             "cwd": "${workspaceFolder}",
             "args": ["--experiment_name", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-                     "--epoch", "5",
-                ],
+                     "--epoch", "5"
+                 ]
         }
     ]
 }
