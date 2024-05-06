@@ -22,9 +22,17 @@ def calculate_scores(df):
     for label in labels:
         label_df = df[df['labels'] == label]
         num_correct = (label_df['labels'] == label_df['predictions']).sum()
-        precision = num_correct / len(df[df['predictions'] == label])
+        num_true = len(df[df['predictions'] == label])
+        if num_true == 0:
+            precision = 0
+        else:
+            precision = num_correct / len(df[df['predictions'] == label])
         recall = num_correct / len(label_df)
-        f1 = 2 * precision * recall / (precision + recall)
+        sum_precision_recall = precision + recall
+        if sum_precision_recall == 0:
+            f1 = 0
+        else:
+            f1 = 2 * precision * recall / sum_precision_recall
         label_scores[label] = {'precision': precision, 'recall': recall, 'f1': f1}
     
     return accuracy, label_scores
