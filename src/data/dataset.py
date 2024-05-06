@@ -5,6 +5,7 @@ import sys
 import re
 import pandas as pd
 import torch
+import argparse
 from torch.utils.data import Dataset, DataLoader
 from abc import ABC, abstractmethod
 from sklearn.model_selection import train_test_split
@@ -43,7 +44,11 @@ class SwissTextDataset(ABC):
                         do_lower_case: bool = True,
                         train_frac: float = 0.8,
                         no_stopword_removal: bool = False,
+                        **kwargs
                         ):
+        
+        if 'other_testset' in kwargs.keys():
+            dataset = kwargs['other_testset']
         
         if dataset == 'OSDG':
             return OSDGDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
@@ -69,6 +74,30 @@ class SwissTextDataset(ABC):
         else:
             raise ValueError(f"Dataset {dataset} not supported")
 
+    @staticmethod
+    def create_test_instance(args: argparse.Namespace) -> DataLoader:
+        arg_dict = vars(args)
+        
+        
+        data_instance = SwissTextDataset.create_instance(**arg_dict)
+        
+        test_ds = PytorchDataset(
+            model_name=data_instance.name, 
+            data_df=data_instance.get_raw_df(), 
+            tokenized_data=data_instance.get_tokenized_data(),
+            tokenizer=data_instance.tokenizer, 
+            max_seq_length=data_instance.max_seq_length
+        )
+        train_dl = DataLoader(
+            test_ds, 
+            shuffle=True, 
+            batch_size=arg_dict['batch_size']
+        )
+        
+        return train_dl
+        
+        
+    
     def __init__(self, name: str, model_name: str, split_method: SplitMethod, use_val: bool,
                 seed: int = DEFAULT_SEED, max_seq_length: int = DEFAULT_SEQ_LENGTH, do_lower_case: bool = True, train_frac: float = 0.8, no_stopword_removal: bool = False,):
         self.name = self._check_dataset_name(name)
@@ -122,6 +151,7 @@ class SwissTextDataset(ABC):
         return self.tokenized_data
     
         # returns the PyTorch dataloaders ready for use
+    
     def get_data_loaders(self, batch_size: int = 8):
         train_df, test_df, validation_df = self.get_train_test_val()
 
@@ -146,7 +176,7 @@ class SwissTextDataset(ABC):
 
         return train_dl, test_dl, val_dl
     
-    def get_data_sets(self, batch_size: int = 8):
+    def get_data_sets(self):
         train_df, test_df, validation_df = self.get_train_test_val()
 
         train_ds = PytorchDataset(model_name=self.name, data_df=train_df, tokenized_data=self.get_tokenized_data(),
@@ -203,7 +233,6 @@ class SwissTextDataset(ABC):
 
         return self.train_df, self.test_df, self.validation_df
     
-
     def _random_split(self):
         def split_fn(df: pd.DataFrame, train_frac: float):
             # Stratified split of the dataset into train and test (and validation if needed) preserving the proportion of labels
@@ -222,10 +251,8 @@ class SwissTextDataset(ABC):
 
         return split_fn
 
-    
     def pre_split(self):
         raise NotImplementedError("Needs to be implemented on subclass.")
-
 
     def get_train_test_val__implementation(self, train_frac: float):
         if self.split_method == SplitMethod.RANDOM:

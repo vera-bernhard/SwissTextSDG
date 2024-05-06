@@ -83,6 +83,7 @@ def read_arguments_test():
 
     parser.add_argument('--experiment_name', type=str, required=True)
     parser.add_argument('--epoch', type=int, required=True)
+    parser.add_argument('--other_testset', type=str, required=False)
 
 
     args = parser.parse_args()
