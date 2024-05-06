@@ -62,7 +62,9 @@ def plot_scores_vs_benchmark(model_scores, benchmark_scores, experiment_name, ep
     axs[1].set_ylabel('F1 score')
 
     # Save the plot
-    plot_path = experiment_file_path(experiment_name, 'mbert__scores_comparison__ep{}.png'.format(epoch))
+    # Get the model name (first _ separated part of the experiment name
+    model_name = experiment_name.split('_')[0]
+    plot_path = experiment_file_path(experiment_name, '{}__scores_comparison__ep{}.png'.format(model_name, epoch))
     plt.savefig(plot_path)
 
 
