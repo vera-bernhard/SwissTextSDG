@@ -77,13 +77,11 @@ class QloraModel(PyTorchModel):
             model_path,
             is_trainable=trainable
         )
-        self.network = self.network.merge_and_unload()
         self._prepare_for_training(load=True)
             
     def save(self, suffix: str = ''): 
         file_name = "".join([self.args.model_name, suffix])
         model_path = experiment_file_path(self.args.experiment_name, file_name)
-        # self.network = self.network.merge_and_unload()
         self.network.save_pretrained(model_path)
         logging.info(f"\tSuccessfully saved checkpoint at {model_path}")
 
