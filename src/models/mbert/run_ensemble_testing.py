@@ -96,7 +96,7 @@ def main(args, experiments_args_dict):
             predictions_dict[model.args.experiment_name], labels_list = model.ensemble_test()
 
     # Now we have the predictions of all models in the predictions_list, we do the ensemble prediction by majority vote
-    predictions_df = pd.DataFrame(columns=['label', 'prediction'])
+    predictions_df = pd.DataFrame(columns=['labels', 'predictions'])
     labels_list = labels_list.tolist()
 
     for test_sample in range(len(labels_list)):
@@ -108,7 +108,7 @@ def main(args, experiments_args_dict):
         ensemble_prediction = max(set(sample_predictions), key=sample_predictions.count).item()
 
         # We add the ensemble prediction to the predictions_df
-        predictions_df = pd.concat([predictions_df, pd.DataFrame({'label': [labels_list[test_sample][0]], 'prediction': [ensemble_prediction]})])
+        predictions_df = pd.concat([predictions_df, pd.DataFrame({'labels': [labels_list[test_sample][0]], 'predictions': [ensemble_prediction]})])
     
     # Now we save the predictions_df to a csv file
     if not os.path.exists(experiment_file_path('ensemble', '')):
