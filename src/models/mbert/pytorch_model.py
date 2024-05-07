@@ -299,8 +299,12 @@ class PyTorchModel:
             loss = outputs[0]
             output = outputs[1]
 
-            outputs_list.append(output)
+            outputs_list.append(torch.argmax(output, axis=1))
             labels_list.append(inputs['labels'])
+
+        # Concatenate all the outputs and labels
+        outputs_list = torch.cat(outputs_list, dim=0)
+        labels_list = torch.cat(labels_list, dim=0)
 
         return outputs_list, labels_list
 
