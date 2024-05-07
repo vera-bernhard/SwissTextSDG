@@ -284,6 +284,27 @@ class PyTorchModel:
 
         logging.info(f"[Epoch {epoch}/{self.args.num_epochs}]\tVal Loss: {val_loss}\tVal Accuracy: {val_acc}")
 
+    def ensemble_test(self,):
+        self._reset_prediction_buffer()
+        total_loss, prev_loss = 0.0, 0.0
+        sample_count, sample_correct = 0, 0
+        outputs_list = []
+        labels_list = []
+
+        for step, batch_tuple in tqdm(enumerate(self.test_data_loader), desc='[TESTING] Running ensemble test for {} ...'.format(self.args.model_name),
+                                      total=len(self.test_data_loader)):
+            self.network.eval()
+            outputs, inputs = self.predict(batch_tuple)
+
+            loss = outputs[0]
+            output = outputs[1]
+
+            outputs_list.append(output)
+            labels_list.append(inputs['labels'])
+
+        return outputs_list, labels_list
+
+
 
     def test_loader(self, loader):
         all_predictions = []

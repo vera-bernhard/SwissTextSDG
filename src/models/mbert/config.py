@@ -3,7 +3,7 @@ import datetime
 import json
 import os
 from dataclasses import dataclass
-
+import copy
 
 import logging
 from src.helpers.logging_helper import setup_logging
@@ -93,6 +93,25 @@ def read_arguments_test():
         logging.info("argument: {} =\t{}".format(str(argument).ljust(20), getattr(args, argument)))
 
     return args
+
+def read_arguments_ensemble_test():
+    parser = argparse.ArgumentParser(description='Test ensemble with following arguments')
+
+    parser.add_argument('--experiment_name_list', action='append', type=str, required=True)
+    parser.add_argument('--epochs_list', action='append', type=int, required=True)
+    parser.add_argument('--other_testset', type=str, required=False)
+
+
+    args = parser.parse_args()
+    experiments_args_dict = {}
+    for i, experiment_name in enumerate(args.experiment_name_list):
+        experiment_args = copy.deepcopy(args)
+        experiment_args = update_args_with_config(experiment_name, experiment_args)
+        experiment_args.epoch = args.epochs_list[i]
+        experiments_args_dict[experiment_name] = experiment_args
+
+    return args, experiments_args_dict
+
 
 def update_args_with_config(experiment_name: str, args: argparse.Namespace = argparse.Namespace()) -> argparse.Namespace:
     if os.path.isfile(experiment_config_path(experiment_name)):
