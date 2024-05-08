@@ -60,22 +60,22 @@
         //              "--no_stopword_removal"
         //          ]
         // },
-        {
-            "name": "Qlora test",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "src/models/qlora/run_qlora_test.py",
-            "console": "integratedTerminal",
-            "justMyCode": true,
-            "env": {
-                "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env2/bin/python"
-            },
-            "cwd": "${workspaceFolder}",
-            "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train_big",
-                     "--epoch", "4",
-                     "--other_testset", "swisstext_task1_train"
-                 ]
-        },
+        // {
+        //     "name": "Qlora test",
+        //     "type": "debugpy",
+        //     "request": "launch",
+        //     "program": "src/models/qlora/run_qlora_test.py",
+        //     "console": "integratedTerminal",
+        //     "justMyCode": true,
+        //     "env": {
+        //         "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env2/bin/python"
+        //     },
+        //     "cwd": "${workspaceFolder}",
+        //     "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train_big",
+        //              "--epoch", "3",
+        //              "--other_testset", "swisstext_task1_train"
+        //          ]
+        // },
         // {
         //     "name": "Qlora evaluate",
         //     "type": "debugpy",
@@ -88,29 +88,29 @@
         //     },
         //     "cwd": "${workspaceFolder}",
         //     "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train_big",
-        //              "--epoch", "4",
+        //              "--epoch", "3",
         //          ]
         // },
-        // {
-        //     "name": "Python Debugger: transformer training",
-        //     "type": "debugpy",
-        //     "request": "launch",
-        //     "program": "src/models/mbert/run_transformer_training.py",
-        //     "console": "integratedTerminal",
-        //     "justMyCode": true,
-        //     "env": {
-        //         "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
-        //     },
-        //     "cwd": "${workspaceFolder}",
-        //     "args": ["--experiment_name", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-        //              "--model_name", "aspect_acl_scibert",
-        //              "--dataset", "combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-        //              "--train_frac", "1",
-        //              "--save_model",
-        //              "--save_config",
-        //              "--seed", "0"
-        //          ]
-        // },
+        {
+            "name": "Python Debugger: transformer training",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "src/models/mbert/run_transformer_training.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": ["--experiment_name", "aspect_acl_scibert_seed_0_all",
+                     "--model_name", "aspect_acl_scibert",
+                     "--dataset", "all",
+                     "--train_frac", "1",
+                     "--save_model",
+                     "--save_config",
+                     "--seed", "0"
+                 ]
+        },
         // {
         //     "name": "Python Debugger: transformer testing",
         //     "type": "debugpy",
@@ -137,7 +137,7 @@
         //         "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
         //     },
         //     "cwd": "${workspaceFolder}",
-        //     "args": ["--experiment_name", "ensemble_no_qlora",
+        //     "args": ["--experiment_name", "ensemble",
         //              "--epoch", "5"
         //          ]
         // },
@@ -152,15 +152,17 @@
         //         "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
         //     },
         //     "cwd": "${workspaceFolder}",
-        //     "args": ["--experiment_name_list", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+        //     "args": ["--experiment_name_list", "qlora-mistral_swisstext_task1_train_big",
+        //              "--experiment_name_list", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
         //              "--experiment_name_list", "biobert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
         //              "--experiment_name_list", "mbert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
         //              "--experiment_name_list", "scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+        //              "--epochs_list", "4",
         //              "--epochs_list", "5",
         //              "--epochs_list", "5",
-        //             "--epochs_list", "5",
-        //             "--epochs_list", "5",
-        //          ]
+        //              "--epochs_list", "5",
+        //              "--epochs_list", "5",
+        //         ]
         // },
     ]
 }

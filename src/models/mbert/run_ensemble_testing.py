@@ -66,37 +66,52 @@ def main(args, experiments_args_dict):
     if not os.path.exists(experiment_file_path('mbert_seed_0_swisstext_task1_train', 'mbert__prediction_log__ep5.csv')): 
         swisstext_model.test(new_args.epoch)
 
+    swisstext_data_loader = copy.deepcopy(swisstext_model.test_data_loader)
+    del swisstext_model
+
     predictions_dict = {}
 
     for model_name, model_args in experiments_args_dict.items():
-        initialize_gpu_seed(model_args.model_seed)
 
-        checkpoint_suffix = '__epoch' + str(model_args.epoch)
-        if model_args.epoch == 0:
-            checkpoint_suffix += '__zeroshot'
+        if 'bert' in model_name:
+            initialize_gpu_seed(model_args.model_seed)
 
-        file_name = "".join([model_args.model_name, checkpoint_suffix, '.pt'])
-        checkpoint_path = experiment_file_path(model_args.experiment_name, file_name)
+            checkpoint_suffix = '__epoch' + str(model_args.epoch)
+            if model_args.epoch == 0:
+                checkpoint_suffix += '__zeroshot'
 
-        if args.model_name == 'mbert':
+            file_name = "".join([model_args.model_name, checkpoint_suffix, '.pt'])
+            checkpoint_path = experiment_file_path(model_args.experiment_name, file_name)
+
             model = PyTorchModel.load_from_checkpoint(model_args, checkpoint_path)
-        elif args.model_name == 'qlora_mistral':
+        elif 'qlora' in model_name:
+            initialize_gpu_seed(model_args.model_seed)
+
+            checkpoint_suffix = '__epoch' + str(model_args.epoch)
+            if model_args.epoch == 0:
+                checkpoint_suffix += '__zeroshot'
+
+            file_name = "".join([model_args.model_name, checkpoint_suffix])
+            checkpoint_path = experiment_file_path(model_args.experiment_name, file_name)
             model = QloraModel.load_from_checkpoint(model_args, checkpoint_path)
 
         if model.args.model_name == 'mbert':
             # Set the test data loader of our model to that of the swisstext_model
-            model.test_data_loader = swisstext_model.test_data_loader
+            model.test_data_loader = swisstext_data_loader
             predictions_dict[model.args.experiment_name], labels_list = model.ensemble_test()
 
         else:
             # If the model is different, we need to tokenize the swisstext data with the model's tokenizer first
-            test_dataloader = swisstext_model.test_data_loader
+            test_dataloader = swisstext_data_loader
             test_df = test_dataloader.dataset.data_df
             tokenized_test_df, _ = model.dataset.tokenizer.tokenize_df(test_df)
-            swisstext_model.test_data_loader.dataset.data_df['tokenized'] = tokenized_test_df['tokenized']
-            swisstext_model.test_data_loader.dataset.tokenizer = model.dataset.tokenizer
+            swisstext_data_loader.dataset.data_df['tokenized'] = tokenized_test_df['tokenized']
+            swisstext_data_loader.dataset.tokenizer = model.dataset.tokenizer
+            if 'qlora' in model_name:
+                # Set the batch size of the test data loader to 1
+                swisstext_data_loader = DataLoader(swisstext_data_loader.dataset, batch_size=1, shuffle=False)
 
-            model.test_data_loader = swisstext_model.test_data_loader
+            model.test_data_loader = swisstext_data_loader
             predictions_dict[model.args.experiment_name], labels_list = model.ensemble_test()
 
     # Now we have the predictions of all models in the predictions_list, we do the ensemble prediction by majority vote

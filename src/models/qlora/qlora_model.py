@@ -19,7 +19,7 @@ from src.models.mbert.config import write_config_to_file
 from tqdm.auto import tqdm
 
 from huggingface_hub import login
-from config import *
+from src.models.qlora.config import *
 import torch.nn as nn
 from src.helpers.logging_helper import setup_logging
 import logging
