@@ -286,8 +286,6 @@ class PyTorchModel:
 
     def ensemble_test(self,):
         self._reset_prediction_buffer()
-        total_loss, prev_loss = 0.0, 0.0
-        sample_count, sample_correct = 0, 0
         outputs_list = []
         labels_list = []
 
@@ -296,7 +294,6 @@ class PyTorchModel:
             self.network.eval()
             outputs, inputs = self.predict(batch_tuple)
 
-            loss = outputs[0]
             output = outputs[1]
 
             outputs_list.append(torch.argmax(output, axis=1))

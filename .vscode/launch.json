@@ -60,22 +60,22 @@
         //              "--no_stopword_removal"
         //          ]
         // },
-        // {
-        //     "name": "Qlora test",
-        //     "type": "debugpy",
-        //     "request": "launch",
-        //     "program": "src/models/qlora/run_qlora_test.py",
-        //     "console": "integratedTerminal",
-        //     "justMyCode": true,
-        //     "env": {
-        //         "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env2/bin/python"
-        //     },
-        //     "cwd": "${workspaceFolder}",
-        //     "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train_big",
-        //              "--epoch", "4",
-        //              "--other_testset", "swisstext_task1_train"
-        //          ]
-        // },
+        {
+            "name": "Qlora test",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "src/models/qlora/run_qlora_test.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "/mnt/home/veralarabernhard/SwissTextSDG/sdg_env2/bin/python"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": ["--experiment_name", "qlora-mistral_swisstext_task1_train_big",
+                     "--epoch", "4",
+                     "--other_testset", "swisstext_task1_train"
+                 ]
+        },
         // {
         //     "name": "Qlora evaluate",
         //     "type": "debugpy",
@@ -126,21 +126,21 @@
         //              "--epoch", "5"
         //             ]
         // },
-        {
-            "name": "Python Debugger: osdg_utils",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "scripts/evaluate_transformer_model.py",
-            "console": "integratedTerminal",
-            "justMyCode": true,
-            "env": {
-                "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
-            },
-            "cwd": "${workspaceFolder}",
-            "args": ["--experiment_name", "ensemble_no_qlora",
-                     "--epoch", "5"
-                 ]
-        },
+        // {
+        //     "name": "Python Debugger: osdg_utils",
+        //     "type": "debugpy",
+        //     "request": "launch",
+        //     "program": "scripts/evaluate_transformer_model.py",
+        //     "console": "integratedTerminal",
+        //     "justMyCode": true,
+        //     "env": {
+        //         "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
+        //     },
+        //     "cwd": "${workspaceFolder}",
+        //     "args": ["--experiment_name", "ensemble_no_qlora",
+        //              "--epoch", "5"
+        //          ]
+        // },
         // {
         //     "name": "Python Debugger: osdg_utils",
         //     "type": "debugpy",

@@ -5,6 +5,7 @@ import pandas as pd
 
 sys.path.append(os.getcwd())
 from src.models.mbert.pytorch_model import PyTorchModel
+from src.models.qlora.qlora_model import QloraModel
 from src.data.dataset import PytorchDataset
 from src.data.tokenizer import SwissTextTokenizer
 from torch.utils.data import Dataset, DataLoader
@@ -77,7 +78,10 @@ def main(args, experiments_args_dict):
         file_name = "".join([model_args.model_name, checkpoint_suffix, '.pt'])
         checkpoint_path = experiment_file_path(model_args.experiment_name, file_name)
 
-        model = PyTorchModel.load_from_checkpoint(model_args, checkpoint_path)
+        if args.model_name == 'mbert':
+            model = PyTorchModel.load_from_checkpoint(model_args, checkpoint_path)
+        elif args.model_name == 'qlora_mistral':
+            model = QloraModel.load_from_checkpoint(model_args, checkpoint_path)
 
         if model.args.model_name == 'mbert':
             # Set the test data loader of our model to that of the swisstext_model
