@@ -1,0 +1,2030 @@
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+0
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 1: 44.56146454811096 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to climate change and its impacts on the environment. It is therefore directly related to Climate Action. <SDG>13</SDG>. '}
+Gold Standard: 13
+Prediction: 13
+1
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 2: 64.90962767601013 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of climate change and the search for solutions to reduce carbon emissions. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nThe text also touches upon the topic of chemical engineering and the development of new materials for specific applications. It is therefore also related to Industry, Innovation and Infrastructure. <SDG>9</SDG>.'}
+Gold Standard: 13
+Prediction: 13
+2
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 3: 62.603724241256714 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to data analysis and modeling techniques. It is therefore directly related to Quality of Life Below Zero. <SDG>9</SDG>. \n\nNote: The SDG number provided is based on the assumption that the text is related to the availability of data and the ability to analyze and model it, which is a key aspect of improving the quality of life.'}
+Gold Standard: 15
+Prediction: 9
+3
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 4: 46.109955072402954 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to sustainable tourism and marketing. It is therefore directly related to Sustainable Development Goal 8: Decent Work and Economic Growth. <SDG>8</SDG>.'}
+Gold Standard: 12
+Prediction: 8
+4
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 5: 63.764222621917725 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of economic systems and their evolution. It is therefore directly related to Industry, Innovation and Infrastructure. <SDG>9</SDG>. \n\nHowever, it also touches upon the links between economic systems and social behavior, which is related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 8
+Prediction: 9
+5
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 6: 104.78141856193542 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is about a Soviet film called "Obyknovennyi fashizm" (Ordinary Fascism) which was compiled from Nazi era film materials. The film was a reflection on fascism and Soviet totalitarianism, and it triggered a broad international debate. The article discusses the film\'s production history, reception, and the media strategies it employed to achieve a critical reading of the Nazi footage. It also examines the film in the context of other movies about National Socialism and the Holocaust. The text is related to the fields of film, history, and politics. It is therefore not directly related to any of the SDGs. <SDG>0</SDG>'}
+Gold Standard: 0
+Prediction: 0
+6
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 7: 45.54859018325806 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the role of the media in shaping public opinion and political discourse. It is therefore directly related to the SDG of Peace, Justice and Strong Institutions. <SDG>16</SDG>.'}
+Gold Standard: 16
+Prediction: 16
+7
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 8: 75.97492122650146 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of cultural representations and their impact on the environment. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nThe paper discusses the negative impact of short-term profit extraction on the environment and the consequences of a narrowly functional approach towards natural resources. It also explores the role of traditional aesthetic principles in supporting sustainability in modern modes of governance. The paper identifies five kinds of environmental subjects and their different patterns of agency.'}
+Gold Standard: 15
+Prediction: 13
+8
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 9: 44.45100426673889 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of river networks and their impact on biodiversity. It is therefore directly related to Life Below Water. <SDG>14</SDG>. '}
+Gold Standard: 14
+Prediction: 14
+9
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 10: 54.359426736831665 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to political science and conflict studies. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. \n\nNote: The SDG number provided is based on the assumption that the text is related to the specific SDG goal mentioned in the text.'}
+Gold Standard: 16
+Prediction: 16
+10
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 11: 96.4579565525055 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to transportation and environmental sustainability. It is therefore directly related to Clean Water and Sanitation, Affordable and Clean Energy, and Responsible Consumption and Production. <SDG>6,7,12</SDG>. \n\nThe study investigates the factors that drive people to carpool, which is a sustainable transportation option that can reduce the negative impact of motorized private mobility on the environment. The study found that normative aspects such as descriptive and personal norms, in combination with perceived behavioral control, predicted carpooling intention for both passengers and drivers. Dispositional trust also had an indirect effect on intention to carpool via perceived behavioral control. These findings'}
+Gold Standard: 11
+Prediction: 18
+11
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 12: 63.66297888755798 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of gender differences and their impact on voting and economic policies. It is therefore directly related to Gender Equality. <SDG>5</SDG>. \n\nAdditionally, the text touches upon the topic of redistribution of wealth and resources, which is also related to the SDG of Reduced Inequalities. <SDG>10</SDG>.'}
+Gold Standard: 5
+Prediction: 5
+12
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 13: 47.46679067611694 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of land grabbing and its impact on local populations. It is therefore directly related to Sustainable Development Goal 10: Reduced Inequalities. <SDG>10</SDG>.'}
+Gold Standard: 1
+Prediction: 10
+13
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 14: 76.97788977622986 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of the effects of cyanobacterial toxins on aquatic life and the environment. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. \n\nAdditionally, the text touches upon the links between climate change, eutrophication and the production of harmful substances. It is therefore also related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 14
+Prediction: 6
+14
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 15: 44.27034950256348 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of chemistry and material science. It is therefore not directly related to any of the SDGs. <SDG>0</SDG>'}
+Gold Standard: 0
+Prediction: 0
+15
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 16: 67.52554225921631 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of health and aging research. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nHowever, it is worth noting that the text also touches upon the use of technology and data collection methods, which could be relevant to SDG 9 (Industry, Innovation and Infrastructure) as well.'}
+Gold Standard: 3
+Prediction: 3
+16
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 17: 65.32209396362305 seconds
+Response:
+{'role': 'assistant', 'content': " The provided text is related to the study of family dynamics and their impact on individuals' outcomes. It is therefore directly related to Gender Equality. <SDG>5</SDG>. \n\nIt is worth noting that the text also touches upon the topic of education and employment, which are also relevant to SDG 4 (Quality Education) and SDG 8 (Decent Work and Economic Growth)."}
+Gold Standard: 5
+Prediction: 5
+17
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 18: 63.04077482223511 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to agricultural productivity and the use of fertilizers and hybrid seeds. It is therefore directly related to sustainable agriculture and food security. <SDG>2</SDG>. \n\nThe text also touches upon the issue of low adoption rates of new technologies, which is a common challenge in many fields. It is therefore also related to innovation and infrastructure. <SDG>9</SDG>.'}
+Gold Standard: 2
+Prediction: 2
+18
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 19: 56.604923248291016 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to mental health and trauma. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nIt is also related to Peace, Justice and Strong Institutions as it touches upon the psychological impact of war and conflict. <SDG>16</SDG>.'}
+Gold Standard: 16
+Prediction: 3
+19
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 20: 51.38615655899048 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the financial sector and the regulation of financial institutions. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nNote: The provided text does not seem to be directly related to any of the other SDGs.'}
+Gold Standard: 10
+Prediction: 8
+20
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 21: 49.17404532432556 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to financial regulation and stability. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nNote: The text does not seem to be directly related to any of the other SDGs.'}
+Gold Standard: 8
+Prediction: 8
+21
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 22: 100.69343686103821 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of chemistry and material science. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. \n\nThe text discusses the design of molecular water oxidation catalysts and their stability in an aqueous environment. The study proposes the use of chloride ligands as protecting groups for catalysts that are to be stabilized on surfaces using Atomic Layer Deposition (ALD). The study shows that chloride ligands can effectively protect catalysts from deactivation during the deposition process, thus improving their stability in an aqueous environment. This research can have practical applications in the field of water treatment'}
+Gold Standard: 7
+Prediction: 6
+22
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 23: 59.355995178222656 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of online content and personalization. It is therefore directly related to Access to Information and Communication. <SDG>9</SDG>. \n\nHowever, it also touches upon the topic of digital rights and freedoms, which is related to Peace, Justice and Strong Institutions. <SDG>16</SDG>.'}
+Gold Standard: 9
+Prediction: 9
+23
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 24: 65.25773572921753 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to juvenile sexual offending and its links to adverse childhood experiences. It is therefore directly related to Childhood Development. <SDG>4</SDG>. \n\nIt is worth noting that the text also touches upon the topic of mental health and well-being, which is also related to SDG 3: Good Health and Well-being.'}
+Gold Standard: 16
+Prediction: 4
+24
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 25: 74.34951996803284 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of animal research and specifically to the use of rodents as models for studying appetite and obesity. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nHowever, it is important to note that the text does not directly address any of the specific SDG goals, but rather discusses the limitations and considerations when using rodent models in research.'}
+Gold Standard: 3
+Prediction: 3
+25
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 26: 47.998528242111206 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of plant evolution and biogeography. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>. '}
+Gold Standard: 15
+Prediction: 15
+26
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 27: 66.04601550102234 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to agriculture and soil quality. It is therefore directly related to sustainable agriculture and responsible consumption and production. <SDG>12</SDG>. \n\nIt is worth noting that the text also touches upon the issue of heavy metals in food and soil, which is related to SDG 3 (Good Health and Well-being) as well.'}
+Gold Standard: 2
+Prediction: 12
+27
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 28: 58.695141315460205 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to business and innovation. It is therefore directly related to Industry, Innovation and Infrastructure. <SDG>9</SDG>. \n\nIt also touches upon the links between business relationships and innovation. It is therefore also related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 9
+Prediction: 9
+28
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 29: 61.21822738647461 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to hydrology and glacier modeling. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. \n\nHowever, it is worth noting that while glaciers play an important role in high-mountain hydrology, they are not directly related to the other SDGs mentioned in the prompt.'}
+Gold Standard: 13
+Prediction: 6
+29
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 30: 61.995038747787476 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of female genital mutilation and its prevalence among immigrant populations. It is therefore directly related to Gender Equality. <SDG>5</SDG>. \n\nHowever, it is important to note that this text does not directly relate to any of the UN Sustainable Development Goals.'}
+Gold Standard: 5
+Prediction: 5
+30
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 31: 94.6464250087738 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of population behavior and evolution in response to environmental changes. It is therefore directly related to Life Below Water and Life On Land. <SDG>14</SDG> and <SDG>15</SDG>. \n\nHowever, it is worth noting that the text also touches upon the topic of responsible consumption and production, as it discusses the potential for plastic responses to environmental change to be either adaptive or nonadaptive, and the role of evolution in shaping population responses to environmental change. Therefore, it could also be argued that this text is related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 15
+Prediction: 14
+31
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 32: 61.424508571624756 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of chemistry and materials science. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. \n\nHowever, it is important to note that the text does not directly touch upon the social or economic aspects of water oxidation or sanitation, so it might not be fully relevant to the SDGs.'}
+Gold Standard: 7
+Prediction: 6
+32
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 33: 65.23284244537354 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of digital inequalities and their impact on public participation. It is therefore directly related to Access to Information and Communication Technologies. <SDG>9</SDG>. \n\nThe paper highlights the importance of education and internet skills for online stratification processes, which is a key aspect of the SDG 9 goal of building resilient infrastructure, promoting inclusive and sustainable industrialization and fostering innovation.'}
+Gold Standard: 10
+Prediction: 9
+33
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 34: 37.33661437034607 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to physics and materials science. It is therefore not directly related to any of the SDGs. <SDG>0</SDG>'}
+Gold Standard: 0
+Prediction: 0
+34
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 35: 58.15712547302246 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the impact of foreign competition on domestic innovation. It is therefore directly related to Industry, Innovation and Infrastructure. <SDG>9</SDG>. \n\nNote: The SDG number provided is based on the assumption that the text is related to the development of infrastructure and industry, which are both part of SDG 9.'}
+Gold Standard: 9
+Prediction: 9
+35
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 36: 39.06468176841736 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to democratic systems and governance. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. '}
+Gold Standard: 16
+Prediction: 16
+36
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 37: 65.59277629852295 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to ecology and conservation. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nIt also touches upon the links between ecosystems, conservation and sustainable development. It is therefore also related to Sustainable Development in Mountains, Forests, Drylands, and Biodiversity. <SDG>15</SDG>.'}
+Gold Standard: 15
+Prediction: 11
+37
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 38: 65.53845405578613 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the design of electronic devices and their impact on the environment. It is therefore directly related to sustainable development and responsible consumption and production. <SDG>12</SDG>. \n\nHowever, it also touches upon the broader issue of resource scarcity and societal changes, which are related to Climate Action and Sustainable Development Goal 13. <SDG>13</SDG>'}
+Gold Standard: 12
+Prediction: 12
+38
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 39: 62.46639442443848 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to conservation and ecology. It is therefore directly related to Life Below Water and Life On Land. <SDG>14</SDG> and <SDG>15</SDG>. \n\nThe text also touches upon the use of data analysis and modeling in conservation efforts, which is related to the SDG of Quality Education. <SDG>4</SDG>.'}
+Gold Standard: 15
+Prediction: 14
+39
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 40: 61.85569143295288 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to conservation and biodiversity. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nIt is also related to responsible consumption and production as it highlights the importance of accurate population trend estimates for conservation policy and management decisions. <SDG>12</SDG>.'}
+Gold Standard: 15
+Prediction: 11
+40
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 41: 81.04483318328857 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to biodiversity conservation and sustainable agriculture. It is therefore directly related to Life Below Water and Life On Land. <SDG>6</SDG>, <SDG>15</SDG>. \n\nNote: The text does not mention any specific SDG number, but it is related to the goals of protecting, restoring and promoting the sustainable use of terrestrial ecosystems, forests, forests, mountains, and other ecosystems, as well as combat desertification, land degradation and biodiversity loss.'}
+Gold Standard: 15
+Prediction: 6
+41
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 42: 41.694692850112915 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of the effects of climate change on wildlife and their survival. It is therefore directly related to Climate Action. <SDG>13</SDG>. '}
+Gold Standard: 15
+Prediction: 13
+42
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 43: 62.049095153808594 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to plant genetics and ecology. It is therefore directly related to Life Below Water and Life On Land. <SDG>6</SDG>, <SDG>15</SDG>. \n\nNote: The SDGs mentioned are based on the provided text and may not necessarily be the only applicable SDGs.'}
+Gold Standard: 15
+Prediction: 6
+43
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 44: 41.94730520248413 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to health and development policies. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+44
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 45: 68.35856485366821 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of environmental engineering and the treatment of wastewater. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. \n\nAdditionally, the text touches upon the issue of antibiotic resistance, which is a major global health concern. It is therefore also related to Good Health and Well-being. <SDG>3</SDG>.'}
+Gold Standard: 15
+Prediction: 6
+45
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 46: 51.68135213851929 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to social norms and their impact on decision making. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nHowever, it is worth noting that the text does not explicitly mention any of the SDGs in the provided text.'}
+Gold Standard: 16
+Prediction: 8
+46
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 47: 42.434354305267334 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of constitutional rights and their emergence. It is therefore directly related to the rule of law and good governance. <SDG>16</SDG>. '}
+Gold Standard: 9
+Prediction: 16
+47
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 48: 68.80183935165405 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of the impact of Arctic shrubs on the environment. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nIt is also related to Climate Action as it touches upon the links between vegetation, albedo, and climate change. <SDG>13</SDG>.'}
+Gold Standard: 13
+Prediction: 11
+48
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 49: 41.437551498413086 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to agriculture and plant breeding. It is therefore directly related to sustainable agriculture and food security. <SDG>2</SDG>. '}
+Gold Standard: 2
+Prediction: 2
+49
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 50: 56.210103034973145 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to gender equality and workplace ethics. It is therefore directly related to Gender Equality. <SDG>5</SDG>. \n\nAdditionally, it touches upon the topic of leadership and organizational behavior, which is also related to SDG 8: Decent Work and Economic Growth.'}
+Gold Standard: 5
+Prediction: 5
+50
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 51: 46.333614110946655 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of forest ecosystems and their functions. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>. '}
+Gold Standard: 15
+Prediction: 15
+51
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 52: 73.62251877784729 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of biology and medicine. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nAdditionally, it touches upon the topic of responsible consumption and production as it relates to the spread of multidrug resistant bacterial pathogens. It is therefore also related to Sustainable Development Goal 12: Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 3
+Prediction: 3
+52
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 53: 52.69667196273804 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the interconnectedness of ecosystems and the carbon flows between them. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>. \n\nNote: The text is a bit too long to be classified in one SDG.'}
+Gold Standard: 15
+Prediction: 15
+53
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 54: 52.744526624679565 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to land ownership and access to resources in rural communities. It is therefore directly related to decent work and economic growth. <SDG>8</SDG>. \n\nAdditionally, it touches upon the theme of inclusive and sustainable industrialization, which is also related to SDG 9.'}
+Gold Standard: 1
+Prediction: 8
+54
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 55: 64.71046423912048 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of criminology and social behavior. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. \n\nThe text also touches upon the links between incentives and behavior, which is also related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 16
+Prediction: 16
+55
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 56: 75.37247228622437 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the economic impact of climate policies and the role of the financial sector in this context. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nAdditionally, it touches upon the importance of understanding the interconnectedness of different sectors and the potential feedback loops that can arise from climate policies. This is also relevant to SDG 9: Industry, Innovation and Infrastructure, as it highlights the need for a comprehensive and integrated approach to addressing climate change.'}
+Gold Standard: 13
+Prediction: 13
+56
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 57: 45.94917154312134 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to sustainable agriculture and soil management. It is therefore directly related to Sustainable Development Goal 2: Zero Hunger. <SDG>2</SDG>.'}
+Gold Standard: 2
+Prediction: 2
+57
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 58: 37.50109076499939 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to education and labor market outcomes. It is therefore directly related to Quality Education. <SDG>4</SDG>. '}
+Gold Standard: 4
+Prediction: 4
+58
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 59: 40.43445920944214 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to mental health and psychology. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 16
+Prediction: 3
+59
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 60: 53.79324460029602 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of psychology and family studies. It is therefore directly related to well-being and social inclusion. <SDG>10</SDG>. \n\nHowever, it is important to note that the text does not directly touch upon the UN Sustainable Development Goals.'}
+Gold Standard: 0
+Prediction: 10
+60
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 61: 40.71015000343323 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to mental health and trauma. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 16
+Prediction: 3
+61
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 62: 57.48440623283386 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of genetics and evolution. It is therefore directly related to Life Below Water. <SDG>14</SDG>. \n\nHowever, it is worth noting that the text does not seem to be directly related to any of the UN Sustainable Development Goals.'}
+Gold Standard: 14
+Prediction: 14
+62
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 63: 41.90926694869995 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of medicine and health. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+63
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 64: 43.56834936141968 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to natural disasters and their impact on the environment. It is therefore directly related to Disaster Risk Reduction. <SDG>11</SDG>. '}
+Gold Standard: 15
+Prediction: 11
+64
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 65: 77.06270217895508 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of chemistry and catalysts. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. \n\nHowever, it is important to note that while the text touches upon the topic of water oxidation, it does not directly relate to the SDG of Clean Water and Sanitation. The text is more focused on the limitations of molecular water oxidation catalysts and their performance in homogeneous catalysis.'}
+Gold Standard: 7
+Prediction: 6
+65
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 66: 45.830132722854614 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of biodiversity and its links to geology and climate. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>.'}
+Gold Standard: 15
+Prediction: 15
+66
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 67: 61.027771949768066 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of evolution and urbanization. It is therefore directly related to Sustainable Cities and Communities. <SDG>11</SDG>. \n\nHowever, it is worth noting that the text does not directly touch upon the concept of social responsibility, which is the main focus of the previous question.'}
+Gold Standard: 15
+Prediction: 11
+67
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 68: 75.10606837272644 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of microbial communities and their role in soil functioning. It is therefore directly related to Life Below Water and Life On Land. <SDG>6</SDG>, <SDG>15</SDG>. \n\nHowever, it is worth noting that the text also touches upon the issue of greenhouse gas emissions, which is a key component of Climate Action. <SDG>13</SDG>.'}
+Gold Standard: 15
+Prediction: 6
+68
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 69: 35.035332918167114 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to science and education. It is therefore directly related to Quality Education. <SDG>4</SDG>. '}
+Gold Standard: 13
+Prediction: 4
+69
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 70: 38.59696817398071 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to international relations and negotiations. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. '}
+Gold Standard: 17
+Prediction: 16
+70
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 71: 97.24812078475952 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of biodiversity and forestry management. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nNote: The SDG number 11 is a broad one that covers many aspects of sustainable development, including forests, biodiversity, and ecosystems. The specific focus of the text on genetic diversity within species makes it more closely related to the sub-targets of SDG 11 that deal with the conservation and sustainable use of oceans, seas and marine resources for sustainable development, as well as the conservation and sustainable use of terrestrial ecosystems and forests.'}
+Gold Standard: 15
+Prediction: 11
+71
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 72: 73.49474883079529 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of plant-water relations and their impact on the environment. It is therefore directly related to Life Below Water and Life On Land. <SDG>6</SDG>, <SDG>15</SDG>. \n\nNote: The SDG numbers provided are based on the assumption that the text is directly related to the goals mentioned. The text may also be related to other goals depending on the context and specific focus of the research.'}
+Gold Standard: 15
+Prediction: 6
+72
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 73: 42.216574907302856 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the digital divide and its impact on people with disabilities. It is therefore directly related to Accessible and inclusive societies. <SDG>10</SDG>. '}
+Gold Standard: 10
+Prediction: 10
+73
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 74: 98.71881985664368 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the development of new materials and their potential applications. It is therefore directly related to sustainable development, specifically sustainable production and consumption. <SDG>12</SDG>. \n\nThe Multi-Perspective Application Selection method introduced in the paper is a useful tool for researchers and industrial practitioners to identify and choose the most promising and sustainable applications for new materials under development. By combining and assessing technical, economic and environmental criteria covering the entire life cycle of an application, the method helps to screen numerous possible applications during the early stages of material development when little information is available. This can help to narrow the selection of feasible products by excluding unpromising applications. The paper uses an example of cellul'}
+Gold Standard: 12
+Prediction: 12
+74
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 75: 69.81815147399902 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of human behavior and psychology. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nHowever, it is also related to the study of responsible consumption and production, as it touches upon the question of why some individuals cooperate while others do not. It is therefore also related to SDG 12: Responsible Consumption and Production.'}
+Gold Standard: 16
+Prediction: 3
+75
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 76: 49.27853012084961 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of microbial ecosystems and their response to environmental factors. It is therefore directly related to Life Below Water. <SDG>6</SDG>. '}
+Gold Standard: 14
+Prediction: 6
+76
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 77: 62.45273399353027 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of immigration and its impact on society. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. \n\nIt also touches upon the topic of economic conditions and their impact on social behavior, which is related to Decent Work and Economic Growth. <SDG>8</SDG>.'}
+Gold Standard: 10
+Prediction: 16
+77
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 78: 44.31954908370972 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of development studies and international aid. It is therefore directly related to Goal 10: Reduced Inequalities. <SDG>10</SDG>.'}
+Gold Standard: 10
+Prediction: 10
+78
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 79: 43.0126051902771 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of ecological systems and their response to environmental factors. It is therefore directly related to Life Below Water. <SDG>14</SDG>. '}
+Gold Standard: 14
+Prediction: 14
+79
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 80: 92.7849383354187 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of automation and its impact on the economy. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nHowever, it is worth noting that the text also touches upon income inequality, which is a cross-cutting issue that is relevant to multiple SDGs, including No Poverty, Zero Hunger, Good Health and Well-being, Quality Education, Gender Equality, Clean Water and Sanitation, Affordable and Clean Energy, Decent Work and Economic Growth, Industry, Innovation and Infrastructure, Reduced Inequalities, Sustainable Cities and Communities, Responsible Consum'}
+Gold Standard: 8
+Prediction: 8
+80
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 81: 51.94346809387207 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to sustainable agriculture and rural development. It is therefore directly related to SDG 8: Decent work and economic growth and SDG 12: Responsible consumption and production. <SDG>8,12</SDG>.'}
+Gold Standard: 2
+Prediction: 18
+81
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 82: 53.18665146827698 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of veterinary medicine and public health. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+82
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 83: 42.51734900474548 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of development aid and international cooperation. It is therefore directly related to Goal 10: Reduced Inequalities. <SDG>10</SDG>.'}
+Gold Standard: 10
+Prediction: 10
+83
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 84: 63.94415044784546 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of chemistry and materials science. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. \n\nHowever, it is important to note that the text does not directly mention the UN Sustainable Development Goals, but rather the concept of water oxidation catalysts and their potential applications in artificial photosynthesis.'}
+Gold Standard: 7
+Prediction: 6
+84
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 85: 41.85418963432312 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to international relations and governance. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. '}
+Gold Standard: 17
+Prediction: 16
+85
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 86: 63.909069776535034 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of ecosystems and biodiversity. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nNote: The SDG number provided is based on the assumption that the text is related to the conservation of biodiversity and ecosystem functioning, which are key aspects of SDG 11.'}
+Gold Standard: 15
+Prediction: 11
+86
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 87: 62.14679169654846 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the evaluation of climate models and their simulations. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nAdditionally, the text touches upon the importance of bias correction in climate model simulations, which is also related to the responsible use of technology (SDG 9).'}
+Gold Standard: 13
+Prediction: 13
+87
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 88: 65.46990704536438 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of commodity chains and their impact on local livelihoods. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nIt also touches upon the topic of sustainable agriculture and responsible consumption and production. It is therefore also related to Sustainable Development in Agriculture. <SDG>12</SDG>.'}
+Gold Standard: 12
+Prediction: 8
+88
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 89: 38.69876480102539 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of fairness and income inequality. It is therefore directly related to Reduced Inequalities. <SDG>10</SDG>. '}
+Gold Standard: 10
+Prediction: 10
+89
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 90: 69.68044924736023 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the fields of biology and ecology. It is therefore directly related to Life Below Water, Life On Land, and Life On Land: Sustainable Forestry and Combat Desertification, Life On Land: Protect, Restore and Promote Sustainable Use of Terrestrial Ecosystems and Sustainable Development Goals. <SDG>11</SDG>, <SDG>15</SDG>.'}
+Gold Standard: 15
+Prediction: 11
+90
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 91: 47.587385177612305 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of ecology and time series analysis. It is therefore directly related to Sustainable Development Goal 13: Climate Action. <SDG>13</SDG>.'}
+Gold Standard: 15
+Prediction: 13
+91
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 92: 43.61415433883667 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of medicine and pharmacology. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+92
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 93: 38.97628998756409 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to linguistics and language sciences. It is therefore not directly related to any of the SDGs. <SDG>0</SDG>'}
+Gold Standard: 0
+Prediction: 0
+93
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 94: 50.77590608596802 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of the impact of environmental stress on the life cycle of Daphnia. It is therefore directly related to Life Below Water. <SDG>6</SDG>. '}
+Gold Standard: 14
+Prediction: 6
+94
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 95: 43.37153148651123 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to agriculture and food production. It is therefore directly related to sustainable agriculture and food security. <SDG>2</SDG>. '}
+Gold Standard: 2
+Prediction: 2
+95
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 96: 55.448493242263794 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of soil and environmental science. It is therefore directly related to Life Below Water and Life On Land. <SDG>6</SDG>, <SDG>15</SDG>.'}
+Gold Standard: 13
+Prediction: 6
+96
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 97: 37.65868949890137 seconds
+Response:
+{'role': 'assistant', 'content': " The provided text is related to gender equality and women's rights. It is therefore directly related to Gender Equality. <SDG>5</SDG>. "}
+Gold Standard: 5
+Prediction: 5
+97
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 98: 57.29123520851135 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of social sciences and psychology. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nHowever, it is important to note that the text does not directly relate to any of the specific targets or indicators of the SDGs.'}
+Gold Standard: 10
+Prediction: 3
+98
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 99: 40.09804916381836 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to social inclusion and minority rights. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. '}
+Gold Standard: 10
+Prediction: 16
+99
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 100: 49.452441930770874 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of microbiology and food safety. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. '}
+Gold Standard: 2
+Prediction: 6
+100
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 101: 43.81039357185364 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of health and nutrition. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+101
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 102: 59.431713342666626 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of forest ecosystems and biodiversity. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nNote: The text also touches upon the use of technology in scientific research, which is also relevant to SDG 9: Industry, Innovation and Infrastructure.'}
+Gold Standard: 15
+Prediction: 11
+102
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 103: 45.07749009132385 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to gender studies and family dynamics. It is therefore directly related to Gender Equality. <SDG>5</SDG>. \n\nNote: The text is not complete and the last sentence is cut off.'}
+Gold Standard: 5
+Prediction: 5
+103
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 104: 48.27648091316223 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of finance and economics. It is therefore directly related to Decent work and economic growth. <SDG>8</SDG>. \n\nNote: The text does not seem to be directly related to any of the other SDGs.'}
+Gold Standard: 10
+Prediction: 8
+104
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 105: 60.40441966056824 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of the impact of biodiversity on ecosystem productivity and resilience. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nNote: The text is a scientific paper and the numbering is referencing specific studies and experiments.'}
+Gold Standard: 15
+Prediction: 11
+105
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 106: 43.11130428314209 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to international relations and governance. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. '}
+Gold Standard: 17
+Prediction: 16
+106
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 107: 55.88572716712952 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the political economy of environmental policies. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nIt is also related to the concept of responsible consumption and production, as it touches upon the link between economic conditions and consumer behavior. <SDG>12</SDG>.'}
+Gold Standard: 12
+Prediction: 13
+107
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 108: 51.944528579711914 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to health information and evaluation. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nNote: The text does not mention any specific SDG number, but it is related to the overall goal of improving health and well-being.'}
+Gold Standard: 3
+Prediction: 3
+108
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 109: 55.01142358779907 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of plant growth and its response to environmental factors such as temperature and nutrients. It is therefore directly related to Life Below Water and Life On Land. <SDG>6</SDG>, <SDG>15</SDG>.'}
+Gold Standard: 13
+Prediction: 6
+109
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 110: 57.49845767021179 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of computer science and information technology. It is therefore directly related to Access to Information. <SDG>4</SDG>. \n\nHowever, it also touches upon the topic of historical preservation and digitization, which is related to the field of Culture and Heritage. <SDG>0</SDG>.'}
+Gold Standard: 0
+Prediction: 4
+110
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 111: 46.202579498291016 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of ecosystems and biodiversity. It is therefore directly related to Life Below Water. <SDG>14</SDG>. '}
+Gold Standard: 14
+Prediction: 14
+111
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 112: 55.42721700668335 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of soft power and its role in international politics, specifically in the context of China and its relationship with climate change. It is therefore directly related to Climate Action and Peace, Justice and Strong Institutions. <SDG>13</SDG>, <SDG>16</SDG>.'}
+Gold Standard: 13
+Prediction: 13
+112
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 113: 60.2570321559906 seconds
+Response:
+{'role': 'assistant', 'content': " The provided text is related to the study of ecosystems and their functioning. It is therefore directly related to Life Below Water and Life On Land. <SDG>6</SDG>, <SDG>15</SDG>. \n\nNote: The text is a bit long, so I've shortened it to make it more readable."}
+Gold Standard: 15
+Prediction: 6
+113
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 114: 51.705078125 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to education and gender equality. It is therefore directly related to Quality Education. <SDG>4</SDG>. \n\nIt also touches upon the issue of gender gap in STEM fields, which is related to Gender Equality. <SDG>5</SDG>.'}
+Gold Standard: 5
+Prediction: 4
+114
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 115: 51.61004829406738 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the impact of globalization on labor market and politics. It is therefore directly related to Decent work and economic growth. <SDG>8</SDG>. \n\nIt is also related to Industry, innovation and infrastructure. <SDG>9</SDG>.'}
+Gold Standard: 17
+Prediction: 8
+115
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 116: 60.13996696472168 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of terrorism and its nature. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. \n\nHowever, it is worth noting that this text does not directly relate to any of the specific targets of the SDGs, but rather touches upon the broader themes of security and safety.'}
+Gold Standard: 16
+Prediction: 16
+116
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 117: 68.33703184127808 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the history and politics of land ownership and dispossession in Ethiopia. It is therefore directly related to the goal of Reduced Inequalities. <SDG>10</SDG>. \n\nIt also touches upon the themes of high modernism and its impact on development policies. It is therefore also related to the goal of Industry, Innovation and Infrastructure. <SDG>9</SDG>.'}
+Gold Standard: 16
+Prediction: 10
+117
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 118: 64.72954177856445 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to poverty and its psychological effects. It is therefore directly related to No Poverty. <SDG>1</SDG>. \n\nHowever, it is important to note that poverty is a complex issue and cannot be reduced to a single SDG. It is interconnected with other issues such as education, health, and economic growth. Therefore, it is important to consider the interplay of multiple SDGs when addressing poverty.'}
+Gold Standard: 1
+Prediction: 1
+118
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 119: 53.2087242603302 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of economics and decision making. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nHowever, it is worth noting that the text does not seem to be directly related to the UN Sustainable Development Goals.'}
+Gold Standard: 0
+Prediction: 8
+119
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 120: 66.50146865844727 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to transportation and air pollution. It is therefore directly related to Clean Water and Sanitation, as well as Affordable and Clean Energy. <SDG>6</SDG>, <SDG>7</SDG>. \n\nAdditionally, it touches upon the links between transportation, social behavior and economic growth. It is therefore also related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 15
+Prediction: 6
+120
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 121: 46.77926278114319 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to chemistry and material science. It is therefore not directly related to any of the SDGs. <SDG>0</SDG>'}
+Gold Standard: 7
+Prediction: 0
+121
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 122: 70.84872102737427 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the impacts of urbanization on biodiversity. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nThe text also touches upon the importance of compacting urban growth to reduce negative impacts on biodiversity. This is also related to Sustainable Cities and Communities. <SDG>11</SDG>.'}
+Gold Standard: 11
+Prediction: 11
+122
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 123: 62.20763683319092 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of soil organic carbon storage in forests. It is therefore directly related to Life Below Water and Life On Land. <SDG>6</SDG>, <SDG>15</SDG>. \n\nNote: The text does not seem to be directly related to any of the other SDGs.'}
+Gold Standard: 13
+Prediction: 6
+123
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 124: 91.26589250564575 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the impact of human activities on wildlife behavior and habitat. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nAdditionally, it touches upon the concept of responsible consumption and production, as the use of anthropogenic food resources can have cascading effects on movement patterns and habitat selection, ultimately resulting in the establishment of distinct behavioral types within a population. This can be seen as a form of responsible consumption and production, as it highlights the importance of considering the impact of human activities on the environment and wildlife. <SDG>12</SDG>.'}
+Gold Standard: 15
+Prediction: 11
+124
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 125: 45.41714024543762 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of human values and their impact on behavior. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. '}
+Gold Standard: 16
+Prediction: 16
+125
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 126: 60.89005637168884 seconds
+Response:
+{'role': 'assistant', 'content': " The provided text is related to maternal health, women's empowerment and child development. It is therefore directly related to Gender equality. <SDG>5</SDG>. \n\nAdditionally, it touches upon the links between mental health, financial empowerment and parental investment. It is therefore also related to Responsible consumption and production. <SDG>12</SDG>."}
+Gold Standard: 5
+Prediction: 5
+126
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 127: 56.57329320907593 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of social attitudes and media perception. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. \n\nHowever, it is worth noting that this SDG is not directly linked to the topic of populism, which is the main focus of the text.'}
+Gold Standard: 16
+Prediction: 16
+127
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 128: 58.05585479736328 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to natural disasters and climate change. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nThe text also touches upon the use of technology and innovation in addressing climate change. It is therefore also related to Industry, Innovation and Infrastructure. <SDG>9</SDG>.'}
+Gold Standard: 13
+Prediction: 13
+128
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 129: 60.865020990371704 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to biodiversity conservation and extinction status. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nNote: The SDG number 11 is a broad one that covers many aspects of sustainable development, including biodiversity conservation.'}
+Gold Standard: 15
+Prediction: 11
+129
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 130: 38.053131103515625 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of photovoltaics and electrocatalysis. It is therefore directly related to Clean Energy. <SDG>7</SDG>. '}
+Gold Standard: 7
+Prediction: 7
+130
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 131: 46.60266923904419 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to social policy instruments and their implementation. It is therefore directly related to Sustainable Development Goal 10: Reduced Inequalities. <SDG>10</SDG>.'}
+Gold Standard: 8
+Prediction: 10
+131
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 132: 68.97651934623718 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of evolutionary biology and ecology. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>. \n\nHowever, it is worth noting that the text also touches upon the broader concept of adaptation and resilience, which are relevant to many other SDGs such as Climate Action, Responsible Consumption and Production, and Sustainable Cities and Communities.'}
+Gold Standard: 15
+Prediction: 15
+132
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 133: 43.84326410293579 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of floods and their impact on the environment. It is therefore directly related to Climate Action. <SDG>13</SDG>. '}
+Gold Standard: 13
+Prediction: 13
+133
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 134: 39.351495027542114 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to food safety and health. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+134
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 135: 61.91573905944824 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of migration and disability. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nAdditionally, the topic of flight and migration in the context of disability is also related to Peace, Justice and Strong Institutions as it touches upon the issue of refugees and their rights. <SDG>16</SDG>.'}
+Gold Standard: 10
+Prediction: 3
+135
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 136: 61.80616283416748 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of migration and labor market. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nIt also touches upon the role of intermediaries in the migration process, which is related to the SDG of Industry, Innovation and Infrastructure. <SDG>9</SDG>.'}
+Gold Standard: 8
+Prediction: 8
+136
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 137: 63.50586915016174 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the changes in employment patterns and the impact of technology on the labor market. It is therefore directly related to decent work and economic growth. <SDG>8</SDG>. \n\nHowever, it is worth noting that the text does not explicitly mention any specific SDGs, but rather discusses the general concept of decent work and economic growth which are relevant to several SDGs.'}
+Gold Standard: 8
+Prediction: 8
+137
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 138: 62.378456115722656 seconds
+Response:
+{'role': 'assistant', 'content': " The provided text is related to the changes in the labor market and the role of education and skills. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nIt also touches upon the issue of gender equality and women's empowerment, which is also related to Gender Equality. <SDG>5</SDG>."}
+Gold Standard: 5
+Prediction: 8
+138
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 139: 37.11902332305908 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of climate change and its impact on the stock market. It is therefore directly related to Climate Action. <SDG>13</SDG>.'}
+Gold Standard: 13
+Prediction: 13
+139
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 140: 52.893293380737305 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to animal behavior and ecology. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>. \n\nNote: The text does not seem to be directly related to any of the other SDGs.'}
+Gold Standard: 15
+Prediction: 15
+140
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 141: 48.02319526672363 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of Human-Computer Interaction (HCI) and sustainable design. It is therefore directly related to Sustainable Development Goal 9: Industry, Innovation and Infrastructure. <SDG>9</SDG>.'}
+Gold Standard: 9
+Prediction: 9
+141
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 142: 38.967041969299316 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to political science and social movements. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. '}
+Gold Standard: 16
+Prediction: 16
+142
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 143: 46.634623765945435 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of cultural differences and their impact on mental health and resilience. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+143
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 144: 50.715269804000854 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the financial sector and systemic risk. It is therefore directly related to Decent work and economic growth. <SDG>8</SDG>. \n\nNote: The text does not seem to be directly related to any of the other SDGs.'}
+Gold Standard: 8
+Prediction: 8
+144
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 145: 46.757723331451416 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of genetics and evolution. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>.'}
+Gold Standard: 15
+Prediction: 15
+145
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 146: 59.345728158950806 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of social sciences and psychology. It is therefore directly related to Quality Education. <SDG>4</SDG>. \n\nIt also touches upon the topic of science and technology, which is related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 12
+Prediction: 4
+146
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 147: 45.467846632003784 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to food safety and hygiene. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+147
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 148: 41.643378257751465 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of political representation and the role of role models in promoting it. It is therefore directly related to Gender Equality. <SDG>5</SDG>. '}
+Gold Standard: 5
+Prediction: 5
+148
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 149: 40.24728989601135 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to health and nutrition. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+149
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 150: 49.259822368621826 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to ethics and leadership. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nNote: The text does not seem to be directly related to any of the other SDGs.'}
+Gold Standard: 16
+Prediction: 8
+150
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 151: 45.04655694961548 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of chemistry and pharmaceuticals. It is therefore not directly related to any of the SDGs. <SDG>0</SDG>'}
+Gold Standard: 0
+Prediction: 0
+151
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 152: 44.5143666267395 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the fields of economics and geography. It is therefore directly related to Sustainable Development Goal 8: Decent Work and Economic Growth. <SDG>8</SDG>.'}
+Gold Standard: 10
+Prediction: 8
+152
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 153: 36.825966119766235 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to labor market policies and unemployment. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. '}
+Gold Standard: 8
+Prediction: 8
+153
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 154: 42.158976793289185 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to health and well-being. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+154
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 155: 61.87821888923645 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to natural disasters and disaster risk reduction. It is therefore directly related to Disaster Risk Reduction. <SDG>11</SDG>. \n\nNote: The SDG number provided is based on the assumption that the text is directly related to the goals and targets of the UN Sustainable Development Goals.'}
+Gold Standard: 15
+Prediction: 11
+155
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 156: 66.22835993766785 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to labor economics and wage setting. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nHowever, it is worth noting that the text also touches upon the topic of unemployment and its impact on wages, which is also related to the SDGs of No Poverty and Zero Hunger, as unemployment can lead to poverty and hunger.'}
+Gold Standard: 8
+Prediction: 8
+156
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 157: 74.27616834640503 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of forest ecosystems and their relationship with biodiversity, productivity and carbon storage. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nIt is worth noting that the text also touches upon the topic of sustainable forest management, which is also relevant to SDG 12: Responsible Consumption and Production.'}
+Gold Standard: 13
+Prediction: 11
+157
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 158: 45.723254919052124 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to public health and animal health. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+158
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 159: 49.44894218444824 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the assessment of ecosystem services and their management. It is therefore directly related to sustainable development goal 12: Responsible consumption and production. <SDG>12</SDG>.'}
+Gold Standard: 15
+Prediction: 12
+159
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 160: 81.25673651695251 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of biodiversity and its changes in response to environmental factors. It is therefore directly related to Life Below Water and Life On Land. <SDG>14</SDG> and <SDG>15</SDG>. \n\nIt is also related to the concept of ecosystem services and the impact of human activities on them. It is therefore also related to Sustainable Development in the context of Ecosystems and Biodiversity. <SDG>12</SDG>.'}
+Gold Standard: 14
+Prediction: 14
+160
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 161: 71.66772770881653 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of marketization and its implications for social policies. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nHowever, it also touches upon the links between marketization, behavioral and experimental economics and their implications for the design and implementation of social policies. It is therefore also related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 8
+Prediction: 8
+161
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 162: 52.69476103782654 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of data representation and bias in big data analysis. It is therefore directly related to Quality of Life Below 10 and Responsible Consumption and Production. <SDG>10</SDG>, <SDG>12</SDG>.'}
+Gold Standard: 9
+Prediction: 10
+162
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 163: 44.02557969093323 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of development aid and governance. It is therefore directly related to Sustainable Development Goal 16: Peace, Justice and Strong Institutions. <SDG>16</SDG>.'}
+Gold Standard: 10
+Prediction: 16
+163
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 164: 54.792163133621216 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of evolutionary biology and genetics. It is therefore directly related to Life Below Water. <SDG>14</SDG>. \n\nHowever, it is worth noting that the text does not seem to be directly related to any of the UN Sustainable Development Goals.'}
+Gold Standard: 0
+Prediction: 14
+164
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 165: 49.40511775016785 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of genetics and population biology. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>.'}
+Gold Standard: 15
+Prediction: 15
+165
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 166: 44.582740783691406 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to sustainable tourism and consumer behavior. It is therefore directly related to Sustainable Development Goal 12: Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 12
+Prediction: 12
+166
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 167: 52.653363943099976 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of forest ecosystems and their growth. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>. '}
+Gold Standard: 15
+Prediction: 15
+167
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 168: 67.7128541469574 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the impact of forestry and climate change on wildlife populations. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nNote: The SDG number provided is based on the assumption that the text is related to the conservation of forests and wildlife, which are key components of the SDGs 11 and 13.'}
+Gold Standard: 13
+Prediction: 11
+168
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 169: 104.14534497261047 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to geology and environmental science. It is therefore directly related to Climate Action and Life Below Water. <SDG>13</SDG>, <SDG>6</SDG>. \n\nThe text describes the study of fracture kinematics in permafrost on Matterhorn, Switzerland. The authors analyze the data collected over 8 years to understand the movement of fractures in permafrost and identify the factors that cause irreversible displacement. The study provides a new metric to quantify the irreversibility of fracture kinematics, which can help in better understanding the processes related to irreversible kinematics. The findings of this study can have implications'}
+Gold Standard: 13
+Prediction: 13
+169
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 170: 41.985522508621216 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of sustainability and human behavior. It is therefore directly related to Sustainable Development Goal 12: Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 12
+Prediction: 12
+170
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 171: 49.18141293525696 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of biomechanics and physiology. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 0
+Prediction: 3
+171
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 172: 40.50356864929199 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of taxation and its role in the functioning of a state. It is therefore directly related to Good Governance. <SDG>16</SDG>. '}
+Gold Standard: 16
+Prediction: 16
+172
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 173: 47.15732383728027 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of economics and health care. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nNote: The text does not seem to be related to social responsibility or sustainable development.'}
+Gold Standard: 3
+Prediction: 3
+173
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 174: 54.720388650894165 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to transportation and urban planning. It is therefore directly related to Sustainable cities and communities. <SDG>11</SDG>. \n\nNote: The SDG number provided is based on the assumption that the paper is discussing the effects of traffic perturbations on bike sharing demand in the context of sustainable urban planning and transportation.'}
+Gold Standard: 11
+Prediction: 11
+174
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 175: 42.45621347427368 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the politics of social protection and welfare policies. It is therefore directly related to Social Protection Systems and Institutions. <SDG>10</SDG>. '}
+Gold Standard: 17
+Prediction: 10
+175
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 176: 44.524982929229736 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to economic inequality and innovation. It is therefore directly related to Reduced Inequalities. <SDG>10</SDG>. \n\nNote: The text is not complete and the last sentence is cut off.'}
+Gold Standard: 9
+Prediction: 10
+176
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 177: 57.266847133636475 seconds
+Response:
+{'role': 'assistant', 'content': " The provided text is related to animal welfare and conservation. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>. \n\nNote: The SDGs mentioned are based on the text's content and may not necessarily be the only applicable SDGs."}
+Gold Standard: 0
+Prediction: 15
+177
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 178: 38.56895589828491 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of natural forests and their productivity. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>. '}
+Gold Standard: 15
+Prediction: 15
+178
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 179: 38.92045307159424 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is a chemical reaction description. It is not directly related to any of the SDGs. <SDG>0</SDG>'}
+Gold Standard: 0
+Prediction: 0
+179
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 180: 52.947712421417236 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is about the history and methodology of archaeology, its relationship with popular culture and its philosophical foundations. It is therefore directly related to the SDGs of Education (<SDG>4</SDG>) and Culture (<SDG>0</SDG>).'}
+Gold Standard: 0
+Prediction: 4
+180
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 181: 47.88198757171631 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of immunology and microbiology. It is therefore directly related to good health and well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+181
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 182: 58.60658264160156 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of prejudice and discrimination. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. \n\nIt is important to note that the text does not directly mention any specific SDG number, but it is related to the overall goal of promoting peace, justice and strong institutions.'}
+Gold Standard: 10
+Prediction: 16
+182
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 183: 59.15580606460571 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to remote sensing and data analysis. It is therefore directly related to affordable and clean technology. <SDG>7</SDG>. \n\nNote: The SDG number provided is based on the assumption that the text is related to the development of technology that can help reduce costs and improve access to clean energy.'}
+Gold Standard: 15
+Prediction: 7
+183
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 184: 44.41595673561096 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of genetics and evolution. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>.'}
+Gold Standard: 15
+Prediction: 15
+184
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 185: 66.60079908370972 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of the effects of environmental conditions on photosynthesis and the use of remote sensing techniques to estimate Gross Primary Production (GPP) in different ecosystems. It is therefore directly related to Climate Action and Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 15
+Prediction: 12
+185
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 186: 61.30651926994324 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of psychology and social behavior. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. \n\nThe text also touches upon the concept of punishment and its role in social and legal institutions. It is therefore also related to Decent Work and Economic Growth. <SDG>8</SDG>.'}
+Gold Standard: 0
+Prediction: 16
+186
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 187: 44.13425827026367 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the governance of businesses and their interactions with stakeholders. It is therefore directly related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 12
+Prediction: 12
+187
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 188: 68.97131395339966 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of population dynamics and the effects of environmental changes on them. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nHowever, it is worth noting that the text also touches upon the topic of climate change and its effects on the environment, which is also relevant to SDG 13: Climate Action.'}
+Gold Standard: 13
+Prediction: 11
+188
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 189: 69.52390265464783 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of ecosystem services and agroforestry systems. It is therefore directly related to Sustainable Agriculture and Food Security. <SDG>2</SDG>. \n\nHowever, it should be noted that the text also touches upon the links between agroforestry systems and landscape structure, which could be related to SDG 11: Sustainable Cities and Communities.'}
+Gold Standard: 15
+Prediction: 2
+189
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 190: 52.338319301605225 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the conservation of biodiversity and the impact of climate change on species. It is therefore directly related to Life Below Water, Life On Land, and Climate Action. <SDG>1, 11, 13</SDG>.'}
+Gold Standard: 15
+Prediction: 18
+190
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 191: 60.921263694763184 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to biodiversity conservation and ecology. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nNote: The text also touches upon the links between geography, topography and biodiversity, which could also be related to Life On Land.'}
+Gold Standard: 15
+Prediction: 11
+191
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 192: 59.858057737350464 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the use of technology and its impact on society. It is therefore directly related to the SDG of decent work and economic growth. <SDG>8</SDG>. \n\nHowever, it is worth noting that the article also touches upon the topic of health and well-being, which is also relevant to SDG 3: Good health and well-being.'}
+Gold Standard: 9
+Prediction: 8
+192
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 193: 36.72041583061218 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to science communication and information behavior. It is therefore directly related to Quality Education. <SDG>4</SDG>. '}
+Gold Standard: 12
+Prediction: 4
+193
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 194: 61.871955156326294 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to mental health and psychology. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nNote: The SDG number provided is based on the assumption that the text is related to the well-being of children and not to the well-being of adults.'}
+Gold Standard: 3
+Prediction: 3
+194
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 195: 41.6873414516449 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of biology and medicine. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+195
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 196: 61.054306983947754 seconds
+Response:
+{'role': 'assistant', 'content': " The provided text is related to the interactions between plants and the environment. It is therefore directly related to Life Below Water and Life On Land. <SDG>6</SDG>, <SDG>15</SDG>. \n\nNote: The SDG numbers provided are based on the text's content and may not necessarily be the only applicable SDGs."}
+Gold Standard: 2
+Prediction: 6
+196
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 197: 101.3758487701416 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of neuroscience and psychology. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nThe text describes a study that investigates the specificity, reliability and sensitivity of social brain responses during spontaneous mentalizing. The study uses animated shapes paradigm based on Frith-Happé animations (FHAs) to trigger spontaneous mentalizing with minimal cognitive demands. The results show that mentalizing-specific responses were observed in key areas of the social brain with high sensitivity and independently from the variant low-level kinematics of the FHAs. The study also shows good-to-excellent cross-'}
+Gold Standard: 0
+Prediction: 3
+197
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 198: 69.1212272644043 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of climate change and its impacts on water availability. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. \n\nAdditionally, it touches upon the topic of sustainable development and the need for adaptation to changing environmental conditions. It is therefore also related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 6
+Prediction: 6
+198
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 199: 48.683852434158325 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of veterinary medicine and public health. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+199
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 200: 58.88470959663391 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the use of electronic equipment and the management of resources. It is therefore directly related to responsible consumption and production. <SDG>12</SDG>. \n\nAdditionally, it touches upon the issue of waste management and recycling, which is also related to SDG 12.'}
+Gold Standard: 12
+Prediction: 12
+200
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 201: 37.99290943145752 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to marine biology and conservation. It is therefore directly related to Life Below Water. <SDG>14</SDG>. '}
+Gold Standard: 14
+Prediction: 14
+201
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 202: 59.42654037475586 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to public health and animal health. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nAdditionally, it touches upon the economic impact of a disease, which is related to Decent Work and Economic Growth. <SDG>8</SDG>.'}
+Gold Standard: 3
+Prediction: 3
+202
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 203: 82.61072850227356 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of the effects of environmental change on living organisms. It is therefore directly related to Life Below Water and Life On Land. <SDG>14</SDG> and <SDG>15</SDG>. \n\nHowever, it is worth noting that the study specifically focuses on the Alpine marmot, a hibernating mammal, and the specific environmental conditions in the Alps. Therefore, the findings may not be directly applicable to other species or regions.'}
+Gold Standard: 15
+Prediction: 14
+203
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 204: 37.38967275619507 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to biology and medicine. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+204
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 205: 42.17788553237915 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of the impact of climate change on the environment. It is therefore directly related to Climate Action. <SDG>13</SDG>.'}
+Gold Standard: 13
+Prediction: 13
+205
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 206: 48.77636408805847 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to education and labor market outcomes. It is therefore directly related to Quality Education. <SDG>4</SDG>. \n\nHowever, it is worth noting that the text also touches upon gender equality, which is a key aspect of SDG 5.'}
+Gold Standard: 5
+Prediction: 4
+206
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 207: 67.77586722373962 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the development of social skills and communication in children. It is therefore directly related to Quality Education. <SDG>4</SDG>. \n\nHowever, it is worth noting that the text also touches upon the links between language development and pragmatics, which could also be related to Responsible Consumption and Production (SDG 12) as it involves the use of language to communicate and negotiate.'}
+Gold Standard: 0
+Prediction: 4
+207
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 208: 64.60924816131592 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of renewable energy and specifically to photo-electrochemical solar energy conversion. It is therefore directly related to Affordable and Clean Energy. <SDG>7</SDG>. \n\nIt is worth noting that the text also touches upon the topic of sustainable development, as it discusses the potential for low-cost renewable energy generation from abundant resources.'}
+Gold Standard: 7
+Prediction: 7
+208
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 209: 51.74891948699951 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of the Arctic tundra ecosystem and its changes. It is therefore directly related to Life Below Water and Life On Land. <SDG>13</SDG>. '}
+Gold Standard: 13
+Prediction: 13
+209
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 210: 53.48698711395264 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to political science and social media. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. \n\nIt is also related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 12
+Prediction: 16
+210
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 211: 46.071364641189575 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of health and wellness. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+211
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 212: 69.84523415565491 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of ecosystems and biodiversity. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nThe text also touches upon the relationship between biodiversity and ecosystem services, which is related to Sustainable Development Goal 12: Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 15
+Prediction: 11
+212
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 213: 64.12140369415283 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of the effects of elevated atmospheric CO2 concentrations on soil-atmosphere CH4 fluxes and the spatial micro-distribution of methanotrophic bacteria. It is therefore directly related to Climate Action. <SDG>13</SDG>. '}
+Gold Standard: 13
+Prediction: 13
+213
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 214: 49.79153537750244 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the ecological and environmental sciences. It is therefore directly related to Life Below Water and Life On Land. <SDG>6</SDG>, <SDG>15</SDG>.'}
+Gold Standard: 15
+Prediction: 6
+214
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 215: 49.55759906768799 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of psychology and social behavior. It is therefore directly related to well-being and social inclusion. <SDG>10</SDG>. \n\nHowever, it is not directly related to any of the other SDGs.'}
+Gold Standard: 3
+Prediction: 10
+215
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 216: 57.221951961517334 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to geology and environmental science. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nNote: The text is about the correlation between mega-scale glacial lineations and ice flow characteristics, which is a subfield of climate science.'}
+Gold Standard: 13
+Prediction: 13
+216
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 217: 68.38939929008484 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to ecology and animal behavior. It is therefore directly related to Life Below Water and Life On Land. <SDG>14</SDG> and <SDG>15</SDG>. \n\nHowever, it is worth noting that the text also touches upon the use of technology and data analysis, which could be linked to SDG 9: Industry, Innovation and Infrastructure.'}
+Gold Standard: 13
+Prediction: 14
+217
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 218: 66.91863679885864 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to cultural practices and attitudes. It is therefore directly related to cultural diversity and inclusion. <SDG>10</SDG>. \n\nIt also touches upon the topic of health and well-being, as female genital cutting is associated with negative health risks. It is therefore also related to good health and well-being. <SDG>3</SDG>.'}
+Gold Standard: 10
+Prediction: 10
+218
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 219: 41.62182021141052 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of democracy and voting rights. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. '}
+Gold Standard: 16
+Prediction: 16
+219
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 220: 64.13619017601013 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of care and gender equality. It is therefore directly related to Gender Equality. <SDG>5</SDG>. \n\nIt also touches upon the topic of intergenerational care and the role of the welfare state in supporting it. It is therefore also related to Decent Work and Economic Growth. <SDG>8</SDG>.'}
+Gold Standard: 5
+Prediction: 5
+220
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 221: 49.58286237716675 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of ecosystem services and their changes. It is therefore directly related to Life Below Water and Life On Land. <SDG>6</SDG>, <SDG>15</SDG>.'}
+Gold Standard: 15
+Prediction: 6
+221
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 222: 65.09062957763672 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of water treatment and pollution. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. \n\nIt also touches upon the topic of responsible consumption and production, as it discusses the removal of organic micropollutants from the water cycle. <SDG>12</SDG>.'}
+Gold Standard: 15
+Prediction: 6
+222
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 223: 67.33511471748352 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the economic and social impacts of manufacturing decline and its effects on marriage and child-rearing. It is therefore directly related to Decent work and economic growth. <SDG>8</SDG>. \n\nAdditionally, it touches upon the issue of gender equality and the role of men in society. It is therefore also related to Gender equality. <SDG>5</SDG>.'}
+Gold Standard: 8
+Prediction: 8
+223
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 224: 49.13344144821167 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to social norms and behavior. It is therefore directly related to Decent work and economic growth. <SDG>8</SDG>. \n\nNote: The text does not seem to be directly related to any of the other SDGs.'}
+Gold Standard: 16
+Prediction: 8
+224
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 225: 58.356067180633545 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is about the study of mammals and their ecology. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nNote: The text is in Spanish.'}
+Gold Standard: 15
+Prediction: 11
+225
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 226: 64.05560374259949 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to labor economics and job markets. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nIt is also related to Responsible Consumption and Production as it touches upon the efficiency of job separations and the impact of UI benefit duration on the separation rate. <SDG>12</SDG>.'}
+Gold Standard: 8
+Prediction: 8
+226
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 227: 36.49039053916931 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of unemployment and its impact on happiness. It is therefore directly related to Decent work and economic growth. <SDG>8</SDG>. '}
+Gold Standard: 8
+Prediction: 8
+227
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 228: 58.55305886268616 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of internet and its impact on society. It is therefore directly related to Access to Information and Communication Technologies. <SDG>9</SDG>. \n\nHowever, it also touches upon the topic of violent conflict, which is related to Peace, Justice and Strong Institutions. <SDG>16</SDG>.'}
+Gold Standard: 9
+Prediction: 9
+228
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 229: 38.78147315979004 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of optics and image processing. It is therefore directly related to Quality Infrastructure. <SDG>9</SDG>. '}
+Gold Standard: 0
+Prediction: 9
+229
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 230: 38.427164793014526 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided texts are related to globalization, economic development and trade. They are therefore directly related to Goal 8: Decent work and economic growth. <SDG>8</SDG>.'}
+Gold Standard: 10
+Prediction: 8
+230
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 231: 36.59727740287781 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to biodiversity and ecology. It is therefore directly related to Life Below Water and Life On Land. <SDG>15</SDG>. '}
+Gold Standard: 15
+Prediction: 15
+231
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 232: 40.76441812515259 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to moral philosophy and ethics. It is therefore directly related to Goal 16: Peace, Justice and Strong Institutions. <SDG>16</SDG>.'}
+Gold Standard: 10
+Prediction: 16
+232
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 233: 41.0636305809021 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to water treatment and disinfection. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. '}
+Gold Standard: 6
+Prediction: 6
+233
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 234: 41.30852699279785 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the legal and social aspects of public space and its usage. It is therefore directly related to Access to public services and spaces. <SDG>11</SDG>. '}
+Gold Standard: 16
+Prediction: 11
+234
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 235: 45.82341122627258 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of attitudes and behavior towards climate change. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nNote: The text is a continuation of the previous one.'}
+Gold Standard: 13
+Prediction: 13
+235
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 236: 67.10906076431274 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the development of new materials and their production processes. It is therefore directly related to sustainable production and consumption. <SDG>12</SDG>. \n\nThe text also touches upon the concept of eco-efficiency, which is a key aspect of sustainable development. It is therefore also related to SDG 9: Industry, Innovation and Infrastructure. <SDG>9</SDG>.'}
+Gold Standard: 12
+Prediction: 12
+236
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 237: 69.11262845993042 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of responsible business conduct and the UN Guidelines for Multinational Enterprises. It is therefore directly related to Responsible Consumption and Production. <SDG>12</SDG>. \n\nThe text also touches upon the topic of access to remedy and the role of national contact points in enforcing the UNGP. It is therefore also related to Access to Justice for All. <SDG>8</SDG>.'}
+Gold Standard: 8
+Prediction: 12
+237
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 238: 46.827993869781494 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to risk management and financial markets. It is therefore directly related to affordable and clean technology. <SDG>7</SDG>. \n\nNote: The provided text does not seem to be directly related to any of the other SDGs.'}
+Gold Standard: 10
+Prediction: 7
+238
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 239: 43.25244355201721 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to quantum physics and the study of certain quantum magnets. It is therefore not directly related to any of the SDGs. <SDG>0</SDG>'}
+Gold Standard: 0
+Prediction: 0
+239
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 240: 59.471935987472534 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of media coverage and climate change. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nThe text also touches upon the topic of responsible consumption and production, as it discusses the role of media in shaping public perception and behavior around climate change. <SDG>12</SDG>.'}
+Gold Standard: 13
+Prediction: 13
+240
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 241: 66.1798803806305 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of public health and environmental protection. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. \n\nAdditionally, it touches upon the links between technology, social behavior and psychology. It is also related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 3
+Prediction: 6
+241
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 242: 36.976311445236206 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to taxation and tax evasion. It is therefore directly related to Good Governance. <SDG>16</SDG>. '}
+Gold Standard: 12
+Prediction: 16
+242
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 243: 62.35171556472778 seconds
+Response:
+{'role': 'assistant', 'content': " The provided text is related to agriculture and genetic modification. It is therefore directly related to sustainable agriculture and responsible consumption and production. <SDG>12</SDG>. \n\nNote: The text is referring to the GMO Panel's conclusion, which is not necessarily representative of the entire scientific community or the general public's opinion on the matter."}
+Gold Standard: 0
+Prediction: 12
+243
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 244: 51.44938087463379 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to financial inclusion and responsible consumption. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nIt is also related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 1
+Prediction: 8
+244
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 245: 59.867610454559326 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the automotive industry and the use of carbon taxes to promote clean technologies. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nThe text also touches upon the concept of directed technical change, which is related to the SDG of Industry, Innovation and Infrastructure. <SDG>9</SDG>.'}
+Gold Standard: 13
+Prediction: 13
+245
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 246: 56.32230353355408 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to political science and environmental policy. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nIt also touches upon the links between political parties and their impact on policy, which is related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 12
+Prediction: 13
+246
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 247: 54.523343324661255 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of immigration and its impact on the economy. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nIt is worth noting that the text also touches upon the topic of education and skill development, which is also related to SDG 4: Quality Education.'}
+Gold Standard: 8
+Prediction: 8
+247
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 248: 45.130422592163086 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of psychology and criminal justice. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>.'}
+Gold Standard: 16
+Prediction: 16
+248
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 249: 38.84781455993652 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to political science and consumer behavior. It is therefore directly related to responsible consumption and production. <SDG>12</SDG>.'}
+Gold Standard: 12
+Prediction: 12
+249
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 250: 41.111449241638184 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to child welfare and mental health. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+250
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 251: 54.537306785583496 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is about the performance of a 94-year-old runner during a 6-hour run. It is therefore not directly related to any of the SDGs. <SDG>0</SDG>'}
+Gold Standard: 0
+Prediction: 0
+251
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 252: 41.713958978652954 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of environmental science and ecology. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. '}
+Gold Standard: 14
+Prediction: 6
+252
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 253: 58.465213775634766 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to mental health and trauma. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nIt also touches upon the role of cognition in mental health, which is related to Quality Education. <SDG>4</SDG>.'}
+Gold Standard: 3
+Prediction: 3
+253
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 254: 43.1699800491333 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to gender equality and economic development. It is therefore directly related to Gender Equality. <SDG>5</SDG>. \n\nNote: The text is not complete and the last sentence is cut off.'}
+Gold Standard: 5
+Prediction: 5
+254
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 255: 41.008363246917725 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to health and well-being. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+255
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 256: 65.37010407447815 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to ecology and biodiversity. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nNote: The SDG number provided is based on the assumption that the text is related to the conservation of marine and terrestrial ecosystems, which are covered by SDG 11.'}
+Gold Standard: 15
+Prediction: 11
+256
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 257: 36.81090784072876 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to renewable energy and sustainable development. It is therefore directly related to Affordable and Clean Energy. <SDG>7</SDG>. '}
+Gold Standard: 7
+Prediction: 7
+257
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 258: 60.89650297164917 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to healthcare and medical research. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. \n\nNote: The text is a scientific paper and the results are specific to the study and context. The generalizability of the findings to other contexts and populations should be considered.'}
+Gold Standard: 3
+Prediction: 3
+258
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 259: 41.10954403877258 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to plant pathology and genetics. It is therefore directly related to sustainable agriculture and food security. <SDG>2</SDG>. '}
+Gold Standard: 2
+Prediction: 2
+259
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 260: 66.16821718215942 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to plant biology and ecology. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nThe text also touches upon the concept of biodiversity and its impact on ecosystems, which is related to Sustainable Development Goal 15: Life Below Water and Life On Land. <SDG>15</SDG>.'}
+Gold Standard: 15
+Prediction: 11
+260
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 261: 60.37771511077881 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of chemistry and material science. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. \n\nHowever, it is important to note that the text does not directly address the issue of water pollution or sanitation, but rather the design of water oxidation catalysts which could potentially be used in water treatment processes.'}
+Gold Standard: 7
+Prediction: 6
+261
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 262: 42.51263165473938 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to environmental policy and sustainability. It is therefore directly related to Sustainable Development Goal 12: Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 12
+Prediction: 12
+262
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 263: 61.746907472610474 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to insurance and financial inclusion. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nAdditionally, it touches upon the links between insurance, liquidity constraints, present bias and counterparty risk. It is therefore also related to Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 8
+Prediction: 8
+263
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 264: 58.01156425476074 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the role of finance in mitigating climate change. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nThe text also touches upon the importance of accurate information and models in decision making, which is related to Quality Education. <SDG>4</SDG>.'}
+Gold Standard: 13
+Prediction: 13
+264
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 265: 51.60585594177246 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of materials science and engineering. It is therefore directly related to Clean Water and Sanitation, as well as Affordable and Clean Energy. <SDG>6</SDG>, <SDG>7</SDG>.'}
+Gold Standard: 7
+Prediction: 6
+265
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 266: 60.77328038215637 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to gender equality and media representation. It is therefore directly related to Gender Equality. <SDG>5</SDG>. \n\nIt is worth noting that the text also touches upon the topic of responsible consumption and production, as it discusses the role of media in shaping public opinion and influencing behavior. <SDG>12</SDG>.'}
+Gold Standard: 5
+Prediction: 5
+266
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 267: 53.40506029129028 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of high energy physics and the development of radiation detectors. It is therefore directly related to affordable and clean technology. <SDG>7</SDG>. \n\nIt is also related to industry, innovation and infrastructure. <SDG>9</SDG>.'}
+Gold Standard: 0
+Prediction: 7
+267
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 268: 44.82103705406189 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of character strengths and their impact on life satisfaction in older adults. It is therefore directly related to well-being and happiness. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+268
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 269: 59.152799129486084 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to media and politics. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. \n\nHowever, it is worth noting that the topic of gender bias in media coverage is also related to Gender Equality (SDG 5) and Decent Work and Economic Growth (SDG 8).'}
+Gold Standard: 5
+Prediction: 16
+269
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 270: 60.73473930358887 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of social behavior and ecology. It is therefore directly related to Life Below Water and Life On Land. <SDG>6</SDG>, <SDG>15</SDG>. \n\nNote: The SDGs mentioned are based on the provided text and may not necessarily be the only applicable SDGs.'}
+Gold Standard: 15
+Prediction: 6
+270
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 271: 60.18149518966675 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the banking industry and the culture within it. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nThe text also touches upon the issue of trust and honesty, which is related to the SDG of Peace, Justice and Strong Institutions. <SDG>16</SDG>.'}
+Gold Standard: 12
+Prediction: 8
+271
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 272: 73.23843884468079 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of character strengths and their relationship with well-being. It is therefore directly related to well-being and happiness. <SDG>3</SDG>. \n\nIt is worth noting that the text also touches upon the concept of positive psychology, which is not explicitly mentioned in the SDGs. However, positive psychology is closely related to well-being and happiness, and thus it could be considered as a related field.'}
+Gold Standard: 3
+Prediction: 3
+272
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 273: 64.42726922035217 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of communication and its effects on attitudes and emotions. It is therefore directly related to Peace, Justice and Strong Institutions. <SDG>16</SDG>. \n\nHowever, it is worth noting that the study is focused on the effects of right-wing populist communication, which may not necessarily align with the values and goals of the SDGs.'}
+Gold Standard: 10
+Prediction: 16
+273
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 274: 42.502938985824585 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to land use, agriculture and rural development. It is therefore directly related to Sustainable Development Goal 2: Zero Hunger. <SDG>2</SDG>.'}
+Gold Standard: 16
+Prediction: 2
+274
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 275: 38.6097993850708 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the environmental impact of chemical production processes. It is therefore directly related to Clean Production. <SDG>12</SDG>.'}
+Gold Standard: 12
+Prediction: 12
+275
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 276: 44.76172184944153 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the behavior of primates, specifically orangutans. It is therefore not directly related to any of the SDGs. <SDG>0</SDG>'}
+Gold Standard: 0
+Prediction: 0
+276
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 277: 72.88846850395203 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the environmental impact of information and communication technology (ICT). It is therefore directly related to responsible consumption and production. <SDG>12</SDG>. \n\nThe text also touches upon the challenges of assessing the indirect environmental effects of ICT, which is a complex task. It is therefore also related to sustainable development goal 9: Industry, Innovation and Infrastructure. <SDG>9</SDG>.'}
+Gold Standard: 12
+Prediction: 12
+277
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 278: 62.15853404998779 seconds
+Response:
+{'role': 'assistant', 'content': " The provided text is related to the topic of global economy and trade. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nHowever, it is worth noting that the spillover effects of China's productivity growth are small for all countries in the sample, which means that the impact of China's productivity growth on worldwide real incomes through international trade is not significant."}
+Gold Standard: 8
+Prediction: 8
+278
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 279: 62.75716233253479 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to ecology and biodiversity. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nNote: The text is quite long and it is not clear if it is a complete text or if it is a part of a larger study.'}
+Gold Standard: 15
+Prediction: 11
+279
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 280: 51.31879496574402 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the financial sector and its role in mitigating climate change. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nNote: The term "carbon bubble" is a controversial one and its existence is still a matter of debate.'}
+Gold Standard: 13
+Prediction: 13
+280
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 281: 39.97602081298828 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to food safety and health. It is therefore directly related to Good Health and Well-being. <SDG>3</SDG>. '}
+Gold Standard: 3
+Prediction: 3
+281
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 282: 43.35233783721924 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of economics and the study of growth and development. It is therefore directly related to Sustainable Development Goal 8: Decent work and economic growth. <SDG>8</SDG>.'}
+Gold Standard: 8
+Prediction: 8
+282
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 283: 53.31993341445923 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to education and teacher training. It is therefore directly related to Quality Education. <SDG>4</SDG>. \n\nNote: The text does not mention any specific links to the UN Sustainable Development Goals, but it is related to the goal of providing inclusive and equitable quality education.'}
+Gold Standard: 4
+Prediction: 4
+283
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 284: 52.65671133995056 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the European Emission Trading System and its dynamics. It is therefore directly related to Climate Action. <SDG>13</SDG>. \n\nNote: The text is not complete and it is not clear if it is a standalone paper or a part of a larger work.'}
+Gold Standard: 13
+Prediction: 13
+284
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 285: 71.28644251823425 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the study of biodiversity and its effects on ecosystem stability. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nThe text also touches upon the concept of ecosystem multifunctionality and its relationship with diversity. It is therefore also related to Sustainable Cities and Communities. <SDG>11</SDG>.'}
+Gold Standard: 15
+Prediction: 11
+285
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 286: 43.76686072349548 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of numerical analysis and computational methods. It is therefore not directly related to any of the SDGs. <SDG>0</SDG>'}
+Gold Standard: 0
+Prediction: 0
+286
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 287: 60.35922884941101 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the topic of information sharing and privacy. It is therefore directly related to Access to Information. <SDG>16</SDG>. \n\nAdditionally, the text touches upon the topic of trust and mistrust, which is related to the goal of Peace, Justice and Strong Institutions. <SDG>16</SDG>.'}
+Gold Standard: 16
+Prediction: 16
+287
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 288: 61.83191418647766 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to the field of renewable energy and specifically water splitting. It is therefore directly related to Clean Water and Sanitation. <SDG>6</SDG>. \n\nAdditionally, it touches upon the topic of sustainable development and the use of renewable resources, which is also related to SDG 7: Affordable and Clean Energy.'}
+Gold Standard: 7
+Prediction: 6
+288
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Time taken for response 289: 56.39500951766968 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to ecological systems and their stability. It is therefore directly related to Life Below Water and Life On Land. <SDG>11</SDG>. \n\nAdditionally, it touches upon the importance of scientific understanding and communication, which is also related to Quality Education. <SDG>4</SDG>.'}
+Gold Standard: 15
+Prediction: 11
+289
+Time taken for response 290: 59.363396883010864 seconds
+Response:
+{'role': 'assistant', 'content': ' The provided text is related to international trade and economics. It is therefore directly related to Decent Work and Economic Growth. <SDG>8</SDG>. \n\nNote: The text also touches upon the concept of consumption indivisibilities, which is related to the SDG of Responsible Consumption and Production. <SDG>12</SDG>.'}
+Gold Standard: 10
+Prediction: 8
