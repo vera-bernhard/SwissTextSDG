@@ -91,26 +91,26 @@
         //              "--epoch", "3",
         //          ]
         // },
-        {
-            "name": "Python Debugger: transformer training",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "src/models/mbert/run_transformer_training.py",
-            "console": "integratedTerminal",
-            "justMyCode": true,
-            "env": {
-                "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
-            },
-            "cwd": "${workspaceFolder}",
-            "args": ["--experiment_name", "aspect_acl_scibert_seed_0_all",
-                     "--model_name", "aspect_acl_scibert",
-                     "--dataset", "all",
-                     "--train_frac", "1",
-                     "--save_model",
-                     "--save_config",
-                     "--seed", "0"
-                 ]
-        },
+        // {
+        //     "name": "Python Debugger: transformer training",
+        //     "type": "debugpy",
+        //     "request": "launch",
+        //     "program": "src/models/mbert/run_transformer_training.py",
+        //     "console": "integratedTerminal",
+        //     "justMyCode": true,
+        //     "env": {
+        //         "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
+        //     },
+        //     "cwd": "${workspaceFolder}",
+        //     "args": ["--experiment_name", "aspect_acl_scibert_seed_0_all",
+        //              "--model_name", "aspect_acl_scibert",
+        //              "--dataset", "all",
+        //              "--train_frac", "1",
+        //              "--save_model",
+        //              "--save_config",
+        //              "--seed", "0"
+        //          ]
+        // },
         // {
         //     "name": "Python Debugger: transformer testing",
         //     "type": "debugpy",
@@ -126,21 +126,21 @@
         //              "--epoch", "5"
         //             ]
         // },
-        // {
-        //     "name": "Python Debugger: osdg_utils",
-        //     "type": "debugpy",
-        //     "request": "launch",
-        //     "program": "scripts/evaluate_transformer_model.py",
-        //     "console": "integratedTerminal",
-        //     "justMyCode": true,
-        //     "env": {
-        //         "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
-        //     },
-        //     "cwd": "${workspaceFolder}",
-        //     "args": ["--experiment_name", "ensemble",
-        //              "--epoch", "5"
-        //          ]
-        // },
+        {
+            "name": "Python Debugger: osdg_utils",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scripts/evaluate_transformer_model.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
+            },
+            "cwd": "${workspaceFolder}",
+            "args": ["--experiment_name", "ensemble",
+                     "--epoch", "5"
+                 ]
+        },
         // {
         //     "name": "Python Debugger: osdg_utils",
         //     "type": "debugpy",
@@ -164,5 +164,31 @@
         //              "--epochs_list", "5",
         //         ]
         // },
+        // {
+        //     "name": "Python Debugger: osdg_utils",
+        //     "type": "debugpy",
+        //     "request": "launch",
+        //     "program": "src/models/mbert/run_ensemble_testing.py",
+        //     "console": "integratedTerminal",
+        //     "justMyCode": true,
+        //     "env": {
+        //         "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
+        //     },
+        //     "cwd": "${workspaceFolder}",
+        //     "args": [
+        //              "--experiment_name_list", "aspect_acl_scibert_seed_0_all",
+        //              "--experiment_name_list", "biobert_seed_0_all",
+        //              "--experiment_name_list", "mbert_seed_0_all",
+        //              "--experiment_name_list", "scibert_seed_0_all",
+        //              "--experiment_name_list", "qlora-mistral_swisstext_task1_train_big",
+        //              "--epochs_list", "5",
+        //              "--epochs_list", "5",
+        //              "--epochs_list", "5",
+        //              "--epochs_list", "5",
+        //              "--epochs_list", "4",
+
+        //         ]
+        // },
+
     ]
 }

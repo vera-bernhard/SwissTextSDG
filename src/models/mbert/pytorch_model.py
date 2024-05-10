@@ -288,22 +288,18 @@ class PyTorchModel:
         self._reset_prediction_buffer()
         outputs_list = []
         labels_list = []
+        outputs_probs = []
 
         for step, batch_tuple in tqdm(enumerate(self.test_data_loader), desc='[TESTING] Running ensemble test for {} ...'.format(self.args.model_name),
                                       total=len(self.test_data_loader)):
             self.network.eval()
             outputs, inputs = self.predict(batch_tuple)
 
-            output = outputs[1]
+            outputs_list.append(torch.argmax(outputs[1], axis=1).cpu().detach().numpy())
+            outputs_probs.append(torch.max(torch.exp(outputs[1]), dim=1).values.cpu().detach().numpy())
+            labels_list.append(inputs['labels'].cpu().detach().numpy())
 
-            outputs_list.append(torch.argmax(output, axis=1))
-            labels_list.append(inputs['labels'])
-
-        # Concatenate all the outputs and labels
-        outputs_list = torch.cat(outputs_list, dim=0)
-        labels_list = torch.cat(labels_list, dim=0)
-
-        return outputs_list, labels_list
+        return outputs_list, outputs_probs, labels_list
 
 
 
