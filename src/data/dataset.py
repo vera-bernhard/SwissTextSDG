@@ -74,6 +74,10 @@ class SwissTextDataset(ABC):
             return EnlargedOSDGSwissTextDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
                                use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
                                do_lower_case = do_lower_case, train_frac = train_frac, no_stopword_removal = no_stopword_removal, all=True)
+        elif dataset == 'test':
+            return TrainSwissTextDataset(name = dataset, model_name = model_name, split_method = SplitMethod.RANDOM, 
+                               use_val = use_val, seed = seed, max_seq_length = max_seq_length, 
+                               do_lower_case = do_lower_case, train_frac = train_frac, no_stopword_removal = no_stopword_removal)
         else:
             raise ValueError(f"Dataset {dataset} not supported")
 
