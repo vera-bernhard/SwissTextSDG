@@ -124,7 +124,7 @@ def reformat_prediction_output(orig_jsonl: str, pred_csv: str, output_jsonl: str
 
 if __name__ == '__main__':
     test_set = 'raw/swisstext/task1_test-covered.jsonl'
-    predictions = '../models/ensemble/ensemble__prediction_log__ep5.csv'
+    predictions = '../models/ensemble_soft_voting/ensemble__prediction_log__ep5.csv'
     pred_test_set = 'predictions/predictions_test.jsonl'
         
     reformat_prediction_output(test_set, predictions, pred_test_set)
