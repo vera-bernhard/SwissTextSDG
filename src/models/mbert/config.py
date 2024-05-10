@@ -109,7 +109,7 @@ def read_arguments_ensemble_test():
         experiment_args = update_args_with_config(experiment_name, experiment_args)
         experiment_args.epoch = args.epochs_list[i]
         experiments_args_dict[experiment_name] = experiment_args
-        experiments_args_dict[experiment_name]['other_testset'] = args.other_testset
+        experiments_args_dict[experiment_name].other_testset = args.other_testset
 
     return args, experiments_args_dict
 

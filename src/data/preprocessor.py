@@ -119,7 +119,10 @@ class TrainSwissTextPreprocessor(Preprocessor):
     def _get_entity_data__implementation(self, raw_df: pd.DataFrame):
         df = copy.deepcopy(raw_df)
         # Drop the ID, URL and sdg columns (not needed for tokenization)
-        df = df.drop(columns=[ 'ID', 'URL', 'sdg'])
+        if 'sdg' in df.columns:
+            df = df.drop(columns=[ 'ID', 'URL', 'sdg'])
+        else:
+            df = df.drop(columns=[ 'ID', 'URL'])
         # Merge rows TITLE and ABSTRACT into one column called text
         df['text'] = df['TITLE'] + ' ' + df['ABSTRACT']
         df = df.drop(columns=['TITLE', 'ABSTRACT'])

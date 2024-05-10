@@ -96,13 +96,13 @@ class SwissTextDataset(ABC):
             tokenizer=data_instance.tokenizer, 
             max_seq_length=data_instance.max_seq_length
         )
-        train_dl = DataLoader(
+        test_dl = DataLoader(
             test_ds, 
-            shuffle=True, 
+            shuffle=False, 
             batch_size=arg_dict['batch_size']
         )
         
-        return train_dl
+        return test_dl
         
         
     
@@ -357,6 +357,10 @@ class PytorchDataset(Dataset):
 
     def __getitem__(self, idx):
         token_seq = self.data_df.iloc[idx]['tokenized']
-        label = self.data_df.iloc[idx]['sdg']
+        if 'sdg' in self.data_df.columns:
+            label = self.data_df.iloc[idx]['sdg']
+        else:
+            # If the dataset does not have labels (e.g. its unlabelled test data), we return a dummy label
+            label = 0
         seq = self.tokenizer.generate_input(token_seq, label)
         return seq
