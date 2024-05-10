@@ -4,6 +4,7 @@ import json
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import sklearn.metrics as metrics
 
 sys.path.append(os.getcwd())
 from src.models.mbert.config import read_arguments_eval
@@ -18,18 +19,20 @@ def main(args):
     # Load the prediction log of the model
     prediction_log_path = 'models/{}'.format(args.experiment_name) + '/{}__prediction_log__ep{}.csv'.format(args.model_name, args.epoch)
     model_predictions = pd.read_csv(prediction_log_path)
-    model_acc, model_scores = calculate_scores(model_predictions)
+    model_acc, model_scores, model_avg_f1 = calculate_scores(model_predictions)
 
     # Benchmark predictions
 
     benchmark_prediction_log_path = 'models/{}'.format('mbert_seed_0_swisstext_task1_train') + '/mbert__prediction_log__ep{}.csv'.format(args.epoch)
     benchmark_predictions = pd.read_csv(benchmark_prediction_log_path)
-    benchmark_acc, benchmark_scores = calculate_scores(benchmark_predictions)
+    benchmark_acc, benchmark_scores, benchmark_avg_f1 = calculate_scores(benchmark_predictions)
 
     # Print the accuracies and save the F1 scores for each label
 
     print('Model accuracy: {}'.format(model_acc))
+    print('Model average F1: {}'.format(model_avg_f1))
     print('Benchmark accuracy: {}'.format(benchmark_acc))
+    print('Benchmark average F1: {}'.format(benchmark_avg_f1))
     save_label_scores(model_scores, args.experiment_name, args.epoch)
     save_label_scores(benchmark_scores, args.experiment_name, args.epoch, benchmark=True)
 

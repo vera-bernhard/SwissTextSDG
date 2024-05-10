@@ -34,8 +34,10 @@ def calculate_scores(df):
         else:
             f1 = 2 * precision * recall / sum_precision_recall
         label_scores[label] = {'precision': precision, 'recall': recall, 'f1': f1}
-    
-    return accuracy, label_scores
+
+    f1_avg = sum([score['f1'] for score in label_scores.values()]) / len(label_scores)
+
+    return accuracy, label_scores, f1_avg
 
 def plot_scores(scores, experiment_name, epoch):
     plt.figure(figsize=(10, 5))
