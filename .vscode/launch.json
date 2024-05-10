@@ -181,13 +181,14 @@
                      "--experiment_name_list", "biobert_seed_0_all",
                      "--experiment_name_list", "mbert_seed_0_all",
                      "--experiment_name_list", "scibert_seed_0_all",
-                     "--experiment_name_list", "qlora-mistral_all",
+                    //  "--experiment_name_list", "qlora-mistral_all",
                      "--epochs_list", "5",
                      "--epochs_list", "5",
                      "--epochs_list", "5",
                      "--epochs_list", "5",
-                     "--epochs_list", "4",
+                    //  "--epochs_list", "4",
                      "--other_testset", "test",
+                     "--soft_voting",
 
                 ]
         },

@@ -301,6 +301,22 @@ class PyTorchModel:
 
         return outputs_list, outputs_probs, labels_list
 
+    def ensemble_test_soft_voting(self,):
+        self._reset_prediction_buffer()
+        outputs_list = []
+        labels_list = []
+        outputs_probs = []
+
+        for step, batch_tuple in tqdm(enumerate(self.test_data_loader), desc='[TESTING] Running ensemble test for {} ...'.format(self.args.model_name),
+                                      total=len(self.test_data_loader)):
+            self.network.eval()
+            outputs, inputs = self.predict(batch_tuple)
+
+            outputs_probs.append(torch.exp(outputs[1]).cpu().detach().numpy())
+            # We use a dummy label here, as we only need the predictions and probabilities
+            labels_list.append(np.zeros_like(inputs['labels'].cpu().detach().numpy()))
+
+        return outputs_list, outputs_probs, labels_list
 
 
     def test_loader(self, loader):

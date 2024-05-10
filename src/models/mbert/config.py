@@ -100,6 +100,7 @@ def read_arguments_ensemble_test():
     parser.add_argument('--experiment_name_list', action='append', type=str, required=True)
     parser.add_argument('--epochs_list', action='append', type=int, required=True)
     parser.add_argument('--other_testset', type=str, required=False)
+    parser.add_argument('--soft_voting', action='store_true', default=False)
 
 
     args = parser.parse_args()
