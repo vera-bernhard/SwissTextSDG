@@ -4,7 +4,7 @@ from sklearn.metrics import accuracy_score, f1_score
 import matplotlib.pyplot as plt
 import pandas as pd
 import json
-
+import os
 
 
 def read_in_data(json_file: str) -> pd.DataFrame:
@@ -96,3 +96,37 @@ def compute_and_plot_metrics(df, dir_name, output_file=None):
     plt.xticks(range(len(f1_per_class)), list(set(actual)))
     plt.show()
     plt.savefig(f'./{dir_name}/F1.png')
+    
+    
+def reformat_prediction_output(orig_jsonl: str, pred_csv: str, output_jsonl: str):
+        prediction_df = pd.read_csv(pred_csv)
+        
+        os.makedirs(os.path.dirname(output_jsonl), exist_ok=True)
+    
+        # open both files
+        with open(orig_jsonl, 'r', encoding='utf-8') as json_file, open(output_jsonl, 'a', encoding='utf-8') as output_file:
+            # remove any contetn in the output file
+            output_file.seek(0)
+            output_file.truncate()
+            
+            # iterate through prediction_df and json_file
+            for csv_line, json_line in zip(prediction_df.iterrows(), json_file):
+                json_dict = json.loads(json_line)
+                # convert csv_line to dictionary
+                csv_dict = dict(csv_line[1])
+                sgd = int(csv_dict['predictions'])
+                json_dict['SGD'] = sgd
+                
+                # append the json_dict to the output file
+                output_file.write(json.dumps(json_dict,ensure_ascii = False))
+                output_file.write('\n')
+                
+
+if __name__ == '__main__':
+    test_set = 'raw/swisstext/task1_test-covered.jsonl'
+    predictions = '../models/test_pred.csv'
+    pred_test_set = 'predictions/predictions_test.jsonl'
+        
+    reformat_prediction_output(test_set, predictions, pred_test_set)
+                 
+                            

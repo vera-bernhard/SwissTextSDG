@@ -48,4 +48,5 @@ class Config():
         'enlarged_swisstext_task1_train': 'swisstext/citing_works_swisstext.csv',
         'combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext': 'combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext.csv', # RUN THIS DATASET WITH --train_frac 1 (we will evaluate it on the task1 test set),
         'all': 'combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext.csv',
+        'test': 'task1_test-covered.jsonl'
     }
