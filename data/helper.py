@@ -115,16 +115,16 @@ def reformat_prediction_output(orig_jsonl: str, pred_csv: str, output_jsonl: str
                 # convert csv_line to dictionary
                 csv_dict = dict(csv_line[1])
                 sgd = int(csv_dict['predictions'])
-                json_dict['SGD'] = sgd
+                json_dict['SDG'] = sgd
                 
                 # append the json_dict to the output file
-                output_file.write(json.dumps(json_dict,ensure_ascii = False))
+                output_file.write(json.dumps(json_dict,ensure_ascii = False, separators=(',', ':')))
                 output_file.write('\n')
                 
 
 if __name__ == '__main__':
     test_set = 'raw/swisstext/task1_test-covered.jsonl'
-    predictions = '../models/test_pred.csv'
+    predictions = '../models/ensemble/ensemble__prediction_log__ep5.csv'
     pred_test_set = 'predictions/predictions_test.jsonl'
         
     reformat_prediction_output(test_set, predictions, pred_test_set)
