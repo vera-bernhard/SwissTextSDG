@@ -19,25 +19,37 @@ def calculate_scores(df):
     # Now calculate the precision/recall/f1 for each label
     labels = df['labels'].unique()
     label_scores = {}
+    precisions = []
+    recalls = []
     for label in labels:
         label_df = df[df['labels'] == label]
         num_correct = (label_df['labels'] == label_df['predictions']).sum()
-        num_true = len(df[df['predictions'] == label])
-        if num_true == 0:
+        num_pred = len(df[df['predictions'] == label])
+        num_true = len(label_df)
+        
+        if num_pred == 0:
             precision = 0
         else:
-            precision = num_correct / len(df[df['predictions'] == label])
-        recall = num_correct / len(label_df)
+            precision = num_correct / num_pred
+        
+        recall = num_correct / num_true
+        
+        precisions.append(precision)
+        recalls.append(recall)
+
         sum_precision_recall = precision + recall
         if sum_precision_recall == 0:
             f1 = 0
         else:
             f1 = 2 * precision * recall / sum_precision_recall
+        
         label_scores[label] = {'precision': precision, 'recall': recall, 'f1': f1}
 
+    precision_avg = sum(precisions) / len(precisions)
+    recall_avg = sum(recalls) / len(recalls)
     f1_avg = sum([score['f1'] for score in label_scores.values()]) / len(label_scores)
 
-    return accuracy, label_scores, f1_avg
+    return accuracy, precision_avg, recall_avg, label_scores, f1_avg
 
 def plot_scores(scores, experiment_name, epoch):
     plt.figure(figsize=(10, 5))
