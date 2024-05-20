@@ -115,7 +115,7 @@ def main(args, experiments_args_dict):
             model.test_data_loader = swisstext_data_loader
         
         if args.soft_voting:
-            predictions_dict[model.args.experiment_name], probs_dict[model.args.experiment_name], labels_list = model.ensemble_test_soft_voting()
+            predictions_dict[model.args.experiment_name], probs_dict[model.args.experiment_name], labels_list = model.ensemble_test_soft_voting(dummy_label= False)
         else:
             predictions_dict[model.args.experiment_name], probs_dict[model.args.experiment_name], labels_list = model.ensemble_test()
 
