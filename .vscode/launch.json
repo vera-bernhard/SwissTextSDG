@@ -194,6 +194,20 @@
 
         //         ]
         // },
+        // {
+        //     "name": "Python Debugger: Analyze Prediction log",
+        //     "type": "debugpy",
+        //     "request": "launch",
+        //     "program": "scripts/analyze_prediction_log.py",
+        //     "console": "integratedTerminal",
+        //     "justMyCode": true,
+        //     "env": {
+        //         "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
+        //     },
+        //     "cwd": "${workspaceFolder}",
+        //     "args": [
+        //             ]
+        // },
 
     ]
 }

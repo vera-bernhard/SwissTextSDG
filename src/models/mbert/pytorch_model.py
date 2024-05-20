@@ -301,7 +301,7 @@ class PyTorchModel:
 
         return outputs_list, outputs_probs, labels_list
 
-    def ensemble_test_soft_voting(self,):
+    def ensemble_test_soft_voting(self, dummy_label=False):
         self._reset_prediction_buffer()
         outputs_list = []
         labels_list = []
@@ -313,8 +313,11 @@ class PyTorchModel:
             outputs, inputs = self.predict(batch_tuple)
 
             outputs_probs.append(torch.exp(outputs[1]).cpu().detach().numpy())
-            # We use a dummy label here, as we only need the predictions and probabilities
-            labels_list.append(np.zeros_like(inputs['labels'].cpu().detach().numpy()))
+            if dummy_label:
+                # We use a dummy label here, as we only need the predictions and probabilities
+                labels_list.append(np.zeros_like(inputs['labels'].cpu().detach().numpy()))
+            else:
+                labels_list.append(inputs['labels'].cpu().detach().numpy())
 
         return outputs_list, outputs_probs, labels_list
 
