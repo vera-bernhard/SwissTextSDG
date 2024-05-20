@@ -2,6 +2,7 @@ import os
 import sys
 import copy
 import pandas as pd
+import numpy as np
 
 sys.path.append(os.getcwd())
 from src.models.mbert.pytorch_model import PyTorchModel
@@ -99,7 +100,6 @@ def main(args, experiments_args_dict):
         if model.args.model_name == 'mbert':
             # Set the test data loader of our model to that of the swisstext_model
             model.test_data_loader = swisstext_data_loader
-            predictions_dict[model.args.experiment_name], probs_dict[model.args.experiment_name], labels_list = model.ensemble_test()
 
         else:
             # If the model is different, we need to tokenize the swisstext data with the model's tokenizer first
@@ -113,10 +113,15 @@ def main(args, experiments_args_dict):
                 swisstext_data_loader = DataLoader(swisstext_data_loader.dataset, batch_size=1, shuffle=False)
 
             model.test_data_loader = swisstext_data_loader
+        
+        if args.soft_voting:
+            predictions_dict[model.args.experiment_name], probs_dict[model.args.experiment_name], labels_list = model.ensemble_test_soft_voting()
+        else:
             predictions_dict[model.args.experiment_name], probs_dict[model.args.experiment_name], labels_list = model.ensemble_test()
 
+
     # Now we have the predictions of all models in the predictions_list, we do the ensemble prediction by majority vote
-    predictions_df = pd.DataFrame(columns=['labels', 'predictions'])
+    predictions_df = pd.DataFrame(columns=['labels', 'predictions', 'model_probs'])
     # Concatenate the labels list (list of lists of arrays)
     labels_list = [label[0] for sublist in labels_list for label in sublist]
     # Do the same for each model's predictions and probabilities

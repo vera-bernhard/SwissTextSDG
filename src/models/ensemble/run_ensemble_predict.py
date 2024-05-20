@@ -68,7 +68,7 @@ def main(args, experiments_args_dict):
     predictions_df = pd.DataFrame(columns=['labels', 'predictions', 'model_probs'])
     # Concatenate the labels list (list of lists of arrays)
     labels_list = [label[0] for sublist in labels_list for label in sublist]
-    # We concatenate  predictions and probabilities
+    # We concatenate predictions and probabilities
     for model_name, model_predictions in predictions_dict.items():
         predictions_dict[model_name] = [prediction for sublist in model_predictions for prediction in sublist]
         probs_dict[model_name] = [prob for sublist in probs_dict[model_name] for prob in sublist]

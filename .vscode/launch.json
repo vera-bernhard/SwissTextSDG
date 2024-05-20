@@ -163,6 +163,7 @@
                      "--epochs_list", "5",
                      "--epochs_list", "5",
                      "--epochs_list", "5",
+                     "--soft_voting",
                 ]
         },
         // {

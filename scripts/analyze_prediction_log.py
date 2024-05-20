@@ -97,7 +97,7 @@ def plot_confusion_matrix(df, experiment_name, epoch):
     plt.savefig(experiment_file_path(experiment_name, "".join(['mbert', '__confusion_matrix__ep', str(epoch), '.png'])))
 
 def main():
-    experiment_name = 'mbert_seed_0_enlargedOSDG'
+    experiment_name = 'ensemble'
     epochs = [1, 2, 3, 4, 5]
 
     for epoch in epochs:
