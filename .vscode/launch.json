@@ -141,57 +141,58 @@
         //              "--epoch", "5"
         //          ]
         // },
-        // {
-        //     "name": "Python Debugger: osdg_utils",
-        //     "type": "debugpy",
-        //     "request": "launch",
-        //     "program": "src/models/mbert/run_ensemble_testing.py",
-        //     "console": "integratedTerminal",
-        //     "justMyCode": true,
-        //     "env": {
-        //         "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
-        //     },
-        //     "cwd": "${workspaceFolder}",
-        //     "args": ["--experiment_name_list", "qlora-mistral_swisstext_task1_train_big",
-        //              "--experiment_name_list", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-        //              "--experiment_name_list", "biobert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-        //              "--experiment_name_list", "mbert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-        //              "--experiment_name_list", "scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-        //              "--epochs_list", "4",
-        //              "--epochs_list", "5",
-        //              "--epochs_list", "5",
-        //              "--epochs_list", "5",
-        //              "--epochs_list", "5",
-        //         ]
-        // },
         {
-            "name": "Python Debugger: ensemble_predict",
+            "name": "Python Debugger: osdg_utils",
             "type": "debugpy",
             "request": "launch",
-            "program": "src/models/ensemble/run_ensemble_predict.py",
+            "program": "src/models/mbert/run_ensemble_testing.py",
             "console": "integratedTerminal",
             "justMyCode": true,
             "env": {
-                "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python",
-                "CUDA_LAUNCH_BLOCKING": "1",
+                "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
             },
             "cwd": "${workspaceFolder}",
             "args": [
-                     "--experiment_name_list", "aspect_acl_scibert_seed_0_all",
-                     "--experiment_name_list", "biobert_seed_0_all",
-                     "--experiment_name_list", "mbert_seed_0_all",
-                     "--experiment_name_list", "scibert_seed_0_all",
-                    //  "--experiment_name_list", "qlora-mistral_all",
-                     "--epochs_list", "5",
-                     "--epochs_list", "5",
-                     "--epochs_list", "5",
-                     "--epochs_list", "5",
+                    // "--experiment_name_list", "qlora-mistral_swisstext_task1_train_big",
+                     "--experiment_name_list", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+                     "--experiment_name_list", "biobert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+                     "--experiment_name_list", "mbert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+                     "--experiment_name_list", "scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
                     //  "--epochs_list", "4",
-                     "--other_testset", "test",
-                     "--soft_voting",
-
+                     "--epochs_list", "5",
+                     "--epochs_list", "5",
+                     "--epochs_list", "5",
+                     "--epochs_list", "5",
                 ]
         },
+        // {
+        //     "name": "Python Debugger: ensemble_predict",
+        //     "type": "debugpy",
+        //     "request": "launch",
+        //     "program": "src/models/ensemble/run_ensemble_predict.py",
+        //     "console": "integratedTerminal",
+        //     "justMyCode": true,
+        //     "env": {
+        //         "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python",
+        //         "CUDA_LAUNCH_BLOCKING": "1",
+        //     },
+        //     "cwd": "${workspaceFolder}",
+        //     "args": [
+        //              "--experiment_name_list", "aspect_acl_scibert_seed_0_all",
+        //              "--experiment_name_list", "biobert_seed_0_all",
+        //              "--experiment_name_list", "mbert_seed_0_all",
+        //              "--experiment_name_list", "scibert_seed_0_all",
+        //             //  "--experiment_name_list", "qlora-mistral_all",
+        //              "--epochs_list", "5",
+        //              "--epochs_list", "5",
+        //              "--epochs_list", "5",
+        //              "--epochs_list", "5",
+        //             //  "--epochs_list", "4",
+        //              "--other_testset", "test",
+        //              "--soft_voting",
+
+        //         ]
+        // },
 
     ]
 }

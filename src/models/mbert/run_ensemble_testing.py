@@ -123,48 +123,66 @@ def main(args, experiments_args_dict):
     for model_name, model_predictions in predictions_dict.items():
         predictions_dict[model_name] = [prediction for sublist in model_predictions for prediction in sublist]
         probs_dict[model_name] = [prob for sublist in probs_dict[model_name] for prob in sublist]
+    if not args.soft_voting:
 
-    for test_sample in range(len(labels_list)):
-        sample_predictions = []
-        for model_name, model_predictions in predictions_dict.items():
-            sample_predictions.append(model_predictions[test_sample])
+        for test_sample in range(len(labels_list)):
+            sample_predictions = []
+            for model_name, model_predictions in predictions_dict.items():
+                sample_predictions.append(model_predictions[test_sample])
 
-        sample_probs = []
-        for model_name, model_probs in probs_dict.items():
-            sample_probs.append(model_probs[test_sample])
+            sample_probs = []
+            for model_name, model_probs in probs_dict.items():
+                sample_probs.append(model_probs[test_sample])
 
-        # Distribute the probabilities across classes
-        class_probs = {}
-        for i, pred in enumerate(sample_predictions):
-            if pred not in class_probs:
-                class_probs[pred] = [sample_probs[i]]
+            # Distribute the probabilities across classes
+            class_probs = {}
+            for i, pred in enumerate(sample_predictions):
+                if pred not in class_probs:
+                    class_probs[pred] = [sample_probs[i]]
+                else:
+                    class_probs[pred].append(sample_probs[i])
+
+            # We do the majority vote, first check if there is a tie across the multiclass predictions
+            pred_counts = {pred: sample_predictions.count(pred) for pred in set(sample_predictions)}
+            max_pred_count = max(pred_counts.values())
+            
+            if list(pred_counts.values()).count(max_pred_count) > 1:
+                # If there is a tie, we take the average of the probabilities of the tied classes
+                tied_preds = [pred for pred, count in pred_counts.items() if count == max_pred_count]
+                tied_class_probs = {}
+                for key in tied_preds:
+                    tied_class_probs[key] = sum(class_probs[key]) / len(class_probs[key])
+                    
+                # We take the class with the highest average probability
+                ensemble_prediction = max(tied_class_probs, key=tied_class_probs.get)
+                ensemble_prob = tied_class_probs[ensemble_prediction]
+                    
             else:
-                class_probs[pred].append(sample_probs[i])
+                # If there is no tie, we take the majority vote
+                ensemble_prediction = max(set(sample_predictions), key=sample_predictions.count)
+                # We take the average of the probabilities of the majority class
+                ensemble_prob = sum(class_probs[ensemble_prediction]) / len(class_probs[ensemble_prediction])
 
-        # We do the majority vote, first check if there is a tie across the multiclass predictions
-        pred_counts = {pred: sample_predictions.count(pred) for pred in set(sample_predictions)}
-        max_pred_count = max(pred_counts.values())
-        
-        if list(pred_counts.values()).count(max_pred_count) > 1:
-            # If there is a tie, we take the average of the probabilities of the tied classes
-            tied_preds = [pred for pred, count in pred_counts.items() if count == max_pred_count]
-            tied_class_probs = {}
-            for key in tied_preds:
-                tied_class_probs[key] = sum(class_probs[key]) / len(class_probs[key])
-                
+            # We add the ensemble prediction to the predictions_df
+            predictions_df = pd.concat([predictions_df, pd.DataFrame({'labels': [labels_list[test_sample]], 'predictions': [ensemble_prediction],
+                                                                    'model_probs':[ensemble_prob]})])
+    else:
+        # If we are doing soft voting, we take the average of the probabilities of all classes
+        for test_sample in range(len(labels_list)):
+            sample_probs = []
+            for model_name, model_probs in probs_dict.items():
+                sample_probs.append(model_probs[test_sample])
+
+            # We take the average of the probabilities of all classes
+            ensemble_prob = sum(sample_probs) / len(sample_probs)
             # We take the class with the highest average probability
-            ensemble_prediction = max(tied_class_probs, key=tied_class_probs.get)
-            ensemble_prob = tied_class_probs[ensemble_prediction]
-                   
-        else:
-            # If there is no tie, we take the majority vote
-            ensemble_prediction = max(set(sample_predictions), key=sample_predictions.count)
-            # We take the average of the probabilities of the majority class
-            ensemble_prob = sum(class_probs[ensemble_prediction]) / len(class_probs[ensemble_prediction])
+            ensemble_prediction = np.argmax(ensemble_prob)
+            ensemble_prob = ensemble_prob[ensemble_prediction]
 
-        # We add the ensemble prediction to the predictions_df
-        predictions_df = pd.concat([predictions_df, pd.DataFrame({'labels': [labels_list[test_sample]], 'predictions': [ensemble_prediction],
-                                                                  'model_probs':[ensemble_prob]})])
+            # We add the ensemble prediction to the predictions_df
+            predictions_df = pd.concat([predictions_df, pd.DataFrame({'labels': [labels_list[test_sample]], 'predictions': [ensemble_prediction],
+                                                                    'model_probs':[ensemble_prob]})])
+
     
     # Now we save the predictions_df to a csv file
     if not os.path.exists(experiment_file_path('ensemble', '')):
