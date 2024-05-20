@@ -126,46 +126,46 @@
         //              "--epoch", "5"
         //             ]
         // },
-        // {
-        //     "name": "Python Debugger: osdg_utils",
-        //     "type": "debugpy",
-        //     "request": "launch",
-        //     "program": "scripts/evaluate_transformer_model.py",
-        //     "console": "integratedTerminal",
-        //     "justMyCode": true,
-        //     "env": {
-        //         "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
-        //     },
-        //     "cwd": "${workspaceFolder}",
-        //     "args": ["--experiment_name", "ensemble",
-        //              "--epoch", "5"
-        //          ]
-        // },
         {
             "name": "Python Debugger: osdg_utils",
             "type": "debugpy",
             "request": "launch",
-            "program": "src/models/mbert/run_ensemble_testing.py",
+            "program": "scripts/evaluate_transformer_model.py",
             "console": "integratedTerminal",
             "justMyCode": true,
             "env": {
                 "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
             },
             "cwd": "${workspaceFolder}",
-            "args": [
-                    // "--experiment_name_list", "qlora-mistral_swisstext_task1_train_big",
-                     "--experiment_name_list", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-                     "--experiment_name_list", "biobert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-                     "--experiment_name_list", "mbert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-                     "--experiment_name_list", "scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
-                    //  "--epochs_list", "4",
-                     "--epochs_list", "5",
-                     "--epochs_list", "5",
-                     "--epochs_list", "5",
-                     "--epochs_list", "5",
-                     "--soft_voting",
-                ]
+            "args": ["--experiment_name", "ensemble",
+                     "--epoch", "5"
+                 ]
         },
+        // {
+        //     "name": "Python Debugger: osdg_utils",
+        //     "type": "debugpy",
+        //     "request": "launch",
+        //     "program": "src/models/mbert/run_ensemble_testing.py",
+        //     "console": "integratedTerminal",
+        //     "justMyCode": true,
+        //     "env": {
+        //         "PYTHONPATH": "anaconda3/envs/swisstextenv/bin/python"
+        //     },
+        //     "cwd": "${workspaceFolder}",
+        //     "args": [
+        //             // "--experiment_name_list", "qlora-mistral_swisstext_task1_train_big",
+        //              "--experiment_name_list", "aspect_acl_scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+        //              "--experiment_name_list", "biobert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+        //              "--experiment_name_list", "mbert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+        //              "--experiment_name_list", "scibert_seed_0_combined_OSDG_swisstext_enlarged_OSDG_enlarged_swisstext",
+        //             //  "--epochs_list", "4",
+        //              "--epochs_list", "5",
+        //              "--epochs_list", "5",
+        //              "--epochs_list", "5",
+        //              "--epochs_list", "5",
+        //              "--soft_voting",
+        //         ]
+        // },
         // {
         //     "name": "Python Debugger: ensemble_predict",
         //     "type": "debugpy",
